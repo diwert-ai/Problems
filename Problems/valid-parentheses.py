@@ -12,7 +12,7 @@ class Solution:
             if c in '({[':
                 st.append(c)
             else:
-                #assert c in ')}]', f"right brace expected: got {c}"
+                assert c in ')}]', f"right brace expected: got {c}"
 
                 if len(st) == 0:
                     return False
@@ -26,7 +26,7 @@ class Solution:
 
         return len(st) == 0
 
-tests = [('{}', True),('{}{}()((((([[[[]]]])))))', True),('{[}]',False)]
+tests = [('{}', True),('{}{}()((((([[[[]]]])))))', True),('{[}]',False), ('({)[({]})}',False)]
 sol = Solution()
 for s,r in tests:
     print(sol.isValid(s),r)
