@@ -1,20 +1,34 @@
-#https://leetcode.com/problems/4sum/
+﻿#https://leetcode.com/problems/4sum/
 #Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
 #
 #0 <= a, b, c, d < n
 #a, b, c, and d are distinct.
 #nums[a] + nums[b] + nums[c] + nums[d] == target
 #You may return the answer in any order.
+
 class Solution:
     def fourSum(self, nums: list[int], target: int) -> list[list[int]]:
+        #результирующие множество квадруплетов
         res = set()
         
+        #кол-во чисел во входном списке-массиве
         n=len(nums)
         
+        #словарь, где будут хранится дополнения к target
+        #ключ - величина дополнения, значение - индекс во входном массиве 
         h={}
+
+        #словарь частот. ключ - целое число из входного массива,
+        #значение - частота наличия в массиве
         f={}
+
+        #отфильтрованный массив входных чисел
         new_nums =[]
-         
+        
+        #фильтруем входной массив чисел: 
+        #после фильтрации 0 должен встречаться не более 3 раз если target 
+        #отличен от 0
+        #другие значения не более 4 раз
         for i in range(n):
             ni = nums[i]
             
@@ -35,9 +49,6 @@ class Solution:
         nums = new_nums
         
         n = len(nums)
-        nums.sort()
-
-
             
         for i in range(n):
             for j in range(i+1,n):

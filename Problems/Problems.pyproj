@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>4sum.py</StartupFile>
+    <StartupFile>Easy\valid-parentheses.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,11 +21,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="4sum.py">
+    <Compile Include="Medium\4sum.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="valid-parentheses.py" />
+    <Compile Include="Easy\valid-parentheses.py" />
     <Compile Include="test.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Easy\" />
+    <Folder Include="Medium\" />
+    <Folder Include="Hard\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
