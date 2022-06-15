@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Easy\valid-parentheses.py</StartupFile>
+    <StartupFile>Easy\test merge.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Easy\test merge.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Medium\4sum.py">
       <SubType>Code</SubType>
     </Compile>
