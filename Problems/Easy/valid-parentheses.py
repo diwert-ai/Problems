@@ -26,7 +26,8 @@ class Solution:
 
         return len(st) == 0
 
-tests = [('{}', True),('{}{}()((((([[[[]]]])))))', True),('{[}]',False), ('({)[({]})}',False)]
-sol = Solution()
-for s,r in tests:
-    print(sol.isValid(s),r)
+if __name__ == '__main__':
+    tests = [('{}', True),('{}{}()((((([[[[]]]])))))', True),('{[}]',False), ('({)[({]})}',False)]
+    sol = Solution()
+    for s,r in tests:
+        print(sol.isValid(s),r)

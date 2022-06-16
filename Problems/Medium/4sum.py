@@ -60,8 +60,9 @@ class Solution:
                         h[target-nums[k]]=k
         return res
 
-nums = [1,0,-1,0,-2,2]
-target = 0
-sol = Solution()
+if __name__ == '__main__':
+    nums = [1,0,-1,0,-2,2]
+    target = 0
+    sol = Solution()
 
-print(sol.fourSum(nums,target))
+    print(sol.fourSum(nums,target))
