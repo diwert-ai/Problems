@@ -4,42 +4,44 @@
 
 class Heap:
     def __init__(self):
-        self.heap =  []
-        self.sz = 0
+        self.values =  []
+        self.size = 0
 
-    def add(self,a):
-        self.heap.append(a)
-        self.sz+=1
-        if self.sz == 1: return
+    def sift_up(self,i):
+        while i!=0 and self.values[i]<self.values[(i-1)//2]:
+            self.values[i],self.values[(i-1)//2] = self.values[(i-1)//2],self.values[i]
+            i = (i-1)//2
 
-        p_index = (self.sz-2)//2
-        a_index = self.sz-1
-        
 
-        while (p_index>=0):
-            p = self.heap[p_index]
-            if a>=p: return
-            self.heap[a_index],self.heap[p_index] = p,a
-            a_index, p_index = p_index,(p_index-1)//2
-            
-            
-    def del_element(self,i):
+    def sift_down(self,i):
         pass
 
+    def insert(self,a):
+        self.values.append(a)
+        self.size+=1
+        self.sift_up(self.size-1)
+            
+            
+    def extract_min(self):
+        m = self.values[0]
+        self.values[0] = self.values.pop()
+        self.size-=1
+        self.sift_down(0)
+
+        return m
+       
+
 h = Heap()
-h.add(4)
-h.add(5)
-h.add(2)
-h.add(5)
-h.add(8)
-h.add(1)
-h.add(-1)
-h.add(10)
-h.add(2)
-h.add(20)
-h.add(-100)
+h.insert(0)
+h.insert(1)
+h.insert(-1)
+h.insert(-10)
+h.insert(-20)
+h.insert(-40)
 
+print(h.values)
+print(h.extract_min())
+print(h.values)
 
-print(h.heap)
 
   
