@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Medium\container with most water.py</StartupFile>
+    <StartupFile>Medium\generate-parentheses.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -42,6 +42,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Medium\container with most water.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Medium\generate-parentheses.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Medium\remove nth node.py">
