@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Medium\remove nth node.py</StartupFile>
+    <StartupFile>Hard\re matching.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Easy\test merge.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Hard\re matching.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Medium\4sum.py">
