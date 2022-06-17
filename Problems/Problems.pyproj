@@ -4,13 +4,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Easy\stack.py</StartupFile>
+    <StartupFile>Hard\median of two sorted array.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Problems</Name>
     <RootNamespace>Problems</RootNamespace>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +26,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Easy\test merge.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Hard\median of two sorted array.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hard\re matching.py">
