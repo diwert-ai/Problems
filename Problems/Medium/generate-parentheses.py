@@ -18,7 +18,7 @@ class Solution:
                 self.result.append(l)
             return
         
-        #self.op1 += 1
+        self.op1 += 1
         if cur_sum < self.max_sum:
             self.add_variant(cur_sum+1,l+'(')
         
@@ -40,7 +40,8 @@ class Solution:
             if len(S) == 2 * n:
                 ans.append("".join(S))
                 return
-            #self.op2+=1
+            
+            self.op2 += 1
             if left < n:
                 S.append("(")
                 backtrack(S, left+1, right)
@@ -58,10 +59,11 @@ def test0():
 
 def test1():
     s = Solution()
-    s.generateParenthesis(14)
-    s.generateParenthesis2(14)
+    s.generateParenthesis(5)
+    s.generateParenthesis2(5)
 
     print(s.op1/s.op2)
 
 if __name__ == '__main__':
+    test0()
     test1()
