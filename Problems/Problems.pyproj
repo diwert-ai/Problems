@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Hard\median of two sorted array.py</StartupFile>
+    <StartupFile>Medium\container with most water.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -39,6 +39,9 @@
     </Compile>
     <Compile Include="Easy\valid-parentheses.py" />
     <Compile Include="Medium\heapsort.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Medium\container with most water.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Medium\remove nth node.py">
