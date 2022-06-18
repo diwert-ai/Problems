@@ -1,7 +1,8 @@
+#https://py.checkio.org/en/mission/remove-all-before/
+
 from typing import Iterable
 
-
-def remove_all_before(items: list, border: int) -> Iterable:
+def remove_all_before_my(items: list, border: int) -> Iterable:
     # your code here
     if items == []:
         return []
@@ -14,6 +15,13 @@ def remove_all_before(items: list, border: int) -> Iterable:
 
 
     return items if i == len(items) else items[i:]
+
+
+
+def remove_all_before(items: list, border: int) -> Iterable:
+    # your code here
+    
+    return items[items.index(border):] if border in items else items
 
 
 if __name__ == '__main__':
