@@ -14,33 +14,26 @@ class Solution:
         for i in range(l):
             for j in range(i+1,l):
                 s_cur = min(height[i],height[j])*(j-i)
-                if s_cur>s: s=s_cur
-                
-        
+                if s_cur>s: s=s_cur                       
         return s
 
-    #fast solution O(N) операций
+    #fast solution O(N) операций O(1) - память
     #метод двух указателей
     def maxArea(self, height: list[int]) -> int:       
         s = 0
         left = 0
         right = len(height)-1
-        
-        
+                
         while(left<right):   
             h_l = height[left]
             h_r = height[right]
                        
             if h_l > h_r:
                 s = max(s,h_r*(right-left))
-                right-=1
-                
-                
+                right-=1                              
             else:
                 s = max(s,h_l*(right-left))
-                left+=1
-            
-        
+                left+=1        
         return s
 
 def test0():

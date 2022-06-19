@@ -19,7 +19,6 @@ class Solution:
         h = {}
         sz=1
         
-
         while node_n.next:
             h[sz]=node_n
             sz+=1
