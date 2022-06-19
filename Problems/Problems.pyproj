@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Easy\test merge.py</StartupFile>
+    <StartupFile>Medium\swap nodes in pairs.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -46,6 +46,9 @@
     <Compile Include="Hard\re matching.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="lib\linkedlist.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Medium\4sum.py">
       <SubType>Code</SubType>
     </Compile>
@@ -62,6 +65,9 @@
     <Compile Include="Medium\letter combinations of a phone number.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Medium\swap nodes in pairs.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Medium\remove nth node.py">
       <SubType>Code</SubType>
     </Compile>
@@ -72,6 +78,7 @@
     <Folder Include="Medium\" />
     <Folder Include="Hard\" />
     <Folder Include="Elementary\" />
+    <Folder Include="lib\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

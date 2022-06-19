@@ -3,11 +3,13 @@
 #Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
 #Return the head of the merged linked list.
 
-# Definition for singly-linked list.
-class ListNode:
-     def __init__(self, val=0, next=None):
-         self.val = val
-         self.next = next
+from lib.linkedlist import *
+
+#Definition for singly-linked list.
+#class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
 class Solution:
     def __init__(self):
@@ -66,26 +68,6 @@ class Solution:
             cur.next = list1 if list1 else list2
             
         return dummy.next
-
-def getLinkedList(l):
-    if l == []:
-        return None
-
-    head = ListNode(val=l[0])
-    cur = head
-    for it in l[1:]:
-        cur.next = ListNode(it)
-        cur = cur.next
-    
-    return head
-
-def printLinkedList(l):
-    while(l):
-        print(l.val, end = ' ')
-        l = l.next
-    print('\n', end = '')
-
-
 
 def test0():
     l1 = [1,2,3,4,5,6]

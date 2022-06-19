@@ -2,12 +2,12 @@
 
 #You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
 #Merge all the linked-lists into one sorted linked-list and return it.
-
+from lib.linkedlist import *
 # Definition for singly-linked list.
-class ListNode:
-     def __init__(self, val=0, next=None):
-         self.val = val
-         self.next = next
+#class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
 class Solution:
     def __init__(self):
@@ -120,24 +120,6 @@ class Solution:
         return self.mergeTwoLists(lists[0],lists[1])
                        
                 
-def getLinkedList(l):
-    if l == []:
-        return None
-
-    head = ListNode(val=l[0])
-    cur = head
-    for it in l[1:]:
-        cur.next = ListNode(it)
-        cur = cur.next
-    
-    return head         
-
-def printLinkedList(l):
-    while(l):
-        print(l.val, end = ' ')
-        l = l.next
-    print('\n', end = '')
-                       
                       
 #test case 132 of 133
 def test0():
