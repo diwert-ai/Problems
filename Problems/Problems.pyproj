@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Easy\merge two sorted lists.py</StartupFile>
+    <StartupFile>Medium\add two numbers.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -62,6 +62,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Medium\letter combinations of a phone number.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Medium\add two numbers.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Medium\swap nodes in pairs.py">
