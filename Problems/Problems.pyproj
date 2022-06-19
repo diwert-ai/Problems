@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Easy\merge two sorted lists.py</StartupFile>
+    <StartupFile>Medium\letter combinations of a phone number.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -54,6 +54,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Medium\generate-parentheses.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Medium\letter combinations of a phone number.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Medium\remove nth node.py">
