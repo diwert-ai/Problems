@@ -5,8 +5,7 @@
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>Medium\swap nodes in pairs.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Problems</Name>
