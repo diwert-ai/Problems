@@ -1,6 +1,5 @@
-from pickle import NONE
-from lib.linkedlist import *
-from typing import *
+from lib.linkedlist import ListNode
+from typing import Optional
 
 def print_segment(prev:ListNode,lst:ListNode,post:ListNode):
     while(not (lst is post)):
@@ -264,7 +263,11 @@ def test5():
 
     printLinkedList(Solution().reverseKGroup(lst,3))
 
+def test6():
+    a = (10,11)
+    print(a)
+
 
 
 if __name__ == '__main__':
-    test5()
+    test6()

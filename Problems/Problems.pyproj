@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test.py</StartupFile>
+    <StartupFile>Hard\reverse nodes in k-group.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -43,6 +43,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hard\merge k sorted linked lists.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Hard\reverse nodes in k-group.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hard\re matching.py">
