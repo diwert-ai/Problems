@@ -84,17 +84,19 @@ class Solution:
 
     #мое решение (медленное и запутанное)        
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        cur = head
+        #ищем длину списка l
+        cur = head  
         l = 0
         while(cur.next):
             cur = cur.next
             l += 1
-
+        
+        #последовательно инвертируем сегменты списка ограниченные индекса start и stop
         start = -1
         stop = start + k + 1
 
         while stop < l+2:           
-            n_head = self.inverse_segment_i(head,start,stop)
+            n_head = self.inverse_segment_i(head,start,stop) 
             head = n_head if n_head != None else head
             start = stop-1
             stop = start + k + 1
