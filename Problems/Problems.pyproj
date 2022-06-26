@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Hard\merge k sorted linked lists.py</StartupFile>
+    <StartupFile>Easy\inverse array.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -22,6 +22,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Easy\merge two sorted lists.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Easy\inverse array.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Easy\primality test.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Easy\remove duplicates from sorted array.py">
