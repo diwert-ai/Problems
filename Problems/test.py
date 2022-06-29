@@ -1,11 +1,13 @@
 def test0():
-    gamma = 0.96
-    lr = 0.001
-
-    for i in range(60):        
-        print (i+1,lr)
-        lr *= gamma
+    items = []
+    print(items)
+    print(sorted(items, key=lambda x: items.count(x) - items.index(x)/len(items), reverse=True))
+    
 
 if __name__ == '__main__':
     test0()
+   
+
+
+
 
