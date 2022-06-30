@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Hiryanov\quadratic sorts.py</StartupFile>
+    <StartupFile>Hiryanov\count sort.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -25,6 +25,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\inverse array.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Hiryanov\count sort.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\quadratic sorts.py">
