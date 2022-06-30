@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Hiryanov\fractal rectangle.py</StartupFile>
+    <StartupFile>Hiryanov\gcd.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -31,6 +31,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\fractal rectangle.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Hiryanov\gcd.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\quadratic sorts.py">
