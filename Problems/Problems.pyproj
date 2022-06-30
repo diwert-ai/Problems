@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Hiryanov\sieve of eratosthenes.py</StartupFile>
+    <StartupFile>Hiryanov\quadratic sorts.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -27,7 +27,7 @@
     <Compile Include="Hiryanov\inverse array.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Hiryanov\quadratic sorts\insert sort.py">
+    <Compile Include="Hiryanov\quadratic sorts.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\sieve of eratosthenes.py">
@@ -95,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Easy\" />
-    <Folder Include="Hiryanov\quadratic sorts\" />
     <Folder Include="Medium\" />
     <Folder Include="Hard\" />
     <Folder Include="Elementary\" />
