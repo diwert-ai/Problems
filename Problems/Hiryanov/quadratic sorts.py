@@ -41,9 +41,10 @@ def test(sort_algo):
              [10,11,22,33,44,0,1,2,3,4,5],
              [9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4]]
 
-    for num,test in enumerate(tests):
-        sort_algo(test)
-        print(f"testcase #{num}: ","Ok!" if test == sorted(test) else "Failed!")
+    for num,test_unsorted in enumerate(tests):
+        test_sorted = test_unsorted.copy()
+        sort_algo(test_sorted)
+        print(f"testcase #{num}: ","Ok!" if test_sorted == sorted(test_unsorted) else "Failed!")
         
     print('')
     
