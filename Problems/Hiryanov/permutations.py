@@ -26,7 +26,7 @@ def gen_permutations(n:int,m:int,prefix=''):
 
 if __name__ == '__main__':
     n = 4
-    #gen_numbers(2,2)
+    gen_numbers(2,2)
     gen_permutations(n,n)
 
 
