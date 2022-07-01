@@ -5,7 +5,7 @@
 def gen_numbers(n:int,m:int,prefix=''):
     '''функция генерируящая все N ричные числа занимающие m позиций  от 00...0 до N-1N-1...N-1'''
     if m == 0:
-        print(prefix,sep='')
+        print(prefix)
         return
 
     for c in range(n):
@@ -15,10 +15,12 @@ def gen_numbers(n:int,m:int,prefix=''):
 def gen_permutations(n:int,m:int,prefix=''):
     '''функция генерируящая все перестановки длины n - модификация gen_numbers'''
     if m == 0:
-        print(prefix,sep='')
+        print(prefix)
         return
 
-    for c in [c for c in range(n) if str(c) not in prefix]:
+    for c in range(n): 
+        if str(c) in prefix:
+            continue
         gen_permutations(n,m-1,prefix+str(c))
 
 
