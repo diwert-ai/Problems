@@ -1,4 +1,5 @@
-﻿#квадратичные сортировки O(N^2). сортировка вставками - insert sort
+﻿#квадратичные сортировки O(N^2). сортировка вставками - insert sort, 
+#сортировка выбором - choise sort, сортировка "пузырьком"
 #из лекции Хирьянова https://www.youtube.com/watch?v=NLq7nB9bV0M&list=PLRDzFCPr95fK7tr47883DFUbm4GeOjjc0&index=6
 
 def insert_sort(array:list):
