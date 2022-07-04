@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Hiryanov\check sorted.py</StartupFile>
+    <StartupFile>Hiryanov\binary search.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -40,6 +40,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\check sorted.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Hiryanov\binary search.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\recursive sorts.py">
