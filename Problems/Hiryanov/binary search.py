@@ -1,6 +1,6 @@
 ﻿#пример: бинарный поиск в отсортированном массиве
 #из лекции  Хирьянова https://www.youtube.com/watch?v=EdhN_gEDfUM&list=PLRDzFCPr95fK7tr47883DFUbm4GeOjjc0&index=10
-import numpy as np
+
 
 def left_bound(array:list,key):
     left = -1
