@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Hiryanov\easy dp.py</StartupFile>
+    <StartupFile>Hiryanov\2d dp.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -49,6 +49,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\easy dp.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Hiryanov\2d dp.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\recursive sorts.py">
