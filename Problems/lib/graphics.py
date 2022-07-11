@@ -1,3 +1,4 @@
+#для задач из курса Хирьянова
 # graphics.py
 """Simple object oriented graphics library  
 

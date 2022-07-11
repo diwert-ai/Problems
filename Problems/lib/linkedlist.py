@@ -1,3 +1,4 @@
+#процедуры для использования в задачах на односвязный список в leetcode
 class ListNode:
      def __init__(self, val=0, next=None):
          self.val = val
