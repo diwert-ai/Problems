@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Hiryanov\substring search.py</StartupFile>
+    <StartupFile>Hiryanov\reverse polish notation.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -57,6 +57,7 @@
     <Compile Include="Hiryanov\levenstein dist.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Hiryanov\reverse polish notation.py" />
     <Compile Include="Hiryanov\substring search.py">
       <SubType>Code</SubType>
     </Compile>
@@ -81,7 +82,7 @@
     <Compile Include="Easy\remove duplicates from sorted array.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Easy\stack.py">
+    <Compile Include="Hiryanov\brace_check.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Easy\test merge.py">
@@ -111,6 +112,7 @@
     <Compile Include="lib\graphics.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="lib\mystack.py" />
     <Compile Include="Medium\4sum.py">
       <SubType>Code</SubType>
     </Compile>
