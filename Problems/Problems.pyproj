@@ -82,7 +82,7 @@
     <Compile Include="Easy\remove duplicates from sorted array.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Hiryanov\brace_check.py">
+    <Compile Include="Hiryanov\brace check.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Easy\test merge.py">
