@@ -1,7 +1,6 @@
 ﻿#структра данных heap (куча или пирамида) и сортировка массива
 #из курса Тимофея Хирьянова: https://www.youtube.com/watch?v=XwNfhI8498k
 
-
 class Heap:
     def __init__(self):
         self.values =  []
@@ -29,7 +28,6 @@ class Heap:
 
             self.values[i],self.values[j] = self.values[j],self.values[i]
             i = j
-
 
     #O(log(size)) - операций
     def insert(self,a):
@@ -79,7 +77,6 @@ def get_sorted_arr(h):
         r.append(h.extract_min())
 
     return r
-
 
        
 def test0():
