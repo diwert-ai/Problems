@@ -91,10 +91,10 @@
     <Compile Include="Easy\test merge.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Elementary\remove all before.py">
+    <Compile Include="Checkio\Elementary\remove all before.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Elementary\most_frequent.py">
+    <Compile Include="Checkio\Elementary\most_frequent.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hard\median of two sorted array.py">
@@ -148,7 +148,7 @@
     <Folder Include="Easy\" />
     <Folder Include="Medium\" />
     <Folder Include="Hard\" />
-    <Folder Include="Elementary\" />
+    <Folder Include="Checkio\Elementary\" />
     <Folder Include="lib\" />
     <Folder Include="Hiryanov\" />
     <Folder Include="Checkio\" />
