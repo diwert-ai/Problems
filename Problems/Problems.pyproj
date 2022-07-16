@@ -22,7 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Checkio\Simple\find sequence.py" />
-    <Compile Include="Easy\merge two sorted lists.py">
+    <Compile Include="Leetcode\Easy\merge two sorted lists.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\knapsack problem.py" />
@@ -82,13 +82,13 @@
     <Compile Include="Hiryanov\primality test.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Easy\remove duplicates from sorted array.py">
+    <Compile Include="Leetcode\Easy\remove duplicates from sorted array.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\brace check.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Easy\test merge.py">
+    <Compile Include="Leetcode\Easy\test merge.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Checkio\Elementary\remove all before.py">
@@ -97,16 +97,16 @@
     <Compile Include="Checkio\Elementary\most_frequent.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Hard\median of two sorted array.py">
+    <Compile Include="Leetcode\Hard\median of two sorted array.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Hard\merge k sorted linked lists.py">
+    <Compile Include="Leetcode\Hard\merge k sorted linked lists.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Hard\reverse nodes in k-group.py">
+    <Compile Include="Leetcode\Hard\reverse nodes in k-group.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Hard\re matching.py">
+    <Compile Include="Leetcode\Hard\re matching.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="lib\linkedlist.py">
@@ -116,42 +116,43 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="lib\mystack.py" />
-    <Compile Include="Medium\4sum.py">
+    <Compile Include="Leetcode\Medium\4sum.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Easy\valid-parentheses.py" />
+    <Compile Include="Leetcode\Easy\valid-parentheses.py" />
     <Compile Include="Hiryanov\heap sort.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Medium\container with most water.py">
+    <Compile Include="Leetcode\Medium\container with most water.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Medium\generate-parentheses.py">
+    <Compile Include="Leetcode\Medium\generate-parentheses.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Medium\letter combinations of a phone number.py">
+    <Compile Include="Leetcode\Medium\letter combinations of a phone number.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Medium\add two numbers.py">
+    <Compile Include="Leetcode\Medium\add two numbers.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Medium\swap nodes in pairs.py">
+    <Compile Include="Leetcode\Medium\swap nodes in pairs.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Medium\remove nth node.py">
+    <Compile Include="Leetcode\Medium\remove nth node.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="test.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Checkio\Simple\" />
-    <Folder Include="Easy\" />
-    <Folder Include="Medium\" />
-    <Folder Include="Hard\" />
+    <Folder Include="Leetcode\Easy\" />
+    <Folder Include="Leetcode\Medium\" />
+    <Folder Include="Leetcode\Hard\" />
     <Folder Include="Checkio\Elementary\" />
     <Folder Include="lib\" />
     <Folder Include="Hiryanov\" />
     <Folder Include="Checkio\" />
+    <Folder Include="Leetcode\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
