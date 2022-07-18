@@ -19,11 +19,15 @@ def rpn(expression: list):
     6.0
     >>> rpn([1,2,'#'])
     unexpected token: #
+    >>> rpn([1,1,1,1,'+','+','+',1,1,'+','*'])
+    8
+    >>> rpn([1,-1,1,1,'+','+','+'])
+    2
     """
     
     st = MyStack()
     for token in expression:
-        if str(token).isdigit():
+        if str(token).lstrip("-").isdigit():
             st.push(token)
         else:
             y = st.pop()
@@ -46,7 +50,7 @@ def rpn(expression: list):
 
 def test0():
     import doctest
-    doctest.testmod(verbose=True)
+    doctest.testmod(verbose=False)
 
 def test1():
     rpn([1,2,'#'])
