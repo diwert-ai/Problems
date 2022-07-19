@@ -106,6 +106,7 @@ def gen_groups(data,m,prefix=None):
        prefix - возвращаемая группировка
     """
     prefix = prefix or []
+
     if m == 0:
         yield prefix
     
@@ -173,7 +174,9 @@ def test0():
              '392039',
              '712922',
              '279216',
-             '173403']
+             '173403',
+             '064027',
+             ]
 
     for i,test in enumerate(tests):
         print(f'test#{i}: {test} {find100(test)} best_clear_check:{not checkio_clear(test)}')
