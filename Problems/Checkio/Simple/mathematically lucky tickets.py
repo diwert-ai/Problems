@@ -85,13 +85,14 @@ def rpn(expression: list):
 
     return st.pop() if len(st)==1 else None
 
-def gen_ordered_permutations(l1:list,l2:list,m:int,prefix=[]):
+def gen_ordered_permutations(l1:list,l2:list,m:int,prefix=None):
     """генератор перестановок элементов из двух списков l1 и l2,
        сохраняющих порядок следования элементов в этих списках:
        l1=[1,2,3] l2=['+','-'] -> [1,2,'+',3,'-']; ['+',1,2,'-',3] и тд
        m - глубина рекурсии = len(l1)+len(l2)
        prefix - возвращаемая перестановка
     """ 
+    prefix = prefix or []
     if m == 0:
         yield prefix
     if len(l1) > 0:
@@ -99,11 +100,12 @@ def gen_ordered_permutations(l1:list,l2:list,m:int,prefix=[]):
     if len(l2) > 0:
         yield from gen_ordered_permutations(l1,l2[1:],m-1,prefix+[l2[0]])
 
-def gen_groups(data,m,prefix=[]):
+def gen_groups(data,m,prefix=None):
     """генератор группировок чисел:
        data = '123456' -> [1,2,3,4,5,6], [12,3,4,5,6], [1,234,5,6] и тд
        prefix - возвращаемая группировка
     """
+    prefix = prefix or []
     if m == 0:
         yield prefix
     
