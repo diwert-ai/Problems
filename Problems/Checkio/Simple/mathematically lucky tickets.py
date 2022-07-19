@@ -176,6 +176,7 @@ def test0():
              '279216',
              '173403',
              '064027',
+             '237867'
              ]
 
     for i,test in enumerate(tests):
