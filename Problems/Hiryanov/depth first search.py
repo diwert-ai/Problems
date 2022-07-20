@@ -113,12 +113,12 @@ def dfs_k(vertex, G, used, stack):
 
 
 # обратный проход
-def dfs_k_backward(vertex, G, used, stack):
+def dfs_k_backward(vertex, G, used):
     print(vertex, end=' ')
     used.add(vertex)
     for neighbor in G[vertex]:
         if neighbor not in used:
-            dfs_k_backward(neighbor, G, used, stack)
+            dfs_k_backward(neighbor, G, used)
 
 
 # процедура инвертирования графа
@@ -167,7 +167,7 @@ def n_strongly_comp(G):
         vertex = stack[len(stack)-1]
         if vertex not in used:
             print(f'strongly comp #{N}: ', end='')
-            dfs_k_backward(vertex, H, used, stack)
+            dfs_k_backward(vertex, H, used)
             print('')
             N += 1
         stack.pop()
