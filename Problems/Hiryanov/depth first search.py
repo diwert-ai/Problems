@@ -139,12 +139,12 @@ def printg(G: dict):
 
 
 # процедура подсчета компонент
-# слабой связности орграфа
+# сильной связности орграфа
 def n_strongly_comp(G):
     used = set()
     stack = []
     N = 0
-    # делаем прямой обход оргграфа и заполняем попутно стек
+    # делаем прямой обход орграфа и заполняем попутно стек
     # считаем компоненты слабой связности
     for vertex in G:
         if vertex not in used:
@@ -158,19 +158,19 @@ def n_strongly_comp(G):
     H = invert(G)
     print(f'inverted graph:')
     printg(H)
-    # обходим инвертированный оргграф
+    # обходим инвертированный орграф
     # учитывая порядок вершин в стеке
+    # считаем компоненты сильной связности
     N = 0
     used = set()
     print('')
     while stack != []:
-        vertex = stack[len(stack)-1]
+        vertex = stack.pop()
         if vertex not in used:
             print(f'strongly comp #{N}: ', end='')
             dfs_k_backward(vertex, H, used)
             print('')
             N += 1
-        stack.pop()
     return N
 
 
@@ -204,13 +204,155 @@ def test2():
                'H': {'G'},
                'J': {'E'},
                'K': {'J'},
-               'L': {'J', 'K'}}]
+               'L': {'J', 'K'}},
+              {'a': {'b'},
+               'b': {'c', 'e', 'f'},
+               'c': {'d', 'g'},
+               'd': {'c', 'h'},
+               'e': {'a', 'f'},
+               'f': {'g'},
+               'g': {'f'},
+               'h': {'d', 'g'}},
+              {0: {1},
+               1: {2, 3},
+               2: {0},
+               3: {}}]
     for G in Graphs:
         print(f'N strongly comps: {n_strongly_comp(G)}')
         print('')
 
+# Топологическая сортировка. Алгоритм Тарьяна.
+# Если орграф не содержит циклов, то его вершины
+# можно пронумеровать так, что любое ребро идет
+# от вершины с меньшим номером к вершине с большим.
+# Сложность по времени алгоритма Тарьяна - О(N),
+# где N - число вершин. Вершина - это число от 1
+# до N.
+
+# вариант с множеством used
+
+
+def dfs_t(vertex, G, used, ans):
+    used.add(vertex)
+    for neighbor in G[vertex]:
+        if neighbor not in used:
+            dfs_t(neighbor, G, used, ans)
+    # добавляем вершину в список на обратном
+    # ходу рекурсии
+    ans.append(vertex)
+
+
+def topsort(G):
+    used = set()
+    # список, в который будет сохраняться топологический порядок вершины
+    ans = []
+    for vertex in G:
+        if vertex not in used:
+            dfs_t(vertex, G, used, ans)
+    # необходимо инвертировать список
+    # так как элементы в него заносились
+    # на обратном ходу рекурсии в dfs_t
+    ans[:] = ans[::-1]
+
+    return ans
+
+
+def test3():
+    Graphs = [{1: {2},
+               2: {3},
+               3: {1}},
+              {1: {3, 4, 5},
+               2: {5},
+               3: {6, 7},
+               4: {7},
+               5: {8},
+               6: {9},
+               7: {9},
+               8: {10, 12},
+               9: {10, 13},
+               10: {11, 13},
+               11: {},
+               12: {},
+               13: {}},
+              {1: {2, 3},
+               2: {4},
+               3: {4},
+               4: {}},
+              {0: {},
+               1: {},
+               2: {3},
+               3: {1},
+               4: {0, 1},
+               5: {0, 2}}]
+
+    for i, G in enumerate(Graphs):
+        print(f'graph #{i}: {topsort(G)}')
+
+# вариант со списком visited
+
+
+def dfs_t_v(vertex, G, visited, ans):
+    visited[vertex] = True
+    for neighbor in G[vertex]:
+        if not visited[neighbor]:
+            dfs_t_v(neighbor, G, visited, ans)
+    # добавляем вершину в список на обратном
+    # ходу рекурсии
+    ans.append(vertex)
+
+
+def topsort_v(G):
+    # число вершин графа
+    n = len(G)
+    # вершина с индексом 0 фиктивная - ее нет в графе
+    visited = [False] * (n+1)
+    # список, в который будет сохраняться топологический порядок вершины
+    ans = []
+    for vertex in range(1, n+1):
+        if not visited[vertex]:
+            dfs_t_v(vertex, G, visited, ans)
+    # необходимо инвертировать список
+    # так как элементы в него заносились
+    # на обратном ходу рекурсии в dfs_t
+    ans[:] = ans[::-1]
+
+    return ans
+
+
+def test4():
+    Graphs = [{1: {2},
+               2: {3},
+               3: {1}},
+              {1: {3, 4, 5},
+               2: {5},
+               3: {6, 7},
+               4: {7},
+               5: {8},
+               6: {9},
+               7: {9},
+               8: {10, 12},
+               9: {10, 13},
+               10: {11, 13},
+               11: {},
+               12: {},
+               13: {}},
+              {1: {2, 3},
+               2: {4},
+               3: {4},
+               4: {}},
+              {1: {},
+               2: {},
+               3: {4},
+               4: {2},
+               5: {1, 2},
+               6: {1, 3}}]
+
+    for i, G in enumerate(Graphs):
+        print(f'graph #{i}: {topsort_v(G)}')
 
 if __name__ == '__main__':
     test0()
     test1()
     test2()
+    test3()
+    test4()
