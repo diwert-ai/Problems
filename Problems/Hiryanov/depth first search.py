@@ -286,7 +286,7 @@ def test3():
                5: {0, 2}}]
 
     for i, G in enumerate(Graphs):
-        print(f'graph #{i}: {topsort(G)}')
+        print(f'graph #{i} has topological order: {topsort(G)}')
 
 # вариант со списком visited
 
@@ -348,7 +348,67 @@ def test4():
                6: {1, 3}}]
 
     for i, G in enumerate(Graphs):
-        print(f'graph #{i}: {topsort_v(G)}')
+        print(f'graph #{i} has topological order: {topsort_v(G)}')
+
+
+# поиск цикла в орграфе
+# используем 3 цвета:
+# 0 - вершина не посещалась ни разу
+# 1 - вершина посещена на прямом ходе рекурсии dfs
+# 2 - вершина посещена на обратном ходе рекурсис dfs
+# если в ходе рекурсии встретилась смежная вершина цвета 1
+# значит найден цикл
+def dfs_cycle(vertex, G, colored):
+    colored[vertex] = 1
+    for neighbor in G[vertex]:
+        if colored[neighbor] == 0:
+            if dfs_cycle(neighbor, G, colored):
+                return True
+        elif colored[neighbor] == 1:
+            return True
+    colored[vertex] = 2
+    return False
+
+
+def find_cycle(G):
+    colored = {v: 0 for v in G}
+    for vertex in G:
+        if dfs_cycle(vertex, G, colored):
+            return True
+    return False
+
+
+def test5():
+    Graphs = [{1: {2},
+               2: {3},
+               3: {1}},
+              {1: {3, 4, 5},
+               2: {5},
+               3: {6, 7},
+               4: {7},
+               5: {8},
+               6: {9},
+               7: {9},
+               8: {10, 12},
+               9: {10, 13},
+               10: {7, 11, 13},
+               11: {},
+               12: {},
+               13: {}},
+              {1: {2, 3},
+               2: {4},
+               3: {4},
+               4: {}},
+              {1: {},
+               2: {},
+               3: {4},
+               4: {2},
+               5: {1, 2},
+               6: {1, 3}}]
+
+    for i, G in enumerate(Graphs):
+        print(f'graph #{i} has cycle: {find_cycle(G)}')
+
 
 if __name__ == '__main__':
     test0()
@@ -356,3 +416,4 @@ if __name__ == '__main__':
     test2()
     test3()
     test4()
+    test5()
