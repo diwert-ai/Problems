@@ -1,8 +1,14 @@
-﻿signature = lambda p1, p2, q: (q[0]-p1[0])*(p2[1]-p1[1]) - (q[1]-p1[1])*(p2[0]-p1[0]) 
+# https://py.checkio.org/en/mission/inside-block/
 
-def in_triangle(t,p):
-    s = signature(t[0], t[1], p), signature(t[1], t[2], p), signature(t[2], t[0], p)                  
-    return all([r>=0 for r in s]) or all([r<=0 for r in s])
+from typing import Tuple
+
+signature = lambda p1, p2, q: (q[0]-p1[0])*(p2[1]-p1[1]) - (q[1]-p1[1])*(p2[0]-p1[0])
+
+
+def in_triangle(t, p):
+    s = signature(t[0], t[1], p), signature(t[1], t[2], p), signature(t[2], t[0], p)
+    return all([r >= 0 for r in s]) or all([r <= 0 for r in s])
+
 
 def square(polygon):
     ret = 0
@@ -15,20 +21,16 @@ def square(polygon):
     return 0.5*abs(ret)
 
 
-
-from typing import Tuple
-
-
 def is_inside(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]) -> bool:
-    n = len(polygon)  
+    n = len(polygon)
     if n == 3:
-        return in_triangle(polygon,point)
+        return in_triangle(polygon, point)
     s = square(polygon)
     for i in range(n):
         reduced_polygon = tuple(polygon[ii] for ii in range(n) if ii != i)
         if square(reduced_polygon) > s:
             continue
-        k = (i+1)%n
+        k = (i+1) % n
         t = polygon[i-1], polygon[i], polygon[k]
         good_triangle = True
         for j in range(n-3):
@@ -41,30 +43,6 @@ def is_inside(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]) -> b
             return True
         else:
             return is_inside(reduced_polygon, point)
-    return False
-
-def is_inside_false(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]) -> bool:
-    n = len(polygon)
-    if n == 3:
-        return in_triangle(polygon, point)
-
-    for i in range(n):
-        k = (i+1) % n
-        t = polygon[i-1], polygon[i], polygon[k]
-        good_triangle = True
-
-        for j in range(n-3):
-            if in_triangle(t, polygon[(k+j+1) % n]):
-                good_triangle = False
-                break
-
-        if good_triangle:
-            if in_triangle(t, point):
-                return True
-            else:
-                new_polygon = tuple(polygon[ii] for ii in range(n) if ii != i)
-                return is_inside(new_polygon, point)
-
     return False
 
 
@@ -85,19 +63,7 @@ if __name__ == '__main__':
                      (3, 3)) is True, "Seventh"
     assert is_inside(((1, 1), (1, 5), (5, 5), (5, 4), (2, 4), (2, 2), (5, 2), (5, 1)),
                      (4, 3)) is False, "Eighth"
+    assert is_inside(((5, 3), (3, 3), (3, 1), (2, 1), (2, 4), (6, 4), (6, 1), (5, 1)),
+                     (4, 2)) is False, "Nineth"
+
     print("All done! Let's check now")
-
-    poly = ((5,3), (3,3), (3,1), (2,1), (2,4), (6,4), (6,1), (5,1))
-    p = (4, 2)
-    print(is_inside(poly,p))
-    print(is_inside_false(poly,p))
-    print(square(poly))
-    poly = [[1,1],[2,4],[5,4],[4,1],[3,1],[4,3],[3,3],[2,1]]
-    p = [3,2]
-    print(square(poly))
-    print(is_inside(poly,p))
-
-
-
-
-
