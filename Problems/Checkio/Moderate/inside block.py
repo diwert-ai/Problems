@@ -50,6 +50,30 @@ def is_inside(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]) -> b
             return is_inside(reduced_polygon, point)
     return False
 
+def is_inside_false(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]) -> bool:
+    n = len(polygon)
+    if n == 3:
+        return in_triangle(polygon, point)
+
+    for i in range(n):
+        k = (i+1) % n
+        t = polygon[i-1], polygon[i], polygon[k]
+        good_triangle = True
+
+        for j in range(n-3):
+            if in_triangle(t, polygon[(k+j+1) % n]):
+                good_triangle = False
+                break
+
+        if good_triangle:
+            if in_triangle(t, point):
+                return True
+            else:
+                new_polygon = tuple(polygon[ii] for ii in range(n) if ii != i)
+                return is_inside(new_polygon, point)
+
+    return False
+
 
 if __name__ == '__main__':
     assert is_inside(((1, 1), (1, 3), (3, 3), (3, 1)),
