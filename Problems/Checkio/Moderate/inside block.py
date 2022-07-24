@@ -15,40 +15,39 @@ def in_triangle(t, p):
     return all([r >= 0 for r in s]) or all([r <= 0 for r in s])
 
 
-def square(polygon):
+def oriented_area(polygon):
     ret = 0
     n = len(polygon)
     for i in range(n-1):
         det = polygon[i][0]*polygon[i+1][1] - polygon[i+1][0]*polygon[i][1]
         ret += det
     ret += polygon[n-1][0]*polygon[0][1]-polygon[0][0]*polygon[n-1][1]
+    return ret
 
-    return 0.5*abs(ret)
 
-
-def is_inside(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]) -> bool:
+def is_inside(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int], s=None) -> bool:
     n = len(polygon)
     if n == 3:
         return in_triangle(polygon, point)
-    s = square(polygon)
+    s = s or oriented_area(polygon)
     for i in range(n):
-        reduced_polygon = tuple(polygon[ii] for ii in range(n) if ii != i)
-        if square(reduced_polygon) > s:
-            continue
         k = (i+1) % n
-        t = polygon[i-1], polygon[i], polygon[k]
-        good_triangle = True
-        for j in range(n-3):
-            if in_triangle(t, polygon[(k+j+1) % n]):
-                good_triangle = False
-                break
-        if not good_triangle:
+        ear = polygon[i-1], polygon[i], polygon[k]
+        if abs(s-oriented_area(ear)) > abs(s):
             continue
-        if in_triangle(t, point):
+        good_ear = True
+        for j in range(n-3):
+            if in_triangle(ear, polygon[(k+j+1) % n]):
+                good_ear = False
+                break
+        if not good_ear:
+            continue
+        if in_triangle(ear, point):
             return True
-        else:
-            return is_inside(reduced_polygon, point)
+        reduced_polygon = tuple(polygon[j] for j in range(n) if j != i)
+        return is_inside(reduced_polygon, point, s)
     return False
+
 
 def is_inside_false(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]) -> bool:
     n = len(polygon)
@@ -71,8 +70,26 @@ def is_inside_false(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]
             else:
                 new_polygon = tuple(polygon[ii] for ii in range(n) if ii != i)
                 return is_inside(new_polygon, point)
-
     return False
+
+
+# best clear solution
+# ref: https://py.checkio.org/mission/inside-block/publications/Sim0000/python-3/second/?ordering=most_voted&filtering=all
+def is_inside(polygon, point):
+    x, y, x1, y1 = point + polygon[-1]
+    count = 0
+    for x2, y2 in polygon:
+        if y1 == y2:
+            if y == y1 and min(x1, x2) <= x <= max(x1, x2):
+                return True  # on line
+        else:
+            cx = x1 + (x2 - x1) * (y - y1) / (y2 - y1)  # x of cross point
+            if x == cx:
+                return True  # on line
+            if x < cx and min(y1, y2) <= y < max(y1, y2):
+                count += 1
+        x1, y1 = x2, y2
+    return count % 2 == 1  # odd then inside
 
 
 if __name__ == '__main__':
@@ -94,5 +111,8 @@ if __name__ == '__main__':
                      (4, 3)) is False, "Eighth"
     assert is_inside(((5, 3), (3, 3), (3, 1), (2, 1), (2, 4), (6, 4), (6, 1), (5, 1)),
                      (4, 2)) is False, "Ninth"
+    assert is_inside(((2, 5), (2, 2), (5, 2), (1, 1)),
+                     (3, 3)) is False, "Tenth"
 
     print("All done! Let's check now")
+
