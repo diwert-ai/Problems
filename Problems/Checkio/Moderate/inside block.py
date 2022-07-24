@@ -44,8 +44,7 @@ def is_inside(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int], s=No
             continue
         if in_triangle(ear, point):
             return True
-        reduced_polygon = tuple(polygon[j] for j in range(n) if j != i)
-        return is_inside(reduced_polygon, point, s)
+        return is_inside(polygon[:i]+polygon[i+1:], point, s)
     return False
 
 
@@ -75,7 +74,7 @@ def is_inside_false(polygon: Tuple[Tuple[int, int], ...], point: Tuple[int, int]
 
 # best clear solution
 # ref: https://py.checkio.org/mission/inside-block/publications/Sim0000/python-3/second/?ordering=most_voted&filtering=all
-def is_inside(polygon, point):
+def is_inside_clear(polygon, point):
     x, y, x1, y1 = point + polygon[-1]
     count = 0
     for x2, y2 in polygon:
