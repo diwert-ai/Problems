@@ -1,2 +1,2 @@
 # Problems
-leetcode promblems and other
+leetcode problems and other
