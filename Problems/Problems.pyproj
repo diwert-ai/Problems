@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Checkio\Moderate\unix match.py</StartupFile>
+    <StartupFile>Checkio\Moderate\loading cargo.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="Checkio\Moderate\can pass.py" />
     <Compile Include="Checkio\Moderate\inside block.py" />
+    <Compile Include="Checkio\Moderate\loading cargo.py" />
     <Compile Include="Checkio\Moderate\unix match.py" />
     <Compile Include="Checkio\Simple\find sequence.py" />
     <Compile Include="Checkio\Simple\mathematically lucky tickets.py" />
