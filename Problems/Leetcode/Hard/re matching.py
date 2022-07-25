@@ -34,7 +34,9 @@ class Solution:
             else:
                 return False
 
-    #правильное решение
+    # короткое рекурсивное  решение
+    # ассимптотика по времени: O((T+P)*2^{T+P/2})
+    # по памяти: O((T+P)*2^{T+P/2}) (T=len(s), P=len(p)) 
     def isMatch(self, s: str, p: str) -> bool:
         if not p: return not s
         
@@ -45,6 +47,29 @@ class Solution:
         else:
             return f_match and self.isMatch(s[1:],p[1:])
 
+    # DP решение с рекурсией
+    # время O(T*P) память O(T*P)
+
+    def isMatch_DP(self, text, pattern):
+        memo = {}
+        def dp(i, j):
+            if (i, j) not in memo:
+                if j == len(pattern):
+                    ans = i == len(text)
+                else:
+                    first_match = i < len(text) and pattern[j] in {text[i], '.'}
+                    if j+1 < len(pattern) and pattern[j+1] == '*':
+                        ans = dp(i, j+2) or first_match and dp(i+1, j)
+                    else:
+                        ans = first_match and dp(i+1, j+1)
+
+                memo[i, j] = ans
+            return memo[i, j]
+
+        return dp(0, 0)
+
+
+
 def test0():
     s = 'ababcdfq'
     p = 'a*b*a*b*...'
@@ -52,6 +77,7 @@ def test0():
     sol = Solution()
     print(sol.isMatch(s,p))
     print(sol.isMatchF(s,p))
+    print(sol.isMatch_DP(s,p))
 
 if __name__ == '__main__':
     test0()
