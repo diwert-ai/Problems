@@ -1,6 +1,7 @@
 ﻿# https://py.checkio.org/ru/mission/army-units/
 # задачка на ООП
 
+
 class Army:
     def __init__(self, etnonim = None, soldier_names = None):
         self.etnonim = etnonim
