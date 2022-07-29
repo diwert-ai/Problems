@@ -1,4 +1,7 @@
-﻿class Army:
+﻿# https://py.checkio.org/ru/mission/army-units/
+# задачка на ООП
+
+class Army:
     def __init__(self, etnonim = None, soldier_names = None):
         self.etnonim = etnonim
         self.swordsman_name  = soldier_names[0] if soldier_names is not None else None
@@ -56,22 +59,24 @@ class EuropeanArmy(Army):
         super().__init__(etnonim='European', soldier_names=['Knight', 'Raubritter', 'Ranger'])
 
 
-my_army = EuropeanArmy()
-enemy_army = AsianArmy()
+if __name__ == '__main__':
+    my_army = EuropeanArmy()
+    enemy_army = AsianArmy()
 
-soldier_1 = my_army.train_swordsman("Jaks")
-soldier_2 = my_army.train_lancer("Harold")
-soldier_3 = my_army.train_archer("Robin")
+    soldier_1 = my_army.train_swordsman("Jaks")
+    soldier_2 = my_army.train_lancer("Harold")
+    soldier_3 = my_army.train_archer("Robin")
 
-soldier_4 = enemy_army.train_swordsman("Kishimoto")
-soldier_5 = enemy_army.train_lancer("Ayabusa")
-soldier_6 = enemy_army.train_archer("Kirigae")
+    soldier_4 = enemy_army.train_swordsman("Kishimoto")
+    soldier_5 = enemy_army.train_lancer("Ayabusa")
+    soldier_6 = enemy_army.train_archer("Kirigae")
 
-assert soldier_1.introduce() == "Knight Jaks, European swordsman"
-assert soldier_2.introduce() == "Raubritter Harold, European lancer"
-assert soldier_3.introduce() == "Ranger Robin, European archer"
+    assert soldier_1.introduce() == "Knight Jaks, European swordsman"
+    assert soldier_2.introduce() == "Raubritter Harold, European lancer"
+    assert soldier_3.introduce() == "Ranger Robin, European archer"
     
-assert soldier_4.introduce() == "Samurai Kishimoto, Asian swordsman"
-assert soldier_5.introduce() == "Ronin Ayabusa, Asian lancer"
-assert soldier_6.introduce() == "Shinobi Kirigae, Asian archer"
+    assert soldier_4.introduce() == "Samurai Kishimoto, Asian swordsman"
+    assert soldier_5.introduce() == "Ronin Ayabusa, Asian lancer"
+    assert soldier_6.introduce() == "Shinobi Kirigae, Asian archer"
+
 
