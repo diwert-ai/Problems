@@ -1,77 +1,54 @@
-﻿class Army:
-    def __init__(self, etnonim = None, soldier_names = None):
-        self.etnonim = etnonim
-        self.swordsman_name  = soldier_names[0] if soldier_names is not None else None
-        self.lancer_name  = soldier_names[1] if soldier_names is not None else None
-        self.archer_name = soldier_names[2] if soldier_names is not None else None
+﻿class AbstractCook:
+    def __init__(self, drink = None, food = None):
+        self.drink_name = drink
+        self.food_name = food
+        self.food_list = []
+        self.drink_list = []
 
-    def train_swordsman(self, name):
-        return Swordsman(name, self.etnonim, soldier_name = self.swordsman_name)
+    def add_food(self, food_amount, food_cost):
+        self.food_list.append((food_amount, food_cost))
 
-    def train_lancer(self, name):
-        return Lancer(name, self.etnonim, soldier_name = self.lancer_name)
+    def add_drink(self,drink_amount, drink_cost):
+        self.drink_list.append((drink_amount, drink_cost))
 
-    def train_archer(self, name):
-        return Archer(name, self.etnonim, soldier_name = self.archer_name)
+    def total(self):
+        t_f_cost = sum([item[0] * item[1] for item in self.food_list])
+        t_d_cost = sum([item[0] * item[1] for item in self.drink_list])
+        t_cost = t_f_cost + t_d_cost
+        return f'{self.food_name}: {t_f_cost}, {self.drink_name}: {t_d_cost}, Total: {t_cost}'
 
-
-class Swordsman:
-    def __init__(self, name, army_name, soldier_name):
-        self.name = name
-        self.army_name = army_name
-        self.soldier_name = soldier_name
-
-    def introduce(self):
-        return self.soldier_name + ' ' + self.name + ', ' + self.army_name + ' swordsman'
-
-
-class Lancer:
-    def __init__(self, name, army_name, soldier_name):
-        self.name = name
-        self.army_name = army_name
-        self.soldier_name = soldier_name
-
-    def introduce(self):
-        return self.soldier_name + ' ' + self.name + ', ' + self.army_name + ' lancer'
-
-
-class Archer:
-    def __init__(self, name, army_name, soldier_name):
-        self.name = name
-        self.army_name = army_name
-        self.soldier_name = soldier_name
-
-    def introduce(self):
-        return self.soldier_name + ' ' + self.name + ', ' + self.army_name + ' archer'
-
-
-class AsianArmy(Army):
+class JapaneseCook(AbstractCook):
     def __init__(self):
-        super().__init__(etnonim='Asian', soldier_names=['Samurai', 'Ronin', 'Shinobi'])
+        super().__init__(drink='Tea', food='Sushi')
 
-
-
-class EuropeanArmy(Army):
+class RussianCook(AbstractCook):
     def __init__(self):
-        super().__init__(etnonim='European', soldier_names=['Knight', 'Raubritter', 'Ranger'])
+        super().__init__(drink='Compote', food='Dumplings')
+
+class ItalianCook(AbstractCook):
+    def __init__(self):
+        super().__init__(drink='Juice', food='Pizza')
 
 
-my_army = EuropeanArmy()
-enemy_army = AsianArmy()
+if __name__ == '__main__':
+    #These "asserts" using only for self-checking and not necessary for auto-testing
 
-soldier_1 = my_army.train_swordsman("Jaks")
-soldier_2 = my_army.train_lancer("Harold")
-soldier_3 = my_army.train_archer("Robin")
+    client_1 = JapaneseCook()
+    client_1.add_food(2, 30)
+    client_1.add_food(3, 15)
+    client_1.add_drink(2, 10)
 
-soldier_4 = enemy_army.train_swordsman("Kishimoto")
-soldier_5 = enemy_army.train_lancer("Ayabusa")
-soldier_6 = enemy_army.train_archer("Kirigae")
+    client_2 = RussianCook()
+    client_2.add_food(1, 40)
+    client_2.add_food(2, 25)
+    client_2.add_drink(5, 20)
 
-assert soldier_1.introduce() == "Knight Jaks, European swordsman"
-assert soldier_2.introduce() == "Raubritter Harold, European lancer"
-assert soldier_3.introduce() == "Ranger Robin, European archer"
-    
-assert soldier_4.introduce() == "Samurai Kishimoto, Asian swordsman"
-assert soldier_5.introduce() == "Ronin Ayabusa, Asian lancer"
-assert soldier_6.introduce() == "Shinobi Kirigae, Asian archer"
+    client_3 = ItalianCook()
+    client_3.add_food(2, 20)
+    client_3.add_food(2, 30)
+    client_3.add_drink(2, 10)
 
+    assert client_1.total() == "Sushi: 105, Tea: 20, Total: 125"
+    assert client_2.total() == "Dumplings: 90, Compote: 100, Total: 190"
+    assert client_3.total() == "Pizza: 100, Juice: 20, Total: 120"
+    print("Coding complete? Let's try tests!")
