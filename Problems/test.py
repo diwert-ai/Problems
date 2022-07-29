@@ -1,19 +1,42 @@
-﻿data = [1,1,1,3]
+﻿from collections import deque
 
-data.sort()
-all_sum = sum(data)
-print(sum(data))
+class Test:
+    def __init__(self):
+        self.field = 10
 
-half_sum = 0
 
-for i in range(len(data)):
-    half_sum += data[i]
-    if half_sum > all_sum:
-        break
-    i += 1
+class TestSet:
+    def __init__(self):
+        self.tests = []
+        pass
 
-print(i)
-print(min(all_sum - half_sum, half_sum - data[i-1]))
+
+    def add_tests(self, testType, num_tests):
+        self.tests += [testType()] * num_tests
+
+t1 = Test()
+t2 = []
+print(t1.field)
+ts = TestSet()
+ts.add_tests(Test, 10)
+for test in ts.tests:
+    print(test.field)
+
+class arm:
+    def __init__(self, l=[1,2,3,4]):
+        self.units = deque(l)
+
+    def reset(self):
+        new_q = deque()
+        while self.units:
+            r = self.units.popleft()
+            new_q.append(r*10)
+        self.units = new_q
+
+
+a1 = [1,2,3]
+a2 = [6]
+print(deque([a1[0]])+  deque(a2) + deque(a1[1:]))
 
 
 
