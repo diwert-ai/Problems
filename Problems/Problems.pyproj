@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Checkio\Simple\cook.py</StartupFile>
+    <StartupFile>Leetcode\Easy\remove element.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -95,6 +95,7 @@
     <Compile Include="Hiryanov\primality test.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Leetcode\Easy\remove element.py" />
     <Compile Include="Leetcode\Easy\remove duplicates from sorted array.py">
       <SubType>Code</SubType>
     </Compile>
