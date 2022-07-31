@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Leetcode\Easy\remove element.py</StartupFile>
+    <StartupFile>Leetcode\Medium\divide two integer.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -125,6 +125,7 @@
     <Compile Include="Leetcode\Hard\re matching.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Leetcode\Medium\divide two integer.py" />
     <Compile Include="lib\linkedlist.py">
       <SubType>Code</SubType>
     </Compile>
