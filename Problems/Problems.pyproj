@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Leetcode\Medium\divide two integer.py</StartupFile>
+    <StartupFile>Leetcode\Medium\29. divide two integer.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -35,7 +35,7 @@
     <Compile Include="Hiryanov\breadth first search.py" />
     <Compile Include="Hiryanov\dijkstra shortest path.py" />
     <Compile Include="Hiryanov\floyd warshall paths.py" />
-    <Compile Include="Leetcode\Easy\merge two sorted lists.py">
+    <Compile Include="Leetcode\Easy\21. merge two sorted lists.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\knapsack problem.py" />
@@ -95,14 +95,14 @@
     <Compile Include="Hiryanov\primality test.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Easy\remove element.py" />
-    <Compile Include="Leetcode\Easy\remove duplicates from sorted array.py">
+    <Compile Include="Leetcode\Easy\27. remove element.py" />
+    <Compile Include="Leetcode\Easy\26. remove duplicates from sorted array.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hiryanov\brace check.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Easy\roman to integer.py" />
+    <Compile Include="Leetcode\Easy\13. roman to integer.py" />
     <Compile Include="Leetcode\Easy\test merge.py">
       <SubType>Code</SubType>
     </Compile>
@@ -112,20 +112,20 @@
     <Compile Include="Checkio\Elementary\most_frequent.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Easy\two sum.py" />
-    <Compile Include="Leetcode\Hard\median of two sorted array.py">
+    <Compile Include="Leetcode\Easy\1. two sum.py" />
+    <Compile Include="Leetcode\Hard\4. median of two sorted array.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Hard\merge k sorted linked lists.py">
+    <Compile Include="Leetcode\Hard\23. merge k sorted linked lists.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Hard\reverse nodes in k-group.py">
+    <Compile Include="Leetcode\Hard\25. reverse nodes in k-group.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Hard\re matching.py">
+    <Compile Include="Leetcode\Hard\10. regular expression matching.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Medium\divide two integer.py" />
+    <Compile Include="Leetcode\Medium\29. divide two integer.py" />
     <Compile Include="lib\linkedlist.py">
       <SubType>Code</SubType>
     </Compile>
@@ -133,29 +133,29 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="lib\mystack.py" />
-    <Compile Include="Leetcode\Medium\4sum.py">
+    <Compile Include="Leetcode\Medium\18. 4sum.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Easy\valid-parentheses.py" />
+    <Compile Include="Leetcode\Easy\20. valid-parentheses.py" />
     <Compile Include="Hiryanov\heap sort.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Medium\container with most water.py">
+    <Compile Include="Leetcode\Medium\11. container with most water.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Medium\generate-parentheses.py">
+    <Compile Include="Leetcode\Medium\22. generate-parentheses.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Medium\letter combinations of a phone number.py">
+    <Compile Include="Leetcode\Medium\17. letter combinations of a phone number.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Medium\add two numbers.py">
+    <Compile Include="Leetcode\Medium\2. add two numbers.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Medium\swap nodes in pairs.py">
+    <Compile Include="Leetcode\Medium\24. swap nodes in pairs.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Leetcode\Medium\remove nth node.py">
+    <Compile Include="Leetcode\Medium\19. remove nth node.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="test.py" />
