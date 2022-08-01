@@ -26,6 +26,3 @@ if __name__ == '__main__':
     fractal_rectangle((100, 100), (500, 100), (500, 500), (100, 500), 10)
     window.getMouse()
     window.close()
-
-
-
