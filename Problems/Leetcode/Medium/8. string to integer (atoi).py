@@ -25,39 +25,56 @@
 
 
 class Solution:
-    digits = {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9}
-    def myAtoi(self, s: str) -> int:
-        
+
+    @staticmethod
+    def my_atoi(s: str) -> int:
+        digits = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
         n = []
         t = s.strip()
-        sign = 1;
         
-        if (len(t) == 0):return 0
+        if len(t) == 0:
+            return 0
         
-        if t[0]=='-':   sign = -1; i=1
-        elif t[0]=='+': sign =  1; i=1
-        else: i=0
-            
-        while (i<len(t)):
-          
-            if (t[i] in self.digits): n.append(t[i])
-            else: break
-            
-            i+=1
-            
-        if n==[]: return 0
-        
+        if t[0] == '-':
+            sign, i = -1, 1
+        elif t[0] == '+':
+            sign, i = 1, 1
         else:
-            int_n=0
+            sign, i = 1, 0
+            
+        while i < len(t):
+          
+            if t[i] in digits:
+                n.append(t[i])
+            else:
+                break
+            
+            i += 1
+            
+        if not n:
+            return 0
+        else:
+            int_n = 0
             pw = 1
-            for i in range(len(n)-1,-1,-1):
-                int_n += self.digits[n[i]]*pw
+            for i in range(len(n)-1, -1, -1):
+                int_n += digits[n[i]]*pw
                 pw *= 10
                 
-            res=sign*int_n
+            res = sign*int_n
             
-        if res<-2147483648: res = -2147483648
+        if res < -2147483648:
+            res = -2147483648
                 
-        if res>2147483647: res = 2147483647
+        if res > 2147483647:
+            res = 2147483647
             
         return res
+
+
+if __name__ == '__main__':
+    tests = [('12342', 12342),
+             ('12315644', 12315644),
+             ('-67923874', -67923874)]
+
+    for test, right_answer in tests:
+        print(f'for test {test} right answer is {right_answer} and solution is {Solution.my_atoi(test)}')
