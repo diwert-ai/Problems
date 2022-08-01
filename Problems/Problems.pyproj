@@ -130,6 +130,7 @@
     <Compile Include="Leetcode\Medium\5. longest palindromic substring.py" />
     <Compile Include="Leetcode\Medium\6. zigzag conversion.py" />
     <Compile Include="Leetcode\Medium\7. reverse integer.py" />
+    <Compile Include="Leetcode\Medium\8. string to integer %28atoi%29.py" />
     <Compile Include="lib\linkedlist.py">
       <SubType>Code</SubType>
     </Compile>
