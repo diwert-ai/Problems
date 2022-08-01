@@ -1,27 +1,31 @@
-﻿#рисуем фрактал с помощью рекурсии
-#из лекции Хирьянова https://www.youtube.com/watch?v=0Bc8zLURY-c&list=PLRDzFCPr95fK7tr47883DFUbm4GeOjjc0&index=7
+﻿# рисуем фрактал с помощью рекурсии
+# из лекции Хирьянова https://www.youtube.com/watch?v=0Bc8zLURY-c&list=PLRDzFCPr95fK7tr47883DFUbm4GeOjjc0&index=7
 
 import graphics as gr
 
-window = gr.GraphWin('Fractal rectangle', 600,600)
-alpha = 0.2
+window = gr.GraphWin('Fractal rectangle', 600, 600)
+alpha = 0.25
 
-def fractal_rectangle(A,B,C,D,deep=10):
+
+def fractal_rectangle(a, b, c, d, deep=10):
     if deep < 1:
         return
 
-    for M, N in (A,B), (B,C), (C,D), (D,A):
-        gr.Line(gr.Point(*M), gr.Point(*N)).draw(window)
+    for m, n in (a, b), (b, c), (c, d), (d, a):
+        gr.Line(gr.Point(*m), gr.Point(*n)).draw(window)
 
-    A1 = (A[0]*(1-alpha) + B[0]*alpha, A[1]*(1-alpha) + B[1]*alpha)
-    B1 = (B[0]*(1-alpha) + C[0]*alpha, B[1]*(1-alpha) + C[1]*alpha)
-    C1 = (C[0]*(1-alpha) + D[0]*alpha, C[1]*(1-alpha) + D[1]*alpha)
-    D1 = (D[0]*(1-alpha) + A[0]*alpha, D[1]*(1-alpha) + A[1]*alpha)
+    a1 = (a[0]*(1-alpha) + b[0]*alpha, a[1]*(1-alpha) + b[1]*alpha)
+    b1 = (b[0]*(1-alpha) + c[0]*alpha, b[1]*(1-alpha) + c[1]*alpha)
+    c1 = (c[0]*(1-alpha) + d[0]*alpha, c[1]*(1-alpha) + d[1]*alpha)
+    d1 = (d[0]*(1-alpha) + a[0]*alpha, d[1]*(1-alpha) + a[1]*alpha)
 
-    fractal_rectangle(A1,B1,C1,D1, deep-1)
+    fractal_rectangle(a1, b1, c1, d1, deep-1)
+
 
 if __name__ == '__main__':
-    fractal_rectangle((100,100),(500,100),(500,500),(100,500), 10)
-    input()
+    fractal_rectangle((100, 100), (500, 100), (500, 500), (100, 500), 10)
+    window.getMouse()
+    window.close()
+
 
 
