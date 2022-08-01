@@ -5,7 +5,7 @@
 # You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
 
-from linkedlist import *
+from linkedlist import ListNode, getLinkedList, printLinkedList
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
