@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04aacf5e-844f-4f8b-9f7b-27fca47f7dfe</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Leetcode\Medium\3. longest substring without repeating characters.py</StartupFile>
+    <StartupFile>Leetcode\Medium\5. longest palindromic substring.py</StartupFile>
     <SearchPath>lib</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="Leetcode\Medium\29. divide two integer.py" />
     <Compile Include="Leetcode\Medium\3. longest substring without repeating characters.py" />
+    <Compile Include="Leetcode\Medium\5. longest palindromic substring.py" />
     <Compile Include="lib\linkedlist.py">
       <SubType>Code</SubType>
     </Compile>
