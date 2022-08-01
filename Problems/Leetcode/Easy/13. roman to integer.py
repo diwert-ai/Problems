@@ -2,7 +2,8 @@
 
 
 class Solution:
-    def roman_to_int(self, s: str) -> int:
+    @staticmethod
+    def roman_to_int(s: str) -> int:
         result = 0
         roman = {'I': 1,
                  'V': 5,
@@ -13,7 +14,6 @@ class Solution:
                  'M': 1000}
         list_s = list(s)
         n = len(list_s)
-        i = 0
         for i in range(n - 1):
             d_i = roman[list_s[i]]
             if d_i >= roman[list_s[i + 1]]:
@@ -29,4 +29,4 @@ if __name__ == '__main__':
              ("LVIII", 58),
              ("MCMXCIV", 1994)]
     for test_case, (test_s, right_answer) in enumerate(tests):
-        print(f'test case#{test_case}: {Solution().roman_to_int(test_s)} == {right_answer}')
+        print(f'test case#{test_case}: {Solution.roman_to_int(test_s)} == {right_answer}')
