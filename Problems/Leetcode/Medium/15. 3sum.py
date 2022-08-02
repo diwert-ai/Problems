@@ -23,7 +23,8 @@ class Solution:
 
         return res
 
-    def two_sum(self, a, k):
+    @staticmethod
+    def two_sum(a, k):
         res = []
         d = {}
         m = len(a)
@@ -51,7 +52,7 @@ class Solution:
 
     # my solution O(N^2) time
     @staticmethod
-    def three_sum_3(nums: List[int]) -> List[List[int]]:
+    def three_sum_3(nums: List[int]):
         res = set()
         d = {}
         f = {}
@@ -95,7 +96,7 @@ class Solution:
 
     # https://leetcode.com/problems/3sum/discuss/725950/Python-5-Easy-Steps-Beats-97.4-Annotated
     @staticmethod
-    def three_sum_l(nums: List[int]) -> List[List[int]]:
+    def three_sum_l(nums: List[int]):
         res = set()
 
         # 1. Split nums into three lists: negative numbers, positive numbers, and zeros
@@ -109,13 +110,13 @@ class Solution:
                 z.append(num)
 
         # 2. Create a separate set for negatives and positives for O(1) look-up times
-        N, P = set(n), set(p)
+        n_set, p_set = set(n), set(p)
 
         # 3. If there is at least 1 zero in the list, add all cases where -num exists in N and num exists in P
         #   i.e. (-3, 0, 3) = 0
         if z:
-            for num in P:
-                if -1 * num in N:
+            for num in p_set:
+                if -1 * num in n_set:
                     res.add((-1 * num, 0, num))
 
         # 3. If there are at least 3 zeros in the list then also include (0, 0, 0) = 0
@@ -127,7 +128,7 @@ class Solution:
         for i in range(len(n)):
             for j in range(i + 1, len(n)):
                 target = -1 * (n[i] + n[j])
-                if target in P:
+                if target in p_set:
                     res.add(tuple(sorted([n[i], n[j], target])))
 
         # 5. For all pairs of positive numbers (1, 1), check to see if their complement (-2)
@@ -135,14 +136,14 @@ class Solution:
         for i in range(len(p)):
             for j in range(i + 1, len(p)):
                 target = -1 * (p[i] + p[j])
-                if target in N:
+                if target in n_set:
                     res.add(tuple(sorted([p[i], p[j], target])))
 
         return res
 
     # my solution O(N^2) time
     @staticmethod
-    def three_sum(nums: List[int]) -> List[List[int]]:
+    def three_sum(nums: List[int]):
         res = set()
         h = {}
         f = {}
