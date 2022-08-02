@@ -1,29 +1,33 @@
-﻿#https://leetcode.com/problems/swap-nodes-in-pairs/
-#Given a linked list, swap every two adjacent nodes and return its head. 
-#You must solve the problem without modifying the values in the list's nodes 
-#(i.e., only nodes themselves may be changed.)
+﻿# https://leetcode.com/problems/swap-nodes-in-pairs/
+# Given a linked list, swap every two adjacent nodes and return its head.
+# You must solve the problem without modifying the values in the list's nodes
+# (i.e., only nodes themselves may be changed.)
 
-from linkedlist import *
+from linkedlist import ListNode, getLinkedList, printLinkedList
 
 
 # Definition for singly-linked list.
-#class ListNode:
+# class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
 
 class Solution:
-    #мое решение
-    def swap(self,h,a,b,e):
-        if h: h.next = b
-        if b: b.next = a
-        if a: a.next = e
-            
-    def swapPairs(self, head: ListNode) -> ListNode:
+    # мое решение
+    @staticmethod
+    def swap(h, a, b, e):
+        if h:
+            h.next = b
+        if b:
+            b.next = a
+        if a:
+            a.next = e
+
+    @staticmethod
+    def swap_pairs(head: ListNode):
         
-        if head == None or head.next == None:
+        if head is None or head.next is None:
             return head
-        
 
         h = None
         a = head
@@ -31,7 +35,7 @@ class Solution:
         e = b.next
         head = head.next
         while b:
-            self.swap(h,a,b,e)
+            Solution.swap(h, a, b, e)
             h = a
             a = e
             b = e.next if e else None
@@ -39,12 +43,13 @@ class Solution:
            
         return head
 
+
 def test0():
-    tests = [[1,2,3,4], [1,2,3,2,3,2,3],[2,1,2,1,2,1,4]]
+    tests = [[1, 2, 3, 4], [1, 2, 3, 2, 3, 2, 3], [2, 1, 2, 1, 2, 1, 4]]
     for test in tests:
         head = getLinkedList(test)
         printLinkedList(head)
-        printLinkedList(Solution().swapPairs(head))
+        printLinkedList(Solution.swap_pairs(head))
         print('')
 
 
