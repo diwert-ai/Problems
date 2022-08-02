@@ -1,30 +1,28 @@
-﻿#https://leetcode.com/problems/remove-nth-node-from-end-of-list/
-#Given the head of a linked list, remove the nth node from the end of the list and return its head.
-
+﻿# https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+# Given the head of a linked list, remove the nth node from the end of the list and return its head.
 # Definition for singly-linked list.
-class ListNode:
-     def __init__(self, val=0, next=None):
-         self.val = val
-         self.next = next
+from linkedlist import ListNode
+
 
 class Solution:
-    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+    @staticmethod
+    def remove_nth_from_end(head: ListNode, n: int):
         if n <= 0:
             return head
 
-        if head == None: 
+        if head is None:
             return None
 
         node_n = head
         h = {}
-        sz=1
+        sz = 1
         
         while node_n.next:
-            h[sz]=node_n
-            sz+=1
+            h[sz] = node_n
+            sz += 1
             node_n = node_n.next
         
-        h[sz]=node_n
+        h[sz] = node_n
 
         if n > sz:
             return None
@@ -33,62 +31,62 @@ class Solution:
             return None
         else:
             if n == 1:
-                h[sz-1].next=None
+                h[sz-1].next = None
             elif n == sz:
                 head = h[2]
             else:
                 h[sz-n].next = h[sz-n+2]
-                
-        
+
         return head
 
-def get_linked_list(l):
-     n  = len(l)
-     if n == 0: return None
+
+def get_linked_list(lst):
+    n = len(lst)
+    if n == 0:
+        return None
+    h = ListNode(val=lst[0])
+    c = h
+    for i in range(1, n):
+        c.next = ListNode(val=lst[i])
+        c = c.next
+    return h
 
 
-     h = ListNode(val=l[0])
-     c = h
-     for i in range(1,n):
-         c.next = ListNode(val=l[i])
-         c = c.next
-     
-     return h
-
-def get_list(l):
+def get_list(lst):
     r = []
-    c = l
-    while(c):
+    c = lst
+    while c:
         r.append(c.val)
         c = c.next
     return r
 
 
-def print_linked_list(l):
-    c = l
-    while (c):
-        print (c.val,end = ' ')
+def print_linked_list(lst):
+    c = lst
+    while c:
+        print(c.val, end=' ')
         c = c.next
 
-def test0 ():
-    print_linked_list(get_linked_list([1,3,2,4,2,4]))
 
-def test1 ():
-    t = [1,4,3,2,3,3]
+def test0():
+    print_linked_list(get_linked_list([1, 3, 2, 4, 2, 4]))
+
+
+def test1():
+    t = [1, 4, 3, 2, 3, 3]
     r = get_list(get_linked_list(t))
-    print (r)
-    print (t == r)
+    print(r)
+    print(t == r)
 
-def test2 ():
-    s = Solution()
-    l = [-1]
+
+def test2():
+    lst = [-1]
     n = -1
-    linked_l = get_linked_list(l)
-    r = s.removeNthFromEnd(linked_l,n)
-    print(l)
+    linked_l = get_linked_list(lst)
+    r = Solution.remove_nth_from_end(linked_l, n)
+    print(lst)
     print(get_list(r))
   
-    
 
 if __name__ == '__main__':
     test0()
