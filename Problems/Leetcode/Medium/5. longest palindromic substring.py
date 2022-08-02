@@ -2,7 +2,8 @@
 # Given a string s, return the longest palindromic substring in s.
 
 class Solution:
-    def get_me_more(self, lst: list, s: str, ls: int) -> list:
+    @staticmethod
+    def get_me_more(lst: list, s: str, ls: int) -> list:
         res = []
         for i in lst:
             start = i[0] - 1
@@ -41,6 +42,3 @@ if __name__ == '__main__':
     for test, right_answer in tests:
         print(f'{test}\nright answer: {right_answer}\n'
               f'my answer: {Solution().longest_palindrome(test)}\n')
-
-
-
