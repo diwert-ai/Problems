@@ -45,18 +45,22 @@ class Solution:
 
         return quotient
 
-    # most voted https://leetcode.com/problems/divide-two-integers/discuss/142849/C%2B%2BJavaPython-Should-Not-Use-%22long%22-Int
-    def divide_mv(self, A, B):
-        if (A == -2147483648 and B == -1): return 2147483647
-        a, b, res = abs(A), abs(B), 0
+    # most voted:
+    # https://leetcode.com/problems/divide-two-integers/discuss/142849/C%2B%2BJavaPython-Should-Not-Use-%22long%22-Int
+    @staticmethod
+    def divide_mv(a, b):
+        if a == -2147483648 and b == -1:
+            return 2147483647
+        abs_a, abs_b, res = abs(a), abs(b), 0
         for x in range(32)[::-1]:
-            if (a >> x) - b >= 0:
+            if (abs_a >> x) - abs_b >= 0:
                 res += 1 << x
-                a -= b << x
-        return res if (A > 0) == (B > 0) else -res
+                abs_a -= abs_b << x
+        return res if (a > 0) == (b > 0) else -res
 
     # clear version https://leetcode.com/problems/divide-two-integers/discuss/13403/Clear-python-code
-    def divide_clear(self, dividend, divisor):
+    @staticmethod
+    def divide_clear(dividend, divisor):
         positive = (dividend < 0) is (divisor < 0)
         dividend, divisor = abs(dividend), abs(divisor)
         res = 0
@@ -73,8 +77,6 @@ class Solution:
 
 
 if __name__ == '__main__':
-    a = 17*(2**3+2**5)
-    b = -3
-    print(f'a={a} b={b}\ntrue result: {int(a/b)}\nmy result: {Solution().divide(a, b)}')
-
-
+    test_a = 17*(2**3+2**5)
+    test_b = -3
+    print(f'a={test_a} b={test_b}\ntrue result: {int(test_a/test_b)}\nmy result: {Solution.divide(test_a, test_b)}')
