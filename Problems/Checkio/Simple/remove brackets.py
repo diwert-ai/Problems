@@ -1,3 +1,20 @@
+# https://py.checkio.org/ru/mission/remove-brackets/
+# Your task is to restore the balance of open and closed
+# brackets by removing the unnecessary ones, while trying
+# to use the minimum number of deletions.
+# Only 3 types of brackets (), [] and {} can be used in the given string.
+# Only a parenthesis can close a parenthesis.
+# That is, in this expression "(}" - the brackets aren’t balanced.
+# In an empty string, i.e., in a string that does not contain any brackets -
+# the brackets are balanced, but removing all the brackets isn’t considered
+# to be an optimal solution.
+# If there are more than one correct answer, then you should
+# choose the one where the character that can be removed is closer to the beginning.
+# For example, in this case "[(])", the correct answer will be "()", since the removable
+# brackets are closer to the beginning of the line.
+# Input: A string of characters () {} []
+# Output: A string of characters () {} []
+
 def norm_bracket_sequence(line: str):
     stack = []
     for token in line:
