@@ -56,7 +56,7 @@ def remove_brackets(line: str) -> str:
 
 if __name__ == "__main__":
     print("Example:")
-    print(remove_brackets("(()()"))
+    print(remove_brackets("[{}()]}(]{"))
 
     # These "asserts" are used for self-checking and not for an auto-testing
     assert remove_brackets("(()()") == "()()"
