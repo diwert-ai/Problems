@@ -1,4 +1,4 @@
-﻿#https://py.checkio.org/en/mission/the-most-frequent/
+﻿# https://py.checkio.org/en/mission/the-most-frequent/
 
 def most_frequent_my(data: list) -> str:
     """
@@ -13,14 +13,13 @@ def most_frequent_my(data: list) -> str:
             item = i
     return item
 
+
 def most_frequent(data: list) -> str:
     """
     determines the most frequently occurring string in the sequence.
     """
    
-    return max(set(data),key=data.count)
-
-
+    return max(set(data), key=data.count)
 
 
 if __name__ == "__main__":
