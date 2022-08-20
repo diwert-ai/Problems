@@ -1,4 +1,16 @@
-﻿from itertools import permutations
+# https://py.checkio.org/ru/mission/cipher-crossword/
+# Дан пустой кроссворд, как 2-ух мерный массив с числами, где 0 - это
+# пустая клетка, а остальные числа соответствуют зашифрованным буквам.
+# Также дан список слов для кроссворда. Вы должны заполнить кроссворд
+# и вернуть решенный кроссворд, как 2-ух мерный массив с буквами.
+# Пустые клетки замените пробелами (0 => " ").
+# Слова размещаются в строках и столбцах, но не в диагоналях. Кроссворд
+# состоит из 6 слов, каждое из 5 букв.
+# Входные данные: Кроссворд, как список (list) списков с числами. Слова, как список строк.
+# Выходные данные: Решение кроссворда, как список списков с буквами.
+
+
+from itertools import permutations
 
 
 def match(word, decode, code_dict):
@@ -17,13 +29,14 @@ def match(word, decode, code_dict):
 
 def checkio(crossword, words):
     def find(perm):
+        perm = tuple(perm)
         for num in range(n):
             if not match(words[perm[num]], ext_crossword[num], code_dict):
                 return False
         return True
     n = len(words)
     code_dict = dict()
-    ext_crossword = [crossword[2*i] for i in range(3)]
+    ext_crossword = [crossword[2*i] for i in range(n//2)]
     for i in range(n//2):
         ext_crossword.append([row[2*i] for row in crossword])
     for permutation in permutations((0, 1, 2, 3, 4, 5)):
