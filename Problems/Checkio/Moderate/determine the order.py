@@ -24,8 +24,7 @@ def checkio(data):
     for word in data:
         f_word = filter_word(word)
         for i in range(len(f_word)-1):
-            token = f_word[i]
-            next_token = f_word[i+1]
+            token, next_token = f_word[i], f_word[i+1]
             if token in graph:
                 graph[token].add(next_token)
             else:
