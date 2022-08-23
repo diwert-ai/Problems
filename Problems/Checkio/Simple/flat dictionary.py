@@ -1,18 +1,21 @@
-﻿def flatten(dictionary):
+# https://py.checkio.org/ru/mission/flatten-dict/
+#  Дан словарь, в котором в качестве ключей используются строки,
+#  а в качестве значений строки или словари. Необходимо сделать
+#  этот словарь "плоским", но сохранить структуру в ключах.
+#  Результатом будет словарь без вложенных словарей. Ключи должны содержать путь,
+#  составленный из родительских ключей из начального словаря, разделенных "/".
+#  Если значение ключа есть пустой словарь, тогда оно должно быть заменено пустой строкой ("").
+
+def flatten(dictionary):
     res_dict = dict()
 
     def parse_dict(dic, in_key=''):
         if not dic:
             res_dict[in_key] = ''
             return
-        for key in dic:
-            val = dic[key]
+        for key, val in dic.items():
             new_key = in_key + '/' + key if in_key != '' else in_key + key
-            if type(val) is dict:
-                parse_dict(val, new_key)
-            else:
-                res_dict.update({new_key: val})
-
+            parse_dict(val, new_key) if type(val) is dict else res_dict.update({new_key: val})
     parse_dict(dictionary)
     return res_dict
 
@@ -52,3 +55,4 @@ def test1():
 
 if __name__ == '__main__':
     test0()
+    test1()
