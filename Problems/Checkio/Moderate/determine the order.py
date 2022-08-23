@@ -1,4 +1,15 @@
-﻿def filter_word(word):
+# https://py.checkio.org/en/mission/determine-the-order/
+# We need to determine the order of the symbols from each
+# "word" and create a single "word" with all of these symbols,
+# placing them in the new alphabetical order. In some cases,
+# if we cannot determine the order for several symbols,
+# you should use the traditional latin alphabetical order .
+# For example: Given words "acb", "bd", "zwa". As we can see "z"
+# and "w" must be before "a" and "d" after "b". So the result is "zwacbd".
+# Input: Words as a list of strings.
+# Output: The order as a string.
+
+def filter_word(word):
     result = ''
     for token in word:
         if token not in result:
@@ -31,6 +42,8 @@ def checkio(data):
         del graph[start_vertex]
 
     return res
+
+# также можно было применить топологическую сортировку графа
 
 
 def test0():
