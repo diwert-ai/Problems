@@ -11,17 +11,17 @@
 
 
 def checkio(data):
-    S = sum(data)
-    M = S//2
-    N = len(data)
-    F = [[0]*(N+1) for i in range(M+1)]
-    for i in range(1, N+1):
-        for k in range(1, M+1):
+    s = sum(data)
+    m = s//2
+    n = len(data)
+    f = [[0]*(n+1) for _ in range(m+1)]
+    for i in range(1, n+1):
+        for k in range(1, m+1):
             if data[i-1] <= k:
-                F[k][i] = max(F[k][i-1], data[i-1] + F[k-data[i-1]][i-1])
+                f[k][i] = max(f[k][i-1], data[i-1] + f[k-data[i-1]][i-1])
             else:
-                F[k][i] = F[k][i-1]
-    return abs(S - 2*F[M][N])
+                f[k][i] = f[k][i-1]
+    return abs(s - 2*f[m][n])
     
     
 # These "asserts" using only for self-checking and not necessary for auto-testing
@@ -33,4 +33,3 @@ if __name__ == '__main__':
     assert checkio([12, 30, 30, 32, 42, 49]) == 9, "5th example"
     assert checkio([1, 1, 1, 3]) == 0, "6th example"
     print('All done!')
-
