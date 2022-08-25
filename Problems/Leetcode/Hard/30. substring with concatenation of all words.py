@@ -28,8 +28,8 @@ class Solution:
         return answer
 
     # более быстрый алгоритм с использованием словарей
-    # сложность по врмени O(n*(n+l)), где n кол-во слов,
-    # l - длина строки
+    # сложность по врмени O(n*(m+l) + n**2), где n кол-во слов,
+    # l - длина строки, m - длина слова
     def find_substring(self, s: str, words: List[str]) -> List[int]:
         cash_words = dict()
         zero_used = dict()
@@ -62,6 +62,13 @@ class Solution:
                 answer.append(index)
         return answer
 
+    def findall_word(self, word, string):
+        index = string.find(word)
+        while index != -1:
+            self.indices.append(index)
+            self.word_map[index] = word
+            index = string.find(word, index + 1)
+
     @staticmethod
     def findall(pattern, string):
         index = string.find(pattern)
@@ -69,12 +76,28 @@ class Solution:
             yield index
             index = string.find(pattern, index + 1)
 
-    def findall_word(self, word, string):
-        index = string.find(word)
-        while index != -1:
-            self.indices.append(index)
-            self.word_map[index] = word
-            index = string.find(word, index + 1)
+    @staticmethod
+    def prefix_func(s: str):
+        n = len(s)
+        pi = [0] * n
+        for i in range(1, n):
+            p = pi[i - 1]
+            while s[i] != s[p] and p > 0:
+                p = pi[p - 1]
+            if s[i] == s[p]:
+                p += 1
+            pi[i] = p
+        return pi
+
+    # такой подход (собственный алгоритм поиска подстроки с помощью префикс-функции)
+    # медленее ~ в 10 раз, чем встроенный алгоритм str.find()
+    def set_indices_and_word_map(self, string: str, word: str):
+        n = len(word)
+        p = self.prefix_func(word + '#' + string)
+        for i in range(len(p)):
+            if p[i] == n:
+                self.indices.append(index := i-2*n)
+                self.word_map[index] = word
 
 
 def test0():
