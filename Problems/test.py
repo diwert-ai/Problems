@@ -1,61 +1,37 @@
-﻿def nonogram_encode(data: list[str]) -> list:
-    rows_clue = []
-    for line in data:
-        row_clue = []
-        index = 0
-        while index < len(line):
-            cnt = 0
-            while index < len(line) and line[index] == 'X':
-                cnt += 1
-                index += 1
-            index += 1
-            row_clue.append(cnt) if cnt else None
-        rows_clue.append(row_clue)
-    k = max(map(len, rows_clue))
-    for i in range(len(rows_clue)):
-        lr = len(rows_clue[i])
-        d = k - lr
-        if d:
-            rows_clue[i] = [0]*d + rows_clue[i]
+﻿def singleton(cls):
+    instances = {}
 
-    first_columns_clue = []
-    n = len(data[0])
-    columns = [[row[i] for row in data] for i in range(n)]
-    for column in columns:
-        column_clue = []
-        index = 0
-        while index < len(column):
-            cnt = 0
-            while index < len(column) and column[index] == 'X':
-                cnt += 1
-                index += 1
-            index += 1
-            column_clue.append(cnt) if cnt else None
-        first_columns_clue.append(column_clue)
-    m = len(first_columns_clue[0])
-    columns_clue = [[clue[i] for clue in first_columns_clue] for i in range(m)]
+    def getinstance(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return getinstance
 
-    return [columns_clue, rows_clue]
+
+@singleton
+class Capital:
+    def __init__(self, city_name):
+        self.city_name = city_name
+
+    def name(self):
+        return self.city_name
+
 
 
 def test0():
-    print("Example:")
-    print(nonogram_encode([" X X ", "X X X", " X X "]))
+    # These "asserts" using only for self-checking and not necessary for auto-testing
+    ukraine_capital_1 = Capital("Kyiv")
+    ukraine_capital_2 = Capital("London")
+    ukraine_capital_3 = Capital("Marocco")
 
-    assert nonogram_encode([" X X ", "X X X", " X X "]) == [
-        [[0, 1, 0, 1, 0], [1, 1, 1, 1, 1]],
-        [[0, 1, 1], [1, 1, 1], [0, 1, 1]],
-    ]
-    assert nonogram_encode(["X"]) == [[[1]], [[1]]]
+    assert ukraine_capital_2.name() == "Kyiv"
+    assert ukraine_capital_3.name() == "Kyiv"
 
-    print("The mission is done! Click 'Check Solution' to earn rewards!")
+    assert ukraine_capital_2 is ukraine_capital_1
+    assert ukraine_capital_3 is ukraine_capital_1
 
-
-def test1():
-    print("Example:")
-    print(nonogram_encode(['XXaaaX', 'aXaXXX', 'aXaXXa', 'aaXXXa', 'aXXXXa', 'aaXaaa']))
+    print("Coding complete? Let's try tests!")
 
 
 if __name__ == '__main__':
-    #test0()
-    test1()
+    test0()
