@@ -1,4 +1,5 @@
-﻿class Friends:
+# https://py.checkio.org/ru/mission/friends/
+class Friends:
     def __init__(self, connections):
         self.graph = dict()
         for connection in connections:
