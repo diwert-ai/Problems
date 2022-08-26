@@ -1,4 +1,18 @@
-﻿# noinspection SpellCheckingInspection
+# https://py.checkio.org/ru/mission/dialogues/
+# Ваша задача - реализовать способ связи между человеком Human(name) и
+# роботом Robot(serial_number) с последующим выводом их переписки.
+# Для этого вам необходимо создать класс для каждого из двоих собеседников
+# и метод send() для отправки сообщений в чат, а также класс Chat как средство связи.
+# Chat должен обладать следующими методами:
+# connect_human() - подключает к чату человека;
+# connect_robot() - подключает к чату робота;
+# show_human_dialogue() - отображает диалог так, как его видит человек - обычным текстом;
+# show_robot_dialogue() - отображает диалог так, как его видит робот - в виде набора нулей
+# и единиц. Для простоты будем считать, что любая гласная буква ("aeiouAEIOU") в текстовом
+# сообщении должна быть заменена на "0", а все остальные символы (согласные буквы, пробелы
+# и специальные знаки, как ",", "!" и т.п.) на "1".
+
+# noinspection SpellCheckingInspection
 VOWELS = "AEIOUaeiou"
 
 
@@ -13,10 +27,10 @@ class Chat:
         robot.chat = self
 
     def show_human_dialogue(self):
-        return ''.join([f'{prefix} {msg}\n' for prefix, msg, _ in self.history])[:-1]
+        return '\n'.join([f'{prefix} {msg}' for prefix, msg, _ in self.history])
 
     def show_robot_dialogue(self):
-        return ''.join([f'{prefix} {code_msg}\n' for prefix, _, code_msg in self.history])[:-1]
+        return '\n'.join([f'{prefix} {code_msg}' for prefix, _, code_msg in self.history])
 
 
 class User:
