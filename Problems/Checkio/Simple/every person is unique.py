@@ -1,4 +1,5 @@
-﻿class Person:
+# https://py.checkio.org/ru/mission/every-person-is-unique/
+class Person:
     def __init__(self, first_name, last_name, birth_date, job, working_years, salary, country, city, gender='unknown'):
         self.first_name = first_name
         self.last_name = last_name
@@ -41,10 +42,9 @@ def test0():
 
 
 def test1():
-    pass
+    print(f'{100000000:,}'.replace(',', ' '))
 
 
 if __name__ == '__main__':
     test0()
     test1()
-    print(f'{100000000:,}'.replace(',', ' '))
