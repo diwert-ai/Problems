@@ -1,26 +1,23 @@
-#https://py.checkio.org/en/mission/remove-all-before/
-
+# https://py.checkio.org/en/mission/remove-all-before/
 from typing import Iterable
+
 
 def remove_all_before_my(items: list, border: int) -> Iterable:
     # your code here
-    if items == []:
+    if items:
         return []
 
     i = 0
-    while i< len(items):
-        if items[i]==border:
+    while i < len(items):
+        if items[i] == border:
             break
-        i+=1
-
+        i += 1
 
     return items if i == len(items) else items[i:]
 
 
-
 def remove_all_before(items: list, border: int) -> Iterable:
     # your code here
-    
     return items[items.index(border):] if border in items else items
 
 

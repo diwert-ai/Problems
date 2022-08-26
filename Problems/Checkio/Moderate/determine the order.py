@@ -45,6 +45,7 @@ def checkio(data):
 # также можно было применить топологическую сортировку графа
 
 
+# noinspection SpellCheckingInspection
 def test0():
     assert checkio(["acb", "bd", "zwa"]) == "zwacbd", "Just concatenate it"
     assert checkio(["klm", "kadl", "lsm"]) == "kadlsm", "Paste in"
@@ -56,6 +57,7 @@ def test0():
     print('all asserts have passed!')
 
 
+# noinspection SpellCheckingInspection
 def test1():
     print(checkio(["abd", "zxy", "rtu"]))
     print(checkio(["axton", "bxton"]))

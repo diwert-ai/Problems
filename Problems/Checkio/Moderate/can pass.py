@@ -6,26 +6,26 @@
 # Матрица представлена, как массив массивов с цифрами. Координаты представлены,
 # как два числа: строка и столбец. Результат проверяется, как булево значение.
 # Есть путь существует - True, иначе - False.
-
 from collections import deque
+from itertools import chain, product, starmap
 
 
-def bfs_p(start_vertex, G, parents):
+def bfs_p(start_vertex, g, parents):
     queue = deque([start_vertex])
     parents[start_vertex] = None
     while queue:
         cur_v = queue.popleft()
-        for neighbor in G[cur_v]:
+        for neighbor in g[cur_v]:
             if neighbor not in parents:
                 parents[neighbor] = cur_v
                 queue.append(neighbor)
 
 
-def find_path(start_vertex, end_vertex, G):
-    if start_vertex not in G:
+def find_path(start_vertex, end_vertex, g):
+    if start_vertex not in g:
         return None
     parents = dict()
-    bfs_p(start_vertex, G, parents)
+    bfs_p(start_vertex, g, parents)
     if end_vertex not in parents:
         return None
     parent = parents[end_vertex]
@@ -42,19 +42,17 @@ def can_pass(matrix, first, second):
         return False
     n = len(matrix)
     m = len(matrix[0])
-    G = dict()
+    g = dict()
     for i in range(n):
         for j in range(m):
             if matrix[i][j] == value:
                 s = set()
-                ij = ((i, j+1), (i, j-1), (i+1, j), (i-1, j))
-                for l, k in ij:
-                    if -1 < l < n and -1 < k < m and matrix[l][k] == value:
-                        s.add((l, k))
-                G[(i, j)] = s
-    return find_path(first, second, G) is not None
-
-from itertools import chain, product, starmap
+                ij = ((i, j + 1), (i, j - 1), (i + 1, j), (i - 1, j))
+                for p, k in ij:
+                    if -1 < p < n and -1 < k < m and matrix[p][k] == value:
+                        s.add((p, k))
+                g[(i, j)] = s
+    return find_path(first, second, g) is not None
 
 
 # best clear solution
@@ -69,7 +67,8 @@ def can_pass_clear(matrix, first, second):
     while tips:
         tips = set(chain.from_iterable(starmap(neighbors, tips))) & living
         living -= tips
-        if second in tips: return True
+        if second in tips:
+            return True
 
     return False
 
@@ -82,7 +81,7 @@ if __name__ == '__main__':
                      (0, 2, 2, 2, 0, 2),
                      (0, 0, 0, 0, 0, 2),
                      (2, 2, 2, 2, 2, 2),),
-                     (3, 2), (0, 5)) == True, 'First example'
+                    (3, 2), (0, 5)) is True, 'First example'
     assert can_pass(((0, 0, 0, 0, 0, 0),
                      (0, 2, 2, 2, 3, 2),
                      (0, 2, 0, 0, 0, 2),
@@ -90,6 +89,5 @@ if __name__ == '__main__':
                      (0, 2, 2, 2, 0, 2),
                      (0, 0, 0, 0, 0, 2),
                      (2, 2, 2, 2, 2, 2),),
-                     (3, 3), (6, 0)) == False, 'First example'
+                    (3, 3), (6, 0)) is False, 'First example'
     print('All done!')
-
