@@ -1,5 +1,21 @@
-# https://py.checkio.org/ru/mission/hacker-language/
 import string
+import time
+
+
+def is_hh_mm(time_string):
+    try:
+        time.strptime(time_string, '%H:%M')
+    except ValueError:
+        return False
+    return len(time_string) == 5
+
+
+def is_dd_mm_yyyy(date_string):
+    try:
+        time.strptime(date_string, '%d.%m.%Y')
+    except ValueError:
+        return False
+    return len(date_string) == 10
 
 
 class HackerLanguage:
@@ -26,8 +42,16 @@ class HackerLanguage:
         result = []
         token_start = 0
         while token_start < len(msg):
-            if (token_code := msg[token_start:token_start+7]) in self.decode_map:
+            # may be msg[toke_start: token_start+5] is time?
+            if is_hh_mm(token_code := msg[token_start: token_start+5]):
+                result.append(token_code)
+            # may be msg[token_start: token_start+10] is date?
+            elif is_dd_mm_yyyy(token_code := msg[token_start: token_start+10]):
+                result.append(token_code)
+            # may be msg[token_start: token_start+7] is alpha or space?
+            elif (token_code := msg[token_start:token_start+7]) in self.decode_map:
                 result.append(self.decode_map[token_code])
+            # else: token is just token
             else:
                 result.append(token_code := msg[token_start])
             token_start += len(token_code)
@@ -61,7 +85,10 @@ def test1():
 
 
 def test2():
-    pass
+    s = '01:59'
+    print(is_hh_mm(s))
+    d = '30.13.9999'
+    print(is_dd_mm_yyyy(d))
 
 
 if __name__ == '__main__':
