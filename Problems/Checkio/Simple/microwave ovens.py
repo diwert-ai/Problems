@@ -1,4 +1,5 @@
-﻿class MicrowaveBase:
+# https://py.checkio.org/ru/mission/microwave-ovens/
+class MicrowaveBase:
     def __init__(self):
         self.mm = 0
         self.ss = 0
