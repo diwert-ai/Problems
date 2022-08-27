@@ -1,4 +1,5 @@
-﻿import string
+# https://py.checkio.org/ru/mission/hacker-language/
+import string
 
 
 class HackerLanguage:
@@ -47,6 +48,7 @@ def test1():
     # These "asserts" using only for self-checking and not necessary for auto-testing
 
     message_1 = HackerLanguage()
+    # noinspection SpellCheckingInspection
     message_1.write("secrit")
     message_1.delete(2)
     message_1.write("et")
