@@ -1,4 +1,6 @@
-﻿def parse(value):
+# https://py.checkio.org/ru/mission/yaml-more-types/
+
+def parse(value):
     if value in ('null', ''):
         return None
     if value == 'false':
