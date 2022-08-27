@@ -1,4 +1,5 @@
-﻿import math
+# https://py.checkio.org/ru/mission/geometry-figures/
+import math
 
 
 class Parameters:
