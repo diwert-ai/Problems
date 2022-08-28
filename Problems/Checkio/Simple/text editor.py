@@ -1,4 +1,5 @@
-﻿class Text:
+# https://py.checkio.org/ru/mission/text-editor/
+class Text:
     def __init__(self):
         self.text = ''
         self.font = None
