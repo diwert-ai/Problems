@@ -7,7 +7,7 @@ def recall_password(grille, password):
     np_password = np.array([[row[i] for i in range(4)] for row in password])
     password = []
     for _ in range(4):
-        password += list(np_password[np.where(np_grille)])
+        password += list(np_password[np_grille])
         np_grille = np.rot90(np_grille, axes=(1, 0))
     return ''.join(password)
 
