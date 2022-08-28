@@ -1,4 +1,5 @@
-﻿import numpy as np
+# https://py.checkio.org/ru/mission/cipher-map2/
+import numpy as np
 
 
 def recall_password(grille, password):
@@ -11,15 +12,17 @@ def recall_password(grille, password):
     return ''.join(password)
 
 
+# noinspection SpellCheckingInspection
 def test0():
     print(recall_password(['X...', '..X.', 'X..X', '....'],
-                    ['itdf', 'gdce', 'aton', 'qrdi']))
+                          ['itdf', 'gdce', 'aton', 'qrdi']))
     # 'icantforgetiddqd'
     print(recall_password(['....', 'X..X', '.X..', '...X'],
-                    ['xhwc', 'rsqx', 'xqzz', 'fyzr']))
+                          ['xhwc', 'rsqx', 'xqzz', 'fyzr']))
     # 'rxqrwsfzxqxzhczy'
 
 
+# noinspection SpellCheckingInspection
 def test1():
     print("Example:")
     print(recall_password(['X...', '..X.', 'X..X', '....'],
