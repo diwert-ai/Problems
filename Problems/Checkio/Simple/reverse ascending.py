@@ -1,9 +1,10 @@
-﻿def reverse_ascending(items):
+# https://py.checkio.org/en/mission/reverse-every-ascending/
+def reverse_ascending(items):
     ret, start_index = [], 0
     for index in range(1, len(items)):
         if items[index] <= items[index-1]:
             ret, start_index = ret+items[start_index:index][::-1], index
-    return ret + items[start_index:][::-1]
+    return ret+items[start_index:][::-1]
 
 
 def test0():
