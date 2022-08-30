@@ -569,9 +569,6 @@ def test5():
 
 
 if __name__ == '__main__':
-    test0()
-    test1()
-    test2()
-    test3()
-    test4()
-    test5()
+    tests = [test0, test1, test2, test3, test4, test5]
+    for test in tests:
+        test()

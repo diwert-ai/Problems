@@ -32,6 +32,6 @@ def test2():
 
 
 if __name__ == '__main__':
-    test0()
-    test1()
-    test2()
+    tests = [test0, test1, test2]
+    for test in tests:
+        test()
