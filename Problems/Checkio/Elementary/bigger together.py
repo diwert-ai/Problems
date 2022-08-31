@@ -1,4 +1,4 @@
-﻿# https://py.checkio.org/ru/mission/bigger-together/
+# https://py.checkio.org/ru/mission/bigger-together/
 
 from typing import List
 from functools import cmp_to_key
