@@ -1,4 +1,6 @@
-﻿def minor(matrix, k):
+# https://www.codewars.com/kata/52a382ee44408cea2500074c
+
+def minor(matrix, k):
     return [[row[j] for j in range(len(matrix)) if j != k] for i, row in enumerate(matrix) if i != 0]
 
 
