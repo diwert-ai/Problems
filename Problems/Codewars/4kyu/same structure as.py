@@ -18,9 +18,9 @@ def same_structure_as(original, other):
 
 
 def test0():
-    print(same_structure_as([[0],[1]], [[0], [1]]))
+    print(same_structure_as([[0], [1]], [[0], [1]]))
     print(same_structure_as([1, [1, 1]], [[2, 2], 2]))
-    print(same_structure_as([1, [1, 1]], 1))
+    print(same_structure_as([1, [1, 1]], [1]))
 
 
 def test1():
