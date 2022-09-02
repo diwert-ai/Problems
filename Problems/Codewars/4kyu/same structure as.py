@@ -1,4 +1,4 @@
-﻿def set_zero(array):
+def set_zero(array):
     if type(array) is not list:
         return
 
@@ -12,13 +12,13 @@
 
 
 def same_structure_as(original, other):
-    set_zero(original)
-    set_zero(other)
-    return original == other
+    set_zero(l1 := original.copy() if type(original) is list else original)
+    set_zero(l2 := other.copy() if type(other) is list else other)
+    return l1 == l2
 
 
 def test0():
-    print(same_structure_as([1, [1, 1]], [2, [2, 2]]))
+    print(same_structure_as([[0],[1]], [[0], [1]]))
     print(same_structure_as([1, [1, 1]], [[2, 2], 2]))
     print(same_structure_as([1, [1, 1]], 1))
 
