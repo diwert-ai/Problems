@@ -1,59 +1,77 @@
-﻿def add_edge(v1, v2, g):
-    if v1 not in g:
-        g[v1] = set()
-    if v2 not in g:
-        g[v2] = set()
-    g[v1].add(v2)
+﻿roman = {'I': 1,
+         'V': 5,
+         'X': 10,
+         'L': 50,
+         'C': 100,
+         'D': 500,
+         'M': 1000}
+first = {
+    '0': "",
+    '1': "I",
+    '2': "II",
+    '3': "III",
+    '4': "IV",
+    '5': "V",
+    '6': "VI",
+    '7': "VII",
+    '8': "VIII",
+    '9': "IX"}
+second = {
+    '0': "",
+    '1': "X",
+    '2': "XX",
+    '3': "XXX",
+    '4': "XL",
+    '5': "L",
+    '6': "LX",
+    '7': "LXX",
+    '8': "LXXX",
+    '9': "XC",
+}
+third = {
+    '0': "",
+    '1': "C",
+    '2': "CC",
+    '3': "CCC",
+    '4': "CD",
+    '5': "D",
+    '6': "DC",
+    '7': "DCC",
+    '8': "DCCC",
+    '9': "CM",
+}
+forth = {
+    '0': "",
+    '1': "M",
+    '2': "MM",
+    '3': "MMM",
+}
 
 
-def dfs_t(vertex, graph, used, ans):
-    used.add(vertex)
-    for neighbor in graph[vertex]:
-        if neighbor not in used:
-            dfs_t(neighbor, graph, used, ans)
-    # добавляем вершину в список на обратном
-    # ходу рекурсии
-    ans.append(vertex)
+class RomanNumerals:
 
+    @staticmethod
+    def to_roman(val):
+        lv = list(f'{val:04d}')
+        return f'{forth[lv[0]]}{third[lv[1]]}{second[lv[2]]}{first[lv[3]]}'
 
-def topsort(graph):
-    used = set()
-    # список, в который будет сохраняться топологический порядок вершины
-    ans = []
-    for vertex in graph:
-        if vertex not in used:
-            dfs_t(vertex, graph, used, ans)
-    # необходимо инвертировать список
-    # так как элементы в него заносились
-    # на обратном ходу рекурсии в dfs_t
-    ans[:] = ans[::-1]
-
-    return ans
-
-
-def recover_secret(triplets):
-    graph = dict()
-    for triplet in triplets:
-        for i in range(2):
-            v1 = triplet[i]
-            v2 = triplet[i+1]
-            add_edge(v1, v2, graph)
-    return ''.join(topsort(graph))
+    @staticmethod
+    def from_roman(roman_num):
+        result = 0
+        list_s = list(roman_num)
+        n = len(list_s)
+        for i in range(n - 1):
+            d_i = roman[list_s[i]]
+            if d_i >= roman[list_s[i + 1]]:
+                result += d_i
+            else:
+                result -= d_i
+        result += roman[list_s[n - 1]]
+        return result
 
 
 def test0():
-    # noinspection SpellCheckingInspection
-    secret = "whatisup"
-    triplets = [
-        ['t', 'u', 'p'],
-        ['w', 'h', 'i'],
-        ['t', 's', 'u'],
-        ['a', 't', 's'],
-        ['h', 'a', 'p'],
-        ['t', 'i', 's'],
-        ['w', 'h', 's']
-    ]
-    print(recover_secret(triplets) == secret)
+    print(RomanNumerals.from_roman('X'), RomanNumerals.to_roman(3999))
 
 
 def test1():
