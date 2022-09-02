@@ -1,4 +1,4 @@
-﻿def longest_slide_down(pyramid):
+def longest_slide_down(pyramid):
     line = pyramid[-1]
     for i in range(len(pyramid) - 2, -1, -1):
         line = [x + max(line[k], line[k + 1]) for k, x in enumerate(pyramid[i])]
