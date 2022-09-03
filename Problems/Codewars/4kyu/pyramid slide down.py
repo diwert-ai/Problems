@@ -1,3 +1,4 @@
+# https://www.codewars.com/kata/551f23362ff852e2ab000037
 def longest_slide_down(pyramid):
     line = pyramid[-1]
     for i in range(len(pyramid) - 2, -1, -1):
