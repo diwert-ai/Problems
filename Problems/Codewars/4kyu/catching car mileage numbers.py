@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/52c4dd683bfd3b434c000292
+
 def is_interesting(number, awesome_phrases):
 
     def interesting(n):
