@@ -1,4 +1,4 @@
-﻿def is_interesting(number, awesome_phrases):
+def is_interesting(number, awesome_phrases):
 
     def interesting(n):
         if n in awesome_phrases:
