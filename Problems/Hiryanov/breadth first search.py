@@ -112,7 +112,7 @@ Graphs = [{0: {1, 11, 12},
 
 
 # функция вычисляющая расстояния от start_vertex
-# до всех вершин графа G
+# до всех вершин графа g
 def bfs_d(start_vertex, g, distances):
     # расстояние до себя же равно 0
     distances[start_vertex] = 0
@@ -133,11 +133,11 @@ def bfs_d(start_vertex, g, distances):
 
 
 def test0():
-    for G in Graphs:
+    for g in Graphs:
         distances = dict()  # словарь расстояний
-        if 0 not in G:
+        if 0 not in g:
             continue
-        bfs_d(0, G, distances)
+        bfs_d(0, g, distances)
         print(f'dists for vertex 0: {distances}')
     print('')
 
@@ -357,22 +357,22 @@ def find_even_path(start, end, graph):
 def test5():
     start = 'a'
     end = 'j'
-    for i, G in enumerate(Graphs):
-        if start in G and end in G:
+    for i, g in enumerate(Graphs):
+        if start in g and end in g:
             print(f'all vertexes between {start} and {end} in graph #{i}:' +
-                  f'{all_vertexes(start, end, G)}')
+                  f'{all_vertexes(start, end, g)}')
             print(f'all edges between {start} and {end} in graph #{i}:' +
-                  f'{all_edges(start, end, G)}')
+                  f'{all_edges(start, end, g)}')
     print('')
 
 
 def test6():
     start = 1
     end = 4
-    for i, G in enumerate(Graphs):
-        if start in G and end in G:
+    for i, g in enumerate(Graphs):
+        if start in g and end in g:
             print(f'[graph #{i}] from {start} to {end} even path: ' +
-                  f'{find_even_path(start, end, G)}')
+                  f'{find_even_path(start, end, g)}')
 
 
 if __name__ == '__main__':
