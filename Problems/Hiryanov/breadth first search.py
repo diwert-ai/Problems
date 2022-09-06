@@ -9,7 +9,7 @@
 # 4. Нахождение кратчайшего цикла в орграфе
 # 5. Найти все ребра, лежащие на каком-либо кратчайшем пути
 # между заданной парой вершин (a, b)
-# 6. Найти все вершины, лежащие на каком-либо кратчайгем пути
+# 6. Найти все вершины, лежащие на каком-либо кратчайшем пути
 # между заданной парой вершин (a, b)
 # 7. Найти кратчайший четный путь в графе (т.е. путь четной длины)
 
@@ -113,7 +113,7 @@ Graphs = [{0: {1, 11, 12},
 
 # функция вычисляющая расстояния от start_vertex
 # до всех вершин графа G
-def bfs_d(start_vertex, G, distances):
+def bfs_d(start_vertex, g, distances):
     # расстояние до себя же равно 0
     distances[start_vertex] = 0
     # создаем очередь
@@ -123,12 +123,12 @@ def bfs_d(start_vertex, G, distances):
         # достаем первый элемент
         cur_v = queue.popleft()
         # проходим всех его соседей
-        for neighbor in G[cur_v]:
+        for neighbor in g[cur_v]:
             # если расстояние до соседа еще не вычислено
             if neighbor not in distances:
                 # считаем расстояние до соседа
                 distances[neighbor] = distances[cur_v] + 1
-                # добавляем соседа в очередь чтобы проверить и его соседей
+                # добавляем соседа в очередь, чтобы проверить и его соседей
                 queue.append(neighbor)
 
 
@@ -143,13 +143,13 @@ def test0():
 
 
 # bfs для подсчета компонент связности
-def bfs_c(vertex, G, used):
+def bfs_c(vertex, g, used):
     used.add(vertex)
     queue = deque([vertex])
     print(vertex, end=' ')
     while queue:
         cur_v = queue.popleft()
-        for neighbor in G[cur_v]:
+        for neighbor in g[cur_v]:
             if neighbor not in used:
                 print(neighbor, end=' ')
                 used.add(neighbor)
@@ -157,42 +157,42 @@ def bfs_c(vertex, G, used):
 
 
 # процедура подсчета компонент связности
-def n_comp(G):
-    N = 0
+def n_comp(g):
+    n = 0
     used = set()
-    for vertex in G:
+    for vertex in g:
         if vertex not in used:
-            print(f'comp #{N}: ', end='')
-            bfs_c(vertex, G, used)
+            print(f'comp #{n}: ', end='')
+            bfs_c(vertex, g, used)
             print('')
-            N += 1
-    return N
+            n += 1
+    return n
 
 
 def test1():
-    for i, G in enumerate(Graphs):
-        print(f'graph #{i} num components: {n_comp(G)}')
+    for i, g in enumerate(Graphs):
+        print(f'graph #{i} num components: {n_comp(g)}')
         print('')
 
 
 # bfs для поиска кратчайшего пути
-def bfs_p(start_vertex, G, parents):
+def bfs_p(start_vertex, g, parents):
     queue = deque([start_vertex])
     parents[start_vertex] = None
     while queue:
         cur_v = queue.popleft()
-        for neighbor in G[cur_v]:
+        for neighbor in g[cur_v]:
             if neighbor not in parents:
                 parents[neighbor] = cur_v
                 queue.append(neighbor)
 
 
 # поиск кратчайшего пути
-def find_path(start_vertex, end_vertex, G):
-    if start_vertex not in G:
+def find_path(start_vertex, end_vertex, g):
+    if start_vertex not in g:
         return None
     parents = dict()
-    bfs_p(start_vertex, G, parents)
+    bfs_p(start_vertex, g, parents)
     if end_vertex not in parents:
         return None
     parent = parents[end_vertex]
@@ -204,11 +204,11 @@ def find_path(start_vertex, end_vertex, G):
 
 
 def test2():
-    for i, G in enumerate(Graphs):
+    for i, g in enumerate(Graphs):
         start_vertex = 'A'
         end_vertex = 'F'
         print(f'[graph #{i}] from {start_vertex} to {end_vertex} path: ' +
-              f'{find_path(start_vertex, end_vertex, G)}')
+              f'{find_path(start_vertex, end_vertex, g)}')
     print('')
 
 
@@ -217,7 +217,7 @@ def test2():
 # чтобы попасть из a8 в h1
 
 def knight_graph():
-    G = dict()
+    g = dict()
     digits = '12345678'
     letters = 'abcdefgh'
     for i in range(8):
@@ -228,19 +228,19 @@ def knight_graph():
             for k, l in ij:
                 if -1 < k < 8 and -1 < l < 8:
                     s.add(letters[k]+digits[l])
-            G[letters[i]+digits[j]] = s
-    return G
+            g[letters[i]+digits[j]] = s
+    return g
 
 
 def test3():
-    G = knight_graph()
+    g = knight_graph()
     start = 'a8'
     end = 'h1'
-    print(f'from {start} to {end} knight path is: {find_path(start, end, G)}')
+    print(f'from {start} to {end} knight path is: {find_path(start, end, g)}')
     print('')
 
 
-# нахождение кратчайшего цикла
+# Нахождение кратчайшего цикла
 # в орграфе (для обычного графа
 # будет возвращать элементарный
 # цикл длины 2 - т.е. ребро)
@@ -252,27 +252,27 @@ def test3():
 # что мы нашли кратчайший цикл, и останавливаем
 # обход в ширину; среди всех таких найденных циклов
 # (по одному от каждого запуска обхода) выбираем кратчайший.
-def bfs_cycle(vertex, G, used):
+def bfs_cycle(vertex, g, used):
     used.add(vertex)
     queue = deque([vertex])
     while queue:
         cur_v = queue.popleft()
-        for neighbor in G[cur_v]:
+        for neighbor in g[cur_v]:
             if neighbor not in used:
                 used.add(neighbor)
                 queue.append(neighbor)
             else:
                 return neighbor, cur_v
-    return (None, None)
+    return None, None
 
 
-def shortest_cycle(G):
+def find_shortest_cycle(g):
     shortest_cycle = None
-    for vertex in G:
+    for vertex in g:
         used = set()
-        cycle_start, cycle_end = bfs_cycle(vertex, G, used)
+        cycle_start, cycle_end = bfs_cycle(vertex, g, used)
         if cycle_start is not None:
-            cycle_path = find_path(cycle_start, cycle_end, G)
+            cycle_path = find_path(cycle_start, cycle_end, g)
             if cycle_path is not None:
                 if (shortest_cycle is None or
                         len(cycle_path) < len(shortest_cycle)):
@@ -281,8 +281,8 @@ def shortest_cycle(G):
 
 
 def test4():
-    for i, G in enumerate(Graphs):
-        print(f'shortest cycle of graph #{i} is: {shortest_cycle(G)}')
+    for i, g in enumerate(Graphs):
+        print(f'shortest cycle of graph #{i} is: {find_shortest_cycle(g)}')
     print('')
 
 
@@ -297,13 +297,13 @@ def test4():
 # легко проверить, лежит ли он на каком-либо
 # кратчайшем пути: критерием будет условие
 # d_a[v] + d_b[v] = d_a[b].
-def all_verts(a, b, G):
+def all_vertexes(a, b, g):
     all_v = []
     d_a = dict()
     d_b = dict()
-    bfs_d(a, G, d_a)
-    bfs_d(b, G, d_b)
-    for v in G:
+    bfs_d(a, g, d_a)
+    bfs_d(b, g, d_b)
+    for v in g:
         if v in d_a and v in d_b and d_a[v] + d_b[v] == d_a[b]:
             all_v.append(v)
     return all_v
@@ -311,22 +311,22 @@ def all_verts(a, b, G):
 
 # ref: http://e-maxx.ru/algo/bfs
 # Найти все рёбра, лежащие на каком-либо кратчайшем
-# пути между заданной парой вершин (a,b). Для этого
+# пути между заданной парой вершин (a, b). Для этого
 # надо запустить 2 поиска в ширину: из a, и из b.
 # Обозначим через d_a[] массив кратчайших расстояний,
 # полученный в результате первого обхода, а через d_b[]
 # — в результате второго обхода. Теперь для любого ребра
-# (u,v) легко проверить, лежит ли он на каком-либо
+# (u, v) легко проверить, лежит ли он на каком-либо
 # кратчайшем пути: критерием будет условие
 # d_a[u] + 1 + d_b[v] = d_a[b].
-def all_edges(a, b, G):
+def all_edges(a, b, g):
     all_e = []
     d_a = dict()
     d_b = dict()
-    bfs_d(a, G, d_a)
-    bfs_d(b, G, d_b)
-    for u in G:
-        for v in G[u]:
+    bfs_d(a, g, d_a)
+    bfs_d(b, g, d_b)
+    for u in g:
+        for v in g[u]:
             if (u in d_a and u in d_b and v in d_a and v in d_b and
                     d_a[u] + 1 + d_b[v] == d_a[b]):
                 all_e.append((u, v))
@@ -336,22 +336,22 @@ def all_edges(a, b, G):
 # ref: http://e-maxx.ru/algo/bfs
 # Найти кратчайший чётный путь в графе (т.е. путь чётной длины).
 # Для этого надо построить вспомогательный граф, вершинами которого
-# будут состояния (v,c), где v — номер текущей вершины,
-# c = 0...1 — текущая чётность. Любое ребро (a,b) исходного графа
-# в этом новом графе превратится в два ребра ((u,0),(v,1)) и ((u,1),(v,0)
+# будут состояния (v, c), где v — номер текущей вершины,
+# c = 0...1 — текущая чётность. Любое ребро (a, b) исходного графа
+# в этом новом графе превратится в два ребра ((u, 0), (v, 1)) и ((u, 1), (v, 0)
 # После этого на этом графе надо обходом в ширину найти кратчайший путь
 # из стартовой вершины в конечную, с чётностью, равной 0.
-def find_even_path(start, end, G):
-    H = dict()
-    for g in G:
-        H[(g, 0)] = set()
-        H[(g, 1)] = set()
+def find_even_path(start, end, graph):
+    h = dict()
+    for g in graph:
+        h[(g, 0)] = set()
+        h[(g, 1)] = set()
 
-    for u in G:
-        for v in G[u]:
-            H[(u, 0)].add((v, 1))
-            H[(u, 1)].add((v, 0))
-    return find_path((start, 0), (end, 0), H)
+    for u in graph:
+        for v in graph[u]:
+            h[(u, 0)].add((v, 1))
+            h[(u, 1)].add((v, 0))
+    return find_path((start, 0), (end, 0), h)
 
 
 def test5():
@@ -360,7 +360,7 @@ def test5():
     for i, G in enumerate(Graphs):
         if start in G and end in G:
             print(f'all vertexes between {start} and {end} in graph #{i}:' +
-                  f'{all_verts(start, end, G)}')
+                  f'{all_vertexes(start, end, G)}')
             print(f'all edges between {start} and {end} in graph #{i}:' +
                   f'{all_edges(start, end, G)}')
     print('')
@@ -374,11 +374,8 @@ def test6():
             print(f'[graph #{i}] from {start} to {end} even path: ' +
                   f'{find_even_path(start, end, G)}')
 
+
 if __name__ == '__main__':
-    test0()
-    test1()
-    test2()
-    test3()
-    test4()
-    test5()
-    test6()
+    tests = [test0, test1, test2, test3, test4, test5, test6]
+    for test_func in tests:
+        test_func()
