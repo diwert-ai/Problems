@@ -1,4 +1,5 @@
-﻿from collections import deque
+# https://py.checkio.org/en/mission/find-enemy/
+from collections import deque
 
 
 # noinspection SpellCheckingInspection
@@ -91,7 +92,7 @@ def find_enemy(you, direction, enemy):
 
 
 def test0():
-    tests = [("C3", "SE", "A1")]
+    tests = [("C3", "SE", "A1"), ("A1", "SW", "Z9")]
     for you, direct, enemy in tests:
         print(f'{you} {direct} {enemy} {find_enemy(you, direct, enemy)}')
 
