@@ -84,9 +84,6 @@ def find_path(start_vertex, end_vertex, g):
     return path[::-1]
 
 
-HexGrid.init_graph()
-
-
 def find_enemy(you, direction, enemy):
     return HexGrid.relative_direction(you, enemy, direction)
 
@@ -110,6 +107,7 @@ def test1():
 
 
 if __name__ == '__main__':
+    HexGrid.init_graph()
     test_funcs = [test0, test1]
     for test in test_funcs:
         test()
