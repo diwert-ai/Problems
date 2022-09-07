@@ -26,11 +26,12 @@ def fast_train(sections):
         velocity = velocity + 1 if check(velocity + 1, cur_pos) else \
             (velocity if check(velocity, cur_pos) else velocity - 1)
         cur_pos, result = cur_pos + velocity, result + 1
+
     return result
 
 
 def test0():
-    sections = [(8, 2), (8, 10), (8, 4)]
+    sections = [(5, 4), (6, 7), (6, 6)]
     print(fast_train(sections))
 
 
