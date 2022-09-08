@@ -1,4 +1,4 @@
-﻿def greatest_common_divisor(*args: int) -> int:
+def greatest_common_divisor(*args: int) -> int:
     def gcd_p(a, b):
         return a if b == 0 else gcd_p(b, a % b)
     d = args[0]
