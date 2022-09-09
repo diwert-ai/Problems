@@ -1,7 +1,8 @@
-﻿#пример: обратная польская запись
-#из лекции Хирьянова https://www.youtube.com/watch?v=rEPggzaPoUw&list=PLRDzFCPr95fK7tr47883DFUbm4GeOjjc0&index=12
+﻿# пример: обратная польская запись
+# из лекции Хирьянова https://www.youtube.com/watch?v=rEPggzaPoUw&list=PLRDzFCPr95fK7tr47883DFUbm4GeOjjc0&index=12
 
 from mystack import MyStack
+
 
 def rpn(expression: list):
     """алгоритм вычисления выражений в постфиксной нотации
@@ -24,7 +25,7 @@ def rpn(expression: list):
     >>> rpn([1,-1,1,1,'+','+','+'])
     2
     """
-    
+
     st = MyStack()
     for token in expression:
         if str(token).lstrip("-").isdigit():
@@ -48,16 +49,15 @@ def rpn(expression: list):
 
     return st.pop()
 
+
 def test0():
     import doctest
     doctest.testmod(verbose=False)
 
+
 def test1():
-    rpn([1,2,'#'])
+    rpn([1, 2, '#'])
+
 
 if __name__ == '__main__':
     test0()
-
-
-   
-
