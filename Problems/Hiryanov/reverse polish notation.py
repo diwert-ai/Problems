@@ -56,8 +56,9 @@ def test0():
 
 
 def test1():
-    rpn([1, 2, '#'])
+    print(rpn([3, 1, 2, '-', '*']))
 
 
 if __name__ == '__main__':
     test0()
+    test1()
