@@ -1,3 +1,4 @@
+# https://www.codewars.com/kata/53005a7b26d12be55c000243
 import re
 
 
@@ -108,6 +109,7 @@ class Interpreter:
         if type(result) is str:
             result = self.parse_variable(result)
         if result is None or not stack.is_empty():
+            print(f"Syntax error! Result '{result}' is undefined or stack {stack.stack} is not empty!")
             raise ValueError
         return result
 
