@@ -8,7 +8,7 @@ class MyStack:
         self.stack.append(a)
 
     def pop(self):
-        return self.stack.pop()
+        return self.stack.pop() if self.stack else None
 
     def is_empty(self):
         return len(self.stack) == 0
