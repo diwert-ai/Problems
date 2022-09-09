@@ -100,7 +100,6 @@ class Interpreter:
                 stack.push(token)
             else:
                 raise ValueError(f'Unexpected token: {token}')
-
         result = stack.pop()
         result = self.parse_variable(result) if type(result) is str else result
         if result is None or not stack.is_empty():
@@ -138,7 +137,6 @@ class Interpreter:
                     out.append(token)
         while not stack.is_empty():
             out.append(stack.pop())
-
         return out
 
 
