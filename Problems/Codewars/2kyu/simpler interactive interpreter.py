@@ -2,8 +2,8 @@
 import re
 
 
-def is_float(s):
-    """ Returns True is string is a float. """
+def is_float(s: str) -> bool:
+    """ Returns True if string is float. """
     try:
         float(s)
         return True
@@ -11,7 +11,7 @@ def is_float(s):
         return False
 
 
-def is_int(s):
+def is_int(s: str) -> bool:
     """ Returns True is string is int. """
     try:
         int(s)
@@ -20,7 +20,7 @@ def is_int(s):
         return False
 
 
-def tokenize(expression):
+def tokenize(expression: str) -> list:
     if expression == "":
         return []
     regex = re.compile("\s*(=>|[-+*\/\%=\(\)]|[A-Za-z_][A-Za-z0-9_]*|[0-9]*\.?[0-9]+)\s*")
@@ -49,20 +49,18 @@ class MyStack:
 class Interpreter:
     def __init__(self):
         self.vars = {}
-        self.functions = {}
         self.operators = ('+', '-', '*', '/', '%')
         self.precedence = {'*': 2, '/': 2, '%': 2, '+': 1, '-': 1, '=': 0}
 
     def input(self, expression):
         tokens = tokenize(expression)
-        rpn_expr = self.gen_rpn(tokens)
-        return self.eval_rpn(rpn_expr)
+        rpn_expression = self.gen_rpn(tokens)
+        return self.eval_rpn(rpn_expression)
 
     def parse_variable(self, var):
         if var in self.vars:
             return self.vars[var]
-        print(f"ERROR: Invalid identifier. No variable with name '{var}' was found.")
-        return None
+        raise ValueError(f"ERROR: Invalid identifier. No variable with name '{var}' was found.")
 
     @staticmethod
     def calculate(x, y, operation):
@@ -88,29 +86,25 @@ class Interpreter:
                 x = self.parse_variable(x) if type(x) is str else x
                 y = self.parse_variable(y) if type(y) is str else y
                 if x is None or y is None:
-                    print(f'Syntax error!')
-                    raise ValueError
+                    raise ValueError('Bad syntax! One of the operands is of type None')
                 x = self.calculate(x, y, token)
                 stack.push(x)
             elif token == '=':
                 y, x = stack.pop(), stack.pop()
                 if type(x) is not str:
-                    print(f'Syntax error! {x} is not variable!')
-                    raise ValueError
+                    raise ValueError(f'{x} is not variable!')
                 y = self.parse_variable(y) if type(y) is str else y
                 self.vars[x] = y
                 stack.push(y)
             elif type(token) in [int, float, str]:
                 stack.push(token)
             else:
-                print(f'Unexpected token: {token}')
-                raise ValueError
+                raise ValueError(f'Unexpected token: {token}')
+
         result = stack.pop()
-        if type(result) is str:
-            result = self.parse_variable(result)
+        result = self.parse_variable(result) if type(result) is str else result
         if result is None or not stack.is_empty():
-            print(f"Syntax error! Result '{result}' is undefined or stack {stack.stack} is not empty!")
-            raise ValueError
+            raise ValueError(f"rpn-result is '{result}' (must not be None) and stack is {stack.stack} (must be empty)!")
         return result
 
     def gen_rpn(self, expression: list):
@@ -133,8 +127,7 @@ class Interpreter:
                 while stack.peak() != '(':
                     out.append(stack.pop())
                     if stack.is_empty():
-                        print("Syntax error! No left parenthesis '(' was found!")
-                        raise ValueError
+                        raise ValueError("No left parenthesis '(' was found!")
                 stack.pop()
             else:
                 if is_int(token):
@@ -150,13 +143,13 @@ class Interpreter:
 
 
 def test0():
-    pass
-
-
-def test1():
     interpreter = Interpreter()
     while True:
         print(interpreter.input(input()))
+
+
+def test1():
+    pass
 
 
 if __name__ == '__main__':
