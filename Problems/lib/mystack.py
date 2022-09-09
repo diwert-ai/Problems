@@ -12,3 +12,7 @@ class MyStack:
 
     def is_empty(self):
         return len(self.stack) == 0
+
+    def peak(self):
+        size = len(self.stack)
+        return self.stack[size-1] if size else None
