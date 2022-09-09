@@ -131,7 +131,7 @@ class Interpreter:
                 while stack.peak() != '(':
                     out.append(stack.pop())
                     if stack.is_empty():
-                        print("Syntax error! Left parenthesis '(' not found!")
+                        print("Syntax error! No left parenthesis '(' was found!")
                         raise ValueError
                 stack.pop()
             else:
