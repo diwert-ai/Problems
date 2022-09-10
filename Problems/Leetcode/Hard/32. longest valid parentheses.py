@@ -1,4 +1,8 @@
-﻿class Solution:
+# https://leetcode.com/problems/longest-valid-parentheses/
+# Given a string containing just the characters '(' and ')',
+# find the length of the longest valid (well-formed) parentheses substring.
+
+class Solution:
     # my first solution - got too much time
     @staticmethod
     def longest_valid_parentheses(s: str) -> int:
