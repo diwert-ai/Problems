@@ -45,13 +45,20 @@ class Solution:
         start = end = 0
         while start < len(string) and string[start] == ')':
             start += 1
-        for i in range(start, len(string)):
+
+        k = 0
+        while start + k < len(string) and string[start+k] == '(':
+            k += 1
+            p_sum += 1
+
+        for i in range(start+k, len(string)):
             p_sum = p_sum + 1 if string[i] == '(' else p_sum - 1
             if p_sum == 0:
                 end = i
             if p_sum < 0:
-                return start, end, -1
-        return start, end, p_sum
+                return start, end, -1, k
+
+        return start, end, p_sum, k
 
     @staticmethod
     def longest_valid_parentheses(string: str):
@@ -65,11 +72,11 @@ class Solution:
         string = string[:i+1]
         i = 0
         while i < len(string):
-            start, end, p_sum = Solution.p_calc_sum(string[i:])
+            start, end, p_sum, k = Solution.p_calc_sum(string[i:])
             delta = end - start + 1
             result.append(delta) if delta > 1 else None
             if p_sum:
-                i = i + end + 1 if p_sum == -1 else i + start + p_sum
+                i = i + end + 1 if p_sum == -1 else (i + start + p_sum - k if p_sum - k > 1 else i + start + 1)
             else:
                 break
 
