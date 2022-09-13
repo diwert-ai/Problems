@@ -39,6 +39,7 @@ class Solution:
         max_res = max(res)
         return max_res if max_res > 1 else 0
 
+    # second wrong (sic!!!) solution
     @staticmethod
     def p_calc_sum(string: str):
         p_sum = 0
@@ -81,6 +82,27 @@ class Solution:
                 break
 
         return max(result) if result else 0
+
+    # Правильное решение.
+    # https://leetcode.com/problems/longest-valid-parentheses/discuss/14312/My-ten-lines-python-solution
+    # Суть алгоритма (динамическое программирование). Пусть s входная строка. Пусть f(i) - длина самой длинной
+    # подпоследовательности, которая заканчивается на элементе с номером i-1 (нумерация ведется с 0). Инициализируем
+    # f(i) нулями для всех i от 0 до n + 1, где n длина строки s. Перебираем элементы s. Если i-й элемент - это
+    # открывающая скобка '(', то помещаем ее номер i в стек. Иначе, т.е. i-й элемент закрывающая скобка ')' и при этом
+    # стек не пуст, то забираем со стека номер p открывающей скобки и вычисляем f(i+1) = f(p) + (i + 1 - p), т.е. в
+    # этом случае длина самой длинной подпоследовательности с концом в i-й скобке ')' есть длина самой длинной
+    # подпоследовательности с концом в элементе с номером p-1 плюс расстояние от p элемента до i-го (i + 1 - p).
+    # Таким образом верный ответ есть max(f(x)). Сложность и по времени и по памяти O(n), где n число элементов в s.
+    @staticmethod
+    def longest_valid_parentheses_dp(s):
+        dp, stack = [0]*(len(s)+1), []
+        for i, c in enumerate(s):
+            if c == '(':
+                stack.append(i)
+            elif stack:
+                p = stack.pop()
+                dp[i+1] = dp[p] + i - p + 1
+        return max(dp)
 
 
 def test0():
@@ -224,15 +246,15 @@ def test0():
         ")))()))(())()()())))()()(((()))((()()(((()())))((()()())((())))))()())()((())))())(()())()()()()((())((()()(" \
         "))((()()))())(())())()(()(((()))())(()))))(()()))(())))))))()())()((()())()()))()())))((()()(()())()(()))(((" \
         "))()))(((())))())))(((()()())())("
-    print(f'string: {Solution.longest_valid_parentheses(s)}')
+    print(f'string: {Solution.longest_valid_parentheses(s)} {Solution.longest_valid_parentheses_dp(s)}')
 
 
 def test1():
     strings = ['((()()(()((()', ')(((((()())()()))()(()))(', '(())(',
                ')))))()()())))))())((', '(((', ')))(((', '((()())))))',
                '()())()()', '((()))', '((((()', '(((()()())))(()()())))']
-    for string in strings:
-        print(f'{string}: {Solution.longest_valid_parentheses(string)}')
+    for s in strings:
+        print(f'{s}: {Solution.longest_valid_parentheses(s)} {Solution.longest_valid_parentheses_dp(s)}')
 
 
 def test2():
