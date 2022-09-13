@@ -4,16 +4,16 @@
 
 class Solution:
     # my first solution - got too much time
+    # almost brute force approach
     @staticmethod
-    def longest_valid_parentheses(s: str) -> int:
+    def longest_valid_parentheses_bf(s: str) -> int:
         ix = []
         ix_s = [(c, i) for i, c in enumerate(s)]
 
         def pair_by_pair(indexed_list: list):
             len_ix = len(ix) - 1
             while len(ix) > len_ix:
-                len_ix = len(ix)
-                i = 0
+                len_ix, i = len(ix), 0
                 while i < len(indexed_list):
                     while i in ix:
                         i += 1
@@ -39,9 +39,45 @@ class Solution:
         max_res = max(res)
         return max_res if max_res > 1 else 0
 
+    @staticmethod
+    def p_calc_sum(string: str):
+        p_sum = 0
+        start = end = 0
+        while start < len(string) and string[start] == ')':
+            start += 1
+        for i in range(start, len(string)):
+            p_sum = p_sum + 1 if string[i] == '(' else p_sum - 1
+            if p_sum == 0:
+                end = i
+            if p_sum < 0:
+                return start, end, -1
+        return start, end, p_sum
+
+    @staticmethod
+    def longest_valid_parentheses(string: str):
+        result = []
+        i = len(string) - 1
+        while i > -1:
+            if string[i] == '(':
+                i -= 1
+            else:
+                break
+        string = string[:i+1]
+        i = 0
+        while i < len(string):
+            start, end, p_sum = Solution.p_calc_sum(string[i:])
+            delta = end - start + 1
+            result.append(delta) if delta > 1 else None
+            if p_sum:
+                i = i + end + 1 if p_sum == -1 else i + start + p_sum
+            else:
+                break
+
+        return max(result) if result else 0
+
 
 def test0():
-    s = "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((" \
+    string = "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((" \
         "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((" \
         "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((" \
         "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((" \
@@ -181,14 +217,24 @@ def test0():
         ")))()))(())()()())))()()(((()))((()()(((()())))((()()())((())))))()())()((())))())(()())()()()()((())((()()(" \
         "))((()()))())(())())()(()(((()))())(()))))(()()))(())))))))()())()((()())()()))()())))((()()(()())()(()))(((" \
         "))()))(((())))())))(((()()())())("
-    print(Solution.longest_valid_parentheses(s))
+    print(f'string: {Solution.longest_valid_parentheses(string)}')
 
 
 def test1():
-    print(Solution.longest_valid_parentheses('((()()))'))
+    strings = ['((()()(()((()',
+               ')(((((()())()()))()(()))(',
+               '(())(', ')))))()()())))))())((', '(((', ')))(((', '((()())))))',
+               '()())()()',
+               '((()))', '((((()', '(((()()())))(()()())))']
+    for string in strings:
+        print(f'{string}: {Solution.longest_valid_parentheses(string)}')
+
+
+def test2():
+    pass
 
 
 if __name__ == '__main__':
-    test_funcs = [test0, test1]
+    test_funcs = [test0, test1, test2]
     for test in test_funcs:
         test()
