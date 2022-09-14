@@ -7,6 +7,9 @@
 # hit and get the resulting stone
 # put the resulting stone back in the batch.
 # For the Speedy category, you can think about your solution for a million stones
+from typing import List
+from heapq import heapify, heappop, heappush
+
 
 def left_bound(array: list, key):
     left = -1
@@ -33,11 +36,22 @@ def final_stone(stones: list[int]) -> int:
     return 0
 
 
+# best clear and speedy solution O(n log(n)) time
+# https://py.checkio.org/mission/the-final-stone/publications/kurosawa4434/python-3/heapq/?ordering=most_voted&filtering=all
+def final_stone_heap(stones: List[int]) -> int:
+    heapify(stones_neg := list(map(lambda x: x * -1, stones + [0])))
+
+    for _ in range(len(stones)):
+        heappush(stones_neg, heappop(stones_neg) - heappop(stones_neg))
+
+    return heappop(stones_neg) * -1
+
+
 def test0():
     final_stone([3, 5, 1, 1, 9])
     final_stone([1, 2, 3, 4])
-    # s = [4] * (1000*1000)
-    # final_stone(s)
+    s = [4] * (1000*1000)
+    print(final_stone_heap(s))
 
 
 def test1():

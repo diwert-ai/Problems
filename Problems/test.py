@@ -1,50 +1,32 @@
-﻿def left_bound(array: list, key):
-    left = -1
-    right = len(array)
-
-    while right - left > 1:
-        middle = (left + right) // 2
-        if array[middle] < key:
-            left = middle
+﻿def adjacent_letters(line: str) -> str:
+    while True:
+        exclude_list, k = [], 0
+        while k < len(line) - 1:
+            if line[k] == line[k+1]:
+                exclude_list.append(k)
+                exclude_list.append(k+1)
+                k += 2
+            else:
+                k += 1
+        if exclude_list:
+            line = ''.join(line[i] for i in range(len(line)) if i not in exclude_list)
         else:
-            right = middle
-
-    return left
-
-
-def final_stone(stones: list[int]) -> int:
-    if stones:
-        stones.sort()
-        for _ in range(len(stones)-1):
-            new_stone = stones[-1] - stones[-2]
-            left = left_bound(stones[:-2], new_stone) + 1
-            stones = stones[:left] + [new_stone] + stones[left:-2]
-        return stones[0]
-    return 0
+            return line
 
 
 def test0():
-    final_stone([3, 5, 1, 1, 9])
-    final_stone([1, 2, 3, 4])
-    # s = [4] * (1000*1000)
-    # final_stone(s)
+    print(adjacent_letters('aaa'))
+    print(adjacent_letters("lllllet's get rrready to the rrrummmmmble!"))
 
 
 def test1():
-    print('Example:')
-    print(final_stone([1, 2, 3]))
+    print("Example:")
+    print(adjacent_letters("abbaca"))
 
-    assert final_stone([3, 5, 1, 1, 9]) == 1
-    assert final_stone([1, 2, 3]) == 0
-    assert final_stone([1, 2, 3, 4]) == 0
-    assert final_stone([1, 2, 3, 4, 5]) == 1
-    assert final_stone([1, 1, 1, 1]) == 0
-    assert final_stone([1, 1, 1]) == 1
-    assert final_stone([1, 10, 1]) == 8
-    assert final_stone([1, 10, 1, 8]) == 0
-    assert final_stone([]) == 0
-    assert final_stone([1]) == 1
-    assert final_stone([10, 20, 30, 50, 100, 10, 20, 10]) == 10
+    assert adjacent_letters("adjacent_letters") == "adjacent_lrs"
+    assert adjacent_letters("") == ""
+    assert adjacent_letters("aaa") == "a"
+    assert adjacent_letters("ABBA") == ""
 
     print("The mission is done! Click 'Check Solution' to earn rewards!")
 
