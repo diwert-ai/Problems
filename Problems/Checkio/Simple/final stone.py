@@ -147,10 +147,12 @@ def final_stone(stones: list[int]) -> int:
 
 
 def test0():
+    from random import randint
     final_stone([3, 5, 1, 1, 9])
     final_stone([1, 2, 3, 4])
-    s = [4] * (1000 * 1000)
+    s = [randint(-500000, 500000) for _ in range(1000 * 1000)]
     print(final_stone_heap(s))
+    print(final_stone(s))
 
 
 def test1():
@@ -176,7 +178,7 @@ def test3():
     array = [1, 7, 5, 2, 3, 6, 0, 9, 7, 5, 3, 2, 34, 543, 2, 1, 2, 344, 5]
     h = fast_heapify(array)
     while h.values:
-        print(h.extract_max())
+        print(h.extract_max(), end=', ')
 
 
 if __name__ == '__main__':
