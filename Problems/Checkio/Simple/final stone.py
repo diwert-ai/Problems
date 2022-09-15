@@ -109,8 +109,8 @@ class Heap:
     # правильную позицию в дереве (куче)
     # O(log(size)) - операций
     def extract_max(self):
-        # if self.size == 0:
-        #     return None
+        if self.size == 0:
+            return None
 
         m = self.values[0]
         self.values[0] = self.values[-1]
