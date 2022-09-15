@@ -11,6 +11,19 @@ from typing import List
 from heapq import heapify, heappop, heappush
 
 
+# first solution - almost brute force
+def final_stone_first(stones: list[int]) -> int:
+    if stones:
+        stones.sort()
+        while len(stones) > 1:
+            new_stone, i = stones[-1] - stones[-2], 0
+            while i < len(stones) - 2 and stones[i] <= new_stone:
+                i += 1
+            stones = stones[:i] + [new_stone] + stones[i:-2]
+        return stones[0]
+    return 0
+
+
 def left_bound(array: list, key):
     left = -1
     right = len(array)
@@ -25,7 +38,8 @@ def left_bound(array: list, key):
     return left
 
 
-def final_stone_first(stones: list[int]) -> int:
+# second solution - using binary search, but slow data structure (list) for insert new element
+def final_stone_bin_search(stones: list[int]) -> int:
     if stones:
         stones.sort()
         for _ in range(len(stones) - 1):
@@ -95,8 +109,8 @@ class Heap:
     # правильную позицию в дереве (куче)
     # O(log(size)) - операций
     def extract_max(self):
-        if self.size == 0:
-            return None
+        # if self.size == 0:
+        #     return None
 
         m = self.values[0]
         self.values[0] = self.values[-1]
@@ -137,6 +151,7 @@ def fast_heapify(a: list):
     return h
 
 
+# third solution - using heap
 def final_stone(stones: list[int]) -> int:
     if stones:
         heap = fast_heapify(stones)
