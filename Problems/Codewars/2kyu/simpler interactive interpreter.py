@@ -1,4 +1,6 @@
 # https://www.codewars.com/kata/53005a7b26d12be55c000243
+# https://www.codewars.com/kata/52a78825cdfc2cfc87000005  support unary minus and plus
+
 import re
 
 
@@ -23,7 +25,7 @@ def is_int(s: str) -> bool:
 def tokenize(expression: str) -> list:
     if expression == "":
         return []
-    regex = re.compile("\s*(=>|[-+*\/\%=\(\)]|[A-Za-z_][A-Za-z0-9_]*|[0-9]*\.?[0-9]+)\s*")
+    regex = re.compile(r"\s*(=>|[-+*/%=()]|[A-Za-z_][A-Za-z0-9_]*|[0-9]*\.?[0-9]+)\s*")
     tokens = regex.findall(expression)
     return [s for s in tokens if not s.isspace()]
 
@@ -49,12 +51,14 @@ class MyStack:
 class Interpreter:
     def __init__(self):
         self.vars = {}
-        self.operators = ('+', '-', '*', '/', '%')
-        self.precedence = {'*': 2, '/': 2, '%': 2, '+': 1, '-': 1, '=': 0}
+        self.binary_operators = ('+', '-', '*', '/', '%')
+        self.operators = ('+', '-', '*', '/', '%', '~')
+        self.precedence = {'~': 3, '*': 2, '/': 2, '%': 2, '+': 1, '-': 1, '=': 0}
 
     def input(self, expression):
         tokens = tokenize(expression)
-        rpn_expression = self.gen_rpn(tokens)
+        unarified_tokens = self.unarify(tokens)
+        rpn_expression = self.gen_rpn(unarified_tokens)
         return self.eval_rpn(rpn_expression)
 
     def parse_variable(self, var):
@@ -76,12 +80,31 @@ class Interpreter:
             x %= y
         return x
 
+    @staticmethod
+    def unarify(expression: list) -> list:
+        unary = True
+        unarified_expression = []
+        for token in expression:
+            if unary and token in ('+', '-'):
+                unary = False
+                if token == '+':
+                    continue
+                elif token == '-':
+                    token = '~'
+            elif token in ('+', '-', '*', '/', '%', '(', '='):
+                unary = True
+            else:
+                unary = False
+            unarified_expression.append(token)
+
+        return unarified_expression
+
     def eval_rpn(self, expression: list):
         if not expression:
             return ''
         stack = MyStack()
         for token in expression:
-            if token in self.operators:
+            if token in self.binary_operators:
                 y, x = stack.pop(), stack.pop()
                 x = self.parse_variable(x) if type(x) is str else x
                 y = self.parse_variable(y) if type(y) is str else y
@@ -89,6 +112,12 @@ class Interpreter:
                     raise ValueError('Bad syntax! One of the operands is of type None')
                 x = self.calculate(x, y, token)
                 stack.push(x)
+            elif token == '~':
+                x = stack.pop()
+                x = self.parse_variable(x) if type(x) is str else x
+                if x is None:
+                    raise ValueError('Bad syntax! One of the operands is of type None')
+                stack.push(-x)
             elif token == '=':
                 y, x = stack.pop(), stack.pop()
                 if type(x) is not str:
