@@ -1,4 +1,6 @@
-﻿from typing import List
+# https://py.checkio.org/ru/mission/escape/
+
+from typing import List
 
 
 def escape(jar: List[int], fly: List[int]) -> bool:
