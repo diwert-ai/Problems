@@ -1,4 +1,6 @@
-﻿def do_calc(x, y, op):
+# https://py.checkio.org/ru/mission/aggregate-by-operation/
+
+def do_calc(x, y, op):
     if op == '+':
         x += y
     elif op == '-':
