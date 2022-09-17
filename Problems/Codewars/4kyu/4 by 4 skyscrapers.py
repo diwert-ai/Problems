@@ -50,6 +50,7 @@ def solve_puzzle(clues):
 
 def test0():
     fill_skyscrapers_dict()
+    print(len(skyscrapers))
 
 
 def test1():
