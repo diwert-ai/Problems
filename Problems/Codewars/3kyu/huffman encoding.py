@@ -1,4 +1,4 @@
-﻿import heapq
+import heapq
 
 
 class BNode:
