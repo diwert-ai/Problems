@@ -86,7 +86,7 @@ def test1():
     b = BNode(('b', 20))
     print(a+b)
     freqs = [('a', 1)]
-    nodes = list(map(lambda x: BNode(x), freqs))
+    nodes = list(map(BNode, freqs))
     print(nodes[0])
 
 
