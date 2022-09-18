@@ -21,7 +21,7 @@ class BNode:
 
 # noinspection SpellCheckingInspection
 def h_tree(freqs):
-    nodes = list(map(lambda x: BNode(x), freqs))
+    nodes = list(map(BNode, freqs))
     heapq.heapify(nodes)
     root = nodes[0]
     while len(nodes) > 1:
