@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/54cf7f926b85dcc4e2000d9d/python
+# my solution
 import heapq
 
 
