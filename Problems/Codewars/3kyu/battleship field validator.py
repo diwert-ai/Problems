@@ -1,4 +1,8 @@
-﻿def validate_battlefield(field):
+# https://www.codewars.com/kata/52bb6539a4cf1b12d90005b7
+
+
+# my solution
+def validate_battlefield(field):
     checked = set()
     ships = {4: (0, 1), 3: (0, 2), 2: (0, 3), 1: (0, 4)}
 
@@ -61,6 +65,39 @@
     return True
 
 
+# best practices solution
+# https://www.codewars.com/kata/reviews/5589f89794c148e42900002a/groups/561ba39888f3ea83d80000b0
+def validate_battlefield_bp(field):
+    n, m = len(field), len(field[0])
+
+    def cell(i, j):
+        if i < 0 or j < 0 or i >= n or j >= m:
+            return 0
+        return field[i][j]
+
+    def find(i, j):
+        if cell(i + 1, j - 1) or cell(i + 1, j + 1):
+            return 10086
+        if cell(i, j + 1) and cell(i + 1, j):
+            return 10086
+        field[i][j] = 2
+        if cell(i, j + 1):
+            return find(i, j + 1) + 1
+        if cell(i + 1, j):
+            return find(i + 1, j) + 1
+        return 1
+    num = [0] * 5
+    for row in range(n):
+        for col in range(m):
+            if cell(row, col) == 1:
+                r = find(row, col)
+                if r > 4:
+                    return False
+                num[r] += 1
+    [tmp, submarines, destroyers, cruisers, battleship] = num
+    return battleship == 1 and cruisers == 2 and destroyers == 3 and submarines == 4
+
+
 def test0():
     battle_field1 = [[1, 0, 0, 0, 0, 1, 1, 0, 0, 0],
                      [1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
@@ -88,7 +125,29 @@ def test0():
 
 
 def test1():
-    pass
+    battle_field1 = [[1, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+                     [1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+                     [1, 0, 1, 0, 1, 1, 1, 0, 1, 0],
+                     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+                     [0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+                     [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+    battle_field2 = [[1, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+                     [1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+                     [1, 0, 1, 0, 1, 1, 1, 0, 1, 0],
+                     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+                     [0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+                     [0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+    print(validate_battlefield_bp(battle_field1))
+    print(validate_battlefield_bp(battle_field2))
 
 
 if __name__ == '__main__':
