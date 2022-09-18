@@ -75,7 +75,7 @@ def test0():
     encode_s = encode(f, s)
     print(encode_s)
     decode_s = decode(f, encode_s)
-    print(decode_s)
+    print(decode_s, len(encode_s)/8, len(decode_s))
 
 
 # noinspection SpellCheckingInspection
