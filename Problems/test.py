@@ -1,51 +1,50 @@
-﻿from typing import List
+﻿def color_map(region):
+    n, m, graph, vertices = len(region), len(region[0]), dict(), set()
+    for line in region:
+        vertices = vertices | set(line)
+    for vertex in vertices:
+        graph[vertex] = set()
 
+    def cell(row, col):
+        return region[row][col] if 0 <= row < n and 0 <= col < m else None
 
-class Solution:
-    @staticmethod
-    def left_bound(array: list, key):
-        left = -1
-        right = len(array)
+    def add_edge(v1, v2):
+        if v2 is not None and v1 != v2:
+            graph[v1].add(v2)
+            graph[v2].add(v1)
 
-        while right - left > 1:
-            middle = (left + right) // 2
-            if array[middle] < key:
-                left = middle
-            else:
-                right = middle
+    for i in range(n):
+        for j in range(m):
+            vertex, right_neighbor, bottom_neighbor = region[i][j], cell(i, j + 1), cell(i + 1, j)
+            add_edge(vertex, right_neighbor)
+            add_edge(vertex, bottom_neighbor)
 
-        return left
-
-    @staticmethod
-    def right_bound(array: list, key):
-        left = -1
-        right = len(array)
-
-        while right - left > 1:
-            middle = (left + right) // 2
-            if array[middle] <= key:
-                left = middle
-            else:
-                right = middle
-
-        return right
-
-    def search_range(self, nums: List[int], target: int) -> List[int]:
-        left = self.left_bound(nums, target)
-        right = self.right_bound(nums, target)
-        return [left + 1, right - 1] if right - left > 1 else [-1, -1]
+    ordered_vertices = sorted(vertices, key=lambda x: -len(graph[x]))
+    print(graph)
+    print(ordered_vertices)
+    return [1, 1]
 
 
 def test0():
-    nums_tests = [([5, 7, 7, 8, 8, 10], 8),
-                  ([5, 7, 7, 8, 8, 10], 6),
-                  ([], 0)]
-    for nums, target in nums_tests:
-        print(Solution().search_range(nums, target))
+    v_s = set()
+    r = ((1, 2, 3, 1, 1, 1, 1, 1, 1),
+         (0, 2, 2, 2, 2, 2, 2, 1, 4))
+
+    for rw in r:
+        v_s = v_s | set(rw)
+
+    print(v_s)
 
 
 def test1():
-    pass
+    color_map(((0, 0, 0, 1, 4, 4, 4, 4, 4),
+               (0, 1, 1, 1, 3, 3, 3, 3, 4),
+               (0, 1, 1, 3, 3, 6, 5, 3, 4),
+               (1, 1, 1, 3, 2, 6, 5, 5, 9),
+               (1, 1, 1, 2, 2, 6, 6, 6, 9),
+               (7, 8, 9, 9, 9, 9, 9, 9, 9),
+               (7, 8, 8, 8, 8, 8, 8, 8, 8),
+               (7, 7, 7, 7, 7, 7, 7, 7, 7)))
 
 
 if __name__ == '__main__':
