@@ -19,10 +19,25 @@
             add_edge(vertex, right_neighbor)
             add_edge(vertex, bottom_neighbor)
 
+    def dfs(vert, clr):
+        used.add(vert)
+        if not colored_vertices[vert] and all((colored_vertices[neighbor] != clr for neighbor in graph[vert])):
+            colored_vertices[vert] = clr
+        for neighbor in graph[vert]:
+            if neighbor not in used:
+                dfs(neighbor, clr)
+
     ordered_vertices = sorted(vertices, key=lambda x: -len(graph[x]))
-    print(graph)
-    print(ordered_vertices)
-    return [1, 1]
+    colored_vertices = {vertex: None for vertex in vertices}
+    print(f'graph: {graph}')
+    print(f'o vertices: {ordered_vertices}')
+    for color in range(1, 5):
+        used = set()
+        for vertex in ordered_vertices[::-1]:
+            if not colored_vertices[vertex]:
+                dfs(vertex, color)
+
+    return [colored_vertices[vertex] for vertex in vertices]
 
 
 def test0():
@@ -37,14 +52,20 @@ def test0():
 
 
 def test1():
-    color_map(((0, 0, 0, 1, 4, 4, 4, 4, 4),
-               (0, 1, 1, 1, 3, 3, 3, 3, 4),
-               (0, 1, 1, 3, 3, 6, 5, 3, 4),
-               (1, 1, 1, 3, 2, 6, 5, 5, 9),
-               (1, 1, 1, 2, 2, 6, 6, 6, 9),
-               (7, 8, 9, 9, 9, 9, 9, 9, 9),
-               (7, 8, 8, 8, 8, 8, 8, 8, 8),
-               (7, 7, 7, 7, 7, 7, 7, 7, 7)))
+    print(color_map(((0, 0, 0, 1, 4, 4, 4, 4, 4),
+                     (0, 1, 1, 1, 3, 3, 3, 3, 4),
+                     (0, 1, 1, 3, 3, 6, 5, 3, 4),
+                     (1, 1, 1, 3, 2, 6, 5, 5, 9),
+                     (1, 1, 1, 2, 2, 6, 6, 6, 9),
+                     (7, 8, 9, 9, 9, 9, 9, 9, 9),
+                     (7, 8, 8, 8, 8, 8, 8, 8, 8),
+                     (7, 7, 7, 7, 7, 7, 7, 7, 7))))
+
+    print(color_map(((13, 13, 13, 13, 13, 13, 14, 14, 14, 14,),
+                     (13, 0, 0, 1, 1, 2, 2, 3, 3, 14,),
+                     (13, 4, 5, 5, 6, 6, 7, 7, 8, 14,),
+                     (13, 9, 9, 10, 10, 11, 11, 12, 12, 14,),
+                     (13, 13, 13, 13, 14, 14, 14, 14, 14, 14,),)))
 
 
 if __name__ == '__main__':
