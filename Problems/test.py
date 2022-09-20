@@ -27,17 +27,14 @@
             if neighbor not in used:
                 dfs(neighbor, clr)
 
-    ordered_vertices = sorted(vertices, key=lambda x: -len(graph[x]))
     colored_vertices = {vertex: None for vertex in vertices}
-    print(f'graph: {graph}')
-    print(f'o vertices: {ordered_vertices}')
     for color in range(1, 5):
         used = set()
-        for vertex in ordered_vertices[::-1]:
+        for vertex in vertices:
             if not colored_vertices[vertex]:
                 dfs(vertex, color)
 
-    return [colored_vertices[vertex] for vertex in vertices]
+    return list(colored_vertices.values())
 
 
 def test0():
