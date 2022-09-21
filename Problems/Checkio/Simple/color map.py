@@ -1,4 +1,4 @@
-﻿def color_map(region):
+def color_map(region):
     n, m, graph, vertices = len(region), len(region[0]), dict(), set()
     for line in region:
         vertices = vertices | set(line)
