@@ -37,6 +37,25 @@
     return list(colored_vertices.values())
 
 
+def color_graph(g):
+    def dfs(vert, clr):
+        used.add(vert)
+        if not colored_vertices[vert] and all((colored_vertices[neighbor] != clr for neighbor in g[vert])):
+            colored_vertices[vert] = clr
+        for neighbor in g[vert]:
+            if neighbor not in used:
+                dfs(neighbor, clr)
+
+    colored_vertices = {vertex: None for vertex in g}
+    for color in range(1, 5):
+        used = set()
+        for vertex in g:
+            if not colored_vertices[vertex]:
+                dfs(vertex, color)
+
+    return list(colored_vertices.values())
+
+
 def test0():
     v_s = set()
     r = ((5, 2, 3, 1, 1, 1, 1, 1, 1),
@@ -66,7 +85,24 @@ def test1():
                      (13, 13, 13, 13, 14, 14, 14, 14, 14, 14,),)))
 
 
+def test3():
+    g = {1: {2, 4, 5},
+         2: {1, 4, 7, 3},
+         3: {2, 7, 8, 11},
+         4: {1, 2, 5, 6, 7},
+         5: {1, 4, 6, 12, 13},
+         6: {5, 4, 7, 10, 12, 2},
+         7: {2, 3, 8, 10, 6, 4, 9},
+         8: {3, 9, 7},
+         9: {8, 10, 11, 7},
+         10: {7, 9, 11, 12, 6},
+         11: {13, 12, 10, 9, 3},
+         12: {6, 5, 10, 11, 13},
+         13: {11, 12, 5}}
+    print('t3: ', color_graph(g))
+
+
 if __name__ == '__main__':
-    test_funcs = [test0, test1]
+    test_funcs = [test0, test1, test3]
     for test in test_funcs:
         test()
