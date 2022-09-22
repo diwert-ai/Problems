@@ -1,3 +1,7 @@
+# https://py.checkio.org/ru/mission/color-map/
+# my solution
+# not sure if it's the right solution
+
 def color_map(region):
     n, m, graph, vertices = len(region), len(region[0]), dict(), set()
     for line in region:
@@ -56,6 +60,30 @@ def color_graph(g):
     return list(colored_vertices.values())
 
 
+# best clear solution
+# https://py.checkio.org/mission/color-map/publications/DiZ/python-3/borders/?ordering=most_voted&filtering=all
+def color_map_bc(colored_map):
+    # Construct all regions
+    regions = {}
+    for i, line in enumerate(colored_map):
+        for j, cell in enumerate(line):
+            regions.setdefault(cell, set()).add(i + 1j * j)
+
+    # Get neighbours for all regions
+    neighbours = {}
+    for region, cells in regions.items():
+        border = set.union(*({c + 1j ** k for k in range(4)} for c in cells)) - cells
+        neighbours[region] = {r for r, c in regions.items() if border & c}
+
+    # Color each region with first available color
+    c, colors = 0, [0] * len(regions)
+    while c < len(regions):
+        variants = set(range(colors[c] + 1, 5)) - {colors[n] for n in neighbours[c]}
+        colors[c] = len(variants) and min(variants)
+        c += 2 * bool(variants) - 1
+    return colors
+
+
 def test0():
     v_s = set()
     r = ((5, 2, 3, 1, 1, 1, 1, 1, 1),
@@ -81,11 +109,13 @@ def test1():
                      (7, 8, 8, 8, 8, 8, 8, 8, 8),
                      (7, 7, 7, 7, 7, 7, 7, 7, 7))))
 
-    print(color_map(((13, 13, 13, 13, 13, 13, 14, 14, 14, 14,),
-                     (13, 0, 0, 1, 1, 2, 2, 3, 3, 14,),
-                     (13, 4, 5, 5, 6, 6, 7, 7, 8, 14,),
-                     (13, 9, 9, 10, 10, 11, 11, 12, 12, 14,),
-                     (13, 13, 13, 13, 14, 14, 14, 14, 14, 14,),)))
+    regions = ((13, 13, 13, 13, 13, 13, 14, 14, 14, 14,),
+               (13, 0, 0, 1, 1, 2, 2, 3, 3, 14,),
+               (13, 4, 5, 5, 6, 6, 7, 7, 8, 14,),
+               (13, 9, 9, 10, 10, 11, 11, 12, 12, 14,),
+               (13, 13, 13, 13, 14, 14, 14, 14, 14, 14,),)
+    print(color_map(regions))
+    print('bc:', color_map_bc(regions))
 
 
 def test3():
