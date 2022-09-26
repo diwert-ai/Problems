@@ -1,6 +1,9 @@
-﻿def solve_n_queens(n, fixed_queen):
+# https://www.codewars.com/kata/5985ea20695be6079e000003
+
+# рекурсивный поиск с возвратом - долго по времени (O(n!) ? или просто экcпонента от n)
+def solve_n_queens(n, fixed_queen):
     forbidden_fields = {(i, j): 0 for i in range(n) for j in range(n)}
-    queens = set([fixed_queen])
+    queens = {fixed_queen}
     q_cash = set()
 
     def forbid_cells(row, col):
@@ -82,26 +85,30 @@
     return None if len(queens) < n else '\n'.join((''.join(line) for line in q_list))
 
 
+# https://en.wikipedia.org/wiki/Eight_queens_puzzle
 def n_queens(n, i, a, b, c):
     if i < n:
         for j in range(n):
-            if j not in a and i+j not in b and i-j not in c:
-                yield from n_queens(n, i+1, a+[j], b+[i+j], c+[i-j])
+            if j not in a and i + j not in b and i - j not in c:
+                yield from n_queens(n, i + 1, a + [j], b + [i + j], c + [i - j])
     else:
         yield a
 
 
+def solve_n_queens_2(n, fixed_queen):
+    pass
+
+
 def test0():
-    s_row = 2
-    s_col = 0
-    for solution in queens(8, 0, [], [], []):
-        if solution[s_row] == s_col:
-            print(solution)
-            return
+    s_row = 0
+    s_col = 2
+    for solution in n_queens(20, 1, [2], [], []):
+        print(solution)
+        return
 
 
 def test1():
-    print(solve_n_queens(5, (2, 0)))
+    print(solve_n_queens(10, (7, 4)))
 
 
 if __name__ == '__main__':
