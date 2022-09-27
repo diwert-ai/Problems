@@ -1,6 +1,8 @@
 # https://www.codewars.com/kata/5985ea20695be6079e000003
+from random import choice, choices
 
-# рекурсивный поиск с возвратом - долго по времени (O(n!) ? или просто экcпонента от n)
+
+# рекурсивный поиск с возвратом - долго по времени (O(n!) ? или даже просто экспонента от n)
 def solve_n_queens(n, fixed_queen):
     forbidden_fields = {(i, j): 0 for i in range(n) for j in range(n)}
     queens = {fixed_queen}
@@ -86,6 +88,9 @@ def solve_n_queens(n, fixed_queen):
 
 
 # https://en.wikipedia.org/wiki/Eight_queens_puzzle
+# Алгоритм генератора корректных расстановок
+# (изложен в книге Н. Вирта  "Алгоритмы и структуры данных" - советское издание "Мир 1977 г.")
+# https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Algorithms%20and%20Data%20Structures%20%28RU%29.pdf
 def n_queens(n, i, a, b, c):
     if i < n:
         for j in range(n):
@@ -95,6 +100,24 @@ def n_queens(n, i, a, b, c):
         yield a
 
 
+def get_random_permutation(n: int, fixed: tuple):
+    fixed_row, fixed_column = fixed
+    columns, rows, perm = list(range(n)), list(range(n)), [None] * n
+    columns.remove(fixed_column)
+    rows.remove(fixed_row)
+    perm[fixed_row] = fixed_column
+    for row in rows:
+        column = choice(columns)
+        perm[row] = column
+        columns.remove(column)
+    return perm
+
+
+# A Polynomial Time Algorithm for the N-Queens Problem
+# Rok Sosic and Jun Gu
+# (appeared in SIGART Bulletin, Vol. 1, 3, pp. 7-11, Oct, 1990.)
+# https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=4DC9292839FE7B1AFABA1EDB8183242C?doi=10.1.1.57.4685&rep=rep1&type=pdf
+# Алгоритм завершения расстановки ферзей методом градиентного спуска.
 def solve_n_queens_2(n, fixed_queen):
     pass
 
@@ -111,7 +134,21 @@ def test1():
     print(solve_n_queens(10, (7, 4)))
 
 
+def test2():
+    array = [1, 2, 3, 4, 5]
+    n = 4
+    for _ in range(10):
+        print(f'{n} choices from array {array}: {choices([1, 2, 3, 4, 5], k=n)}')
+
+
+def test3():
+    n = 10
+    k = 7
+    for i in range(n):
+        print(f'({i},{k}) :{get_random_permutation(n, (i, k))}')
+
+
 if __name__ == '__main__':
-    test_funcs = [test0, test1]
+    test_funcs = [test0, test1, test2, test3]
     for test in test_funcs:
         test()
