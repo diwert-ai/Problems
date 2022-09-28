@@ -170,7 +170,7 @@ def solve_n_queens_2(n, fixed_queen):
                         neg[q2 - i + n - 1] -= 1
         if collision_number == 0:
             line = '.' * n
-            return '\n'.join((line[:column] + 'Q' + line[column + 1:] for column in position)) + '\n'
+            return runs, '\n'.join((line[:column] + 'Q' + line[column + 1:] for column in position)) + '\n'
         runs += 1
     return None
 
@@ -209,7 +209,9 @@ def test4():
 
 
 def test5():
-    print(solve_n_queens_2(4, (0, 2)))
+    for n in range(1, 1000, 10):
+        r, _ = solve_n_queens_2(n, (n//2, n//2))
+        print(n, r)
 
 
 if __name__ == '__main__':
