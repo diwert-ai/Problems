@@ -172,7 +172,7 @@ def solve_n_queens_2(n, fixed_queen):
             line = '.' * n
             return runs, '\n'.join((line[:column] + 'Q' + line[column + 1:] for column in position)) + '\n'
         runs += 1
-    return None
+    return runs, None
 
 
 def test0():
@@ -209,7 +209,7 @@ def test4():
 
 
 def test5():
-    for n in range(1, 1000, 10):
+    for n in range(1, 200):
         r, _ = solve_n_queens_2(n, (n//2, n//2))
         print(n, r)
 
