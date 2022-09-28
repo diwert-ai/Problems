@@ -100,9 +100,9 @@ def n_queens(n, i, a, b, c):
         yield a
 
 
-def get_random_permutation(n: int, fixed: tuple):
+def gen_random_permutation(n: int, fixed: tuple):
     fixed_row, fixed_column = fixed
-    columns, rows, perm = list(range(n)), list(range(n)), [None] * n
+    columns, rows, perm = list(range(n)), list(range(n)), [0] * n
     columns.remove(fixed_column)
     rows.remove(fixed_row)
     perm[fixed_row] = fixed_column
@@ -113,21 +113,75 @@ def get_random_permutation(n: int, fixed: tuple):
     return perm
 
 
+def collision_arrays(position: list):
+    n = len(position)
+    positive_diagonal = [0] * (2 * n - 1)
+    negative_diagonal = [0] * (2 * n - 1)
+    for row, column in enumerate(position):
+        positive_diagonal[position[row] + row] += 1
+        negative_diagonal[position[row] - row + n - 1] += 1
+    return positive_diagonal, negative_diagonal
+    # return sum((k-1 for k in positive_diagonal+negative_diagonal if k))
+
+
 # A Polynomial Time Algorithm for the N-Queens Problem
 # Rok Sosic and Jun Gu
 # (appeared in SIGART Bulletin, Vol. 1, 3, pp. 7-11, Oct, 1990.)
 # https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=4DC9292839FE7B1AFABA1EDB8183242C?doi=10.1.1.57.4685&rep=rep1&type=pdf
 # Алгоритм завершения расстановки ферзей методом градиентного спуска.
 def solve_n_queens_2(n, fixed_queen):
-    pass
+    rows = list(range(n))
+    rows.remove(fixed_queen[0])
+    runs = 0
+    while runs < 100:
+        position = gen_random_permutation(n, fixed_queen)
+        pos, neg = collision_arrays(position)
+        collision_number = sum((k - 1 for k in pos + neg if k > 1))
+        for k, i in enumerate(rows):
+            for j in rows[k + 1:]:
+                q1 = position[i]
+                q2 = position[j]
+                if pos[q1 + i] > 1 or pos[q2 + j] > 1 or neg[q1 - i + n - 1] > 1 or neg[q2 - j + n - 1] > 1:
+                    d_pos = {q1 + i, q1 + j, q2 + j, q2 + i}
+                    d_neg = {q1 - i + n - 1, q1 - j + n - 1, q2 - j + n - 1, q2 - i + n - 1}
+                    delta = sum((pos[d] - 1 for d in d_pos if pos[d] > 1)) +\
+                        sum((neg[d] - 1 for d in d_neg if neg[d] > 1))
+                    pos[q1 + i] -= 1
+                    pos[q1 + j] += 1
+                    pos[q2 + j] -= 1
+                    pos[q2 + i] += 1
+                    neg[q1 - i + n - 1] -= 1
+                    neg[q1 - j + n - 1] += 1
+                    neg[q2 - j + n - 1] -= 1
+                    neg[q2 - i + n - 1] += 1
+                    new_delta = sum((pos[d] - 1 for d in d_pos if pos[d] > 1)) +\
+                        sum((neg[d] - 1 for d in d_neg if neg[d] > 1))
+                    if new_delta < delta:
+                        position[i], position[j] = position[j], position[i]
+                        collision_number = collision_number - delta + new_delta
+                    else:
+                        pos[q1 + i] += 1
+                        pos[q1 + j] -= 1
+                        pos[q2 + j] += 1
+                        pos[q2 + i] -= 1
+                        neg[q1 - i + n - 1] += 1
+                        neg[q1 - j + n - 1] -= 1
+                        neg[q2 - j + n - 1] += 1
+                        neg[q2 - i + n - 1] -= 1
+        if collision_number == 0:
+            line = '.' * n
+            return '\n'.join((line[:column] + 'Q' + line[column + 1:] for column in position)) + '\n'
+        runs += 1
+    return None
 
 
 def test0():
     s_row = 0
     s_col = 2
-    for solution in n_queens(20, 1, [2], [], []):
-        print(solution)
-        return
+    for solution in n_queens(10, 0, [], [], []):
+        if solution[s_row] == s_col:
+            print(solution)
+            return
 
 
 def test1():
@@ -145,10 +199,20 @@ def test3():
     n = 10
     k = 7
     for i in range(n):
-        print(f'({i},{k}) :{get_random_permutation(n, (i, k))}')
+        print(f'({i},{k}) :{gen_random_permutation(n, (i, k))}')
+
+
+def test4():
+    position = [0, 2, 4, 1, 3, 12, 14, 11, 17, 19, 16, 8, 15, 18, 7, 9, 6, 13, 5, 10]
+    pos, neg = collision_arrays(position)
+    print(f'collision number {position}: {sum((k - 1 for k in pos + neg if k))}')
+
+
+def test5():
+    print(solve_n_queens_2(4, (0, 2)))
 
 
 if __name__ == '__main__':
-    test_funcs = [test0, test1, test2, test3]
+    test_funcs = [test0, test1, test2, test3, test4, test5]
     for test in test_funcs:
         test()
