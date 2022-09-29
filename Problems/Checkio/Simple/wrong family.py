@@ -1,4 +1,4 @@
-﻿from collections import deque
+from collections import deque
 
 
 def is_family(tree: list[list[str]]) -> bool:
@@ -13,7 +13,7 @@ def is_family(tree: list[list[str]]) -> bool:
 
     for parent, child in tree:
         add_edge(parent, child)
-        
+
     used.add(tree[0][0])
     queue = deque([tree[0][0]])
     while queue:
