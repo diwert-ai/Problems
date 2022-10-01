@@ -66,7 +66,7 @@ def test1():
     assert is_family([["Jack", "Mike"], ["Logan", "Mike"], ["Logan", "Jack"]]) is False
 
     print("The mission is done! Click 'Check Solution' to earn rewards!")
-
+    
 
 if __name__ == '__main__':
     test_funcs = [test0, test1]
