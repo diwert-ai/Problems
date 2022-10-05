@@ -1,6 +1,4 @@
-﻿# https://www.codewars.com/kata/53005a7b26d12be55c000243
-# https://www.codewars.com/kata/52a78825cdfc2cfc87000005  support unary minus and plus
-
+# https://www.codewars.com/kata/5265b0885fda8eac5900093b
 import re
 
 
@@ -22,14 +20,6 @@ def is_int(s: str) -> bool:
         return False
 
 
-def tokenize(expression: str) -> list:
-    if expression == "":
-        return []
-    regex = re.compile(r"\s*(=>|[-+*/%=()]|[A-Za-z_][A-Za-z0-9_]*|[0-9]*\.?[0-9]+)\s*")
-    tokens = regex.findall(expression)
-    return [s for s in tokens if not s.isspace()]
-
-
 class MyStack:
     def __init__(self):
         self.stack = []
@@ -48,13 +38,15 @@ class MyStack:
         return self.stack[size - 1] if size else None
 
 
-class Interpreter:
+class Compiler:
     def __init__(self):
-        self.vars = {}
         self.args = {}
-        self.binary_operators = ('+', '-', '*', '/', '%')
-        self.operators = ('+', '-', '*', '/', '%', '~')
-        self.precedence = {'~': 3, '*': 2, '/': 2, '%': 2, '+': 1, '-': 1, '=': 0}
+        self.binary_operators = ('+', '-', '*', '/')
+        self.operators = ('+', '-', '*', '/', '~')
+        self.precedence = {'~': 3, '*': 2, '/': 2, '+': 1, '-': 1}
+
+    def compile(self, program):
+        return self.pass3(self.pass2(self.pass1(program)))
 
     @staticmethod
     def tokenize(program):
@@ -63,17 +55,6 @@ class Interpreter:
            name or a number (as a string)"""
         token_iter = (m.group(0) for m in re.finditer(r'[-+*/()[\]]|[A-Za-z]+|\d+', program))
         return [int(tok) if tok.isdigit() else tok for tok in token_iter]
-
-    def input(self, expression):
-        tokens = tokenize(expression)
-        unarified_tokens = self.unarify(tokens)
-        rpn_expression = self.gen_rpn(unarified_tokens)
-        return self.eval_rpn(rpn_expression)
-
-    def parse_variable(self, var):
-        if var in self.vars:
-            return self.vars[var]
-        raise ValueError(f"ERROR: Invalid identifier. No variable with name '{var}' was found.")
 
     @staticmethod
     def calculate(x, y, operation):
@@ -100,49 +81,13 @@ class Interpreter:
                     continue
                 elif token == '-':
                     token = '~'
-            elif token in ('+', '-', '*', '/', '%', '(', '='):
+            elif token in ('+', '-', '*', '/', '('):
                 unary = True
             else:
                 unary = False
             unarified_expression.append(token)
 
         return unarified_expression
-
-    def eval_rpn(self, expression: list):
-        if not expression:
-            return ''
-        stack = MyStack()
-        for token in expression:
-            if token in self.binary_operators:
-                y, x = stack.pop(), stack.pop()
-                x = self.parse_variable(x) if type(x) is str else x
-                y = self.parse_variable(y) if type(y) is str else y
-                if x is None or y is None:
-                    raise ValueError('Bad syntax! One of the operands is of type None')
-                x = self.calculate(x, y, token)
-                stack.push(x)
-            elif token == '~':
-                x = stack.pop()
-                x = self.parse_variable(x) if type(x) is str else x
-                if x is None:
-                    raise ValueError('Bad syntax! One of the operands is of type None')
-                stack.push(-x)
-            elif token == '=':
-                y, x = stack.pop(), stack.pop()
-                if type(x) is not str:
-                    raise ValueError(f'{x} is not variable!')
-                y = self.parse_variable(y) if type(y) is str else y
-                self.vars[x] = y
-                stack.push(y)
-            elif type(token) in [int, float, str]:
-                stack.push(token)
-            else:
-                raise ValueError(f'Unexpected token: {token}')
-        result = stack.pop()
-        result = self.parse_variable(result) if type(result) is str else result
-        if result is None or not stack.is_empty():
-            raise ValueError(f"rpn-result is '{result}' (must not be None) and stack is {stack.stack} (must be empty)!")
-        return result
 
     def gen_rpn(self, expression: list):
         """Shunting yard algorithm by Edsger Dijkstra
@@ -151,7 +96,7 @@ class Interpreter:
         out = []
         stack = MyStack()
         for token in expression:
-            if token in self.operators or token == '=':
+            if token in self.operators:
                 while (op := stack.peak()) is not None and op in self.operators:
                     if self.precedence[op] >= self.precedence[token]:
                         out.append(stack.pop())
@@ -212,7 +157,6 @@ class Interpreter:
         t_expr = self.process_arg_list(t_prog)
         u_expr = self.unarify(t_expr)
         rpn = self.gen_rpn(u_expr)
-        print(rpn)
         ast = self.rpn_to_ast(rpn)
         return ast
 
@@ -227,6 +171,7 @@ class Interpreter:
                     del tree['a']
                     del tree['b']
                     tree['op'] = 'imm'
+
         traverse(ast)
         return ast
 
@@ -262,17 +207,45 @@ class Interpreter:
                     flat(item)
                 else:
                     asm.append(item)
+
         flat(self.translate(ast))
         return asm
 
 
+def simulate(asm, argv):
+    r0, r1, n = None, None, None
+    stack = []
+    for ins in asm:
+        if ins[:2] == 'IM' or ins[:2] == 'AR':
+            ins, n = ins[:2], int(ins[2:])
+        if ins == 'IM':
+            r0 = n
+        elif ins == 'AR':
+            r0 = argv[n]
+        elif ins == 'SW':
+            r0, r1 = r1, r0
+        elif ins == 'PU':
+            stack.append(r0)
+        elif ins == 'PO':
+            r0 = stack.pop()
+        elif ins == 'AD':
+            r0 += r1
+        elif ins == 'SU':
+            r0 -= r1
+        elif ins == 'MU':
+            r0 *= r1
+        elif ins == 'DI':
+            r0 /= r1
+    return r0
+
+
 def test0():
-    interpreter = Interpreter()
-    prog = '[x y z w] (y + z) * (w + x)'
+    compiler = Compiler()
+    prog = '[x y z] (x * (y/(z-(x/(10 + z)) + z * (10 - x))))*(x-y-z)'
     print(prog)
-    print(ast1 := interpreter.pass1(prog))
-    print(ast2 := interpreter.pass2(ast1))
-    print(asm := interpreter.pass3(ast2))
+    print(asm := compiler.compile(prog))
+    argv = x, y, z = 123, -212, -3212
+    print(simulate(asm, argv), (x * (y / (z - (x / (10 + z)) + z * (10 - x))))*(x-y-z))
 
 
 def test1():
