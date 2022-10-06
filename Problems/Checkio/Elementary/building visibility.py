@@ -1,4 +1,5 @@
-﻿def checkio(buildings):
+# https://py.checkio.org/en/mission/buildings-visibility/
+def checkio(buildings):
     n = len(buildings)
     builds = [(building[0], building[1], building[2] - building[0], building[4]) for building in buildings]
     builds.sort(key=lambda x: x[1])
@@ -13,10 +14,9 @@
     def optimize_widths(inter):
         widths.sort(key=lambda x: x[0])
         for w_int in widths.copy():
-            if w_int[1] < inter[0] or inter[1] < w_int[0]:
-                continue
-            inter = (min(inter[0], w_int[0]), max(inter[1], w_int[1]))
-            widths.remove(w_int)
+            if not (w_int[1] < inter[0] or inter[1] < w_int[0]):
+                inter = (min(inter[0], w_int[0]), max(inter[1], w_int[1]))
+                widths.remove(w_int)
         widths.append(inter)
 
     def get_interval(bld):
@@ -68,6 +68,10 @@ def test0():
                    [3, 4, 5, 6, 20],
                    [5, 1, 7, 3, 20],
                    [1, 7, 7, 9, 20]]))
+    # todo: исправить ошибку с примером ниже
+    print(checkio([[1, 1, 8, 2, 3],
+                   [2, 3, 7, 4, 6],
+                   [3, 5, 6, 6, 5]]))
 
 
 def test1():
