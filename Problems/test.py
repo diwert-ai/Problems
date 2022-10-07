@@ -19,29 +19,21 @@
             widths.remove(w_int)
         widths.append(inter)
 
+    def calc_widths(build_number):
+        for k in range(build_number):
+            if builds[build_number][3] <= builds[k][3]:
+                widths.append(get_interval(builds[k]))
+                optimize_widths(get_interval(builds[k]))
+
     def get_interval(bld):
         return bld[0], bld[0] + bld[2]
 
     for i, build in enumerate(builds):
-        interval = get_interval(build)
-        if is_visible(interval):
-            optimize_widths(interval)
+        widths = []
+        calc_widths(i)
+        print(widths)
+        if is_visible(get_interval(build)):
             visible[i] = True
-
-    builds_visible = {build: i for i, build in enumerate(builds) if visible[i]}
-    builds_invisible = {build: i for i, build in enumerate(builds) if not visible[i]}
-
-    def behind(uv_b, v_b):
-        inter1 = get_interval(uv_b)
-        inter2 = get_interval(v_b)
-        return not (inter1[1] < inter2[0] or inter2[1] < inter1[0])
-
-    for iv_build in builds_invisible:
-        iv_index = builds_invisible[iv_build]
-        for v_build in builds_visible:
-            v_index = builds_visible[v_build]
-            if iv_index > v_index and behind(iv_build, v_build) and iv_build[3] > v_build[3]:
-                visible[iv_index] = True
 
     return sum(visible)
 
