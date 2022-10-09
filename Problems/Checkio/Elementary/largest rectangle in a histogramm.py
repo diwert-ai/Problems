@@ -1,4 +1,7 @@
-﻿def largest_histogram(histogram):
+# https://py.checkio.org/ru/mission/largest-histogram/
+# У вас есть гистограмма. Попробуйте найти размер самого
+# большого прямоугольника, который можно построить из столбцов гистограммы.
+def largest_histogram(histogram):
     result, prev_h_bin, n = 0, -1, len(histogram)
     for i, h_bin in enumerate(histogram):
         if h_bin > prev_h_bin:
