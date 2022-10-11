@@ -41,15 +41,16 @@ class Solution:
             for i, row in enumerate(board)
             for j, c in enumerate(row)
             if c != '.'
-            for x in ((c, i), (j, c), (i/3, j/3, c))
+            for x in ((c, i), (j, c), (i//3, j//3, c))
         ).values())
 
     @staticmethod
     def is_valid_sudoku_sp2(board):
-        seen = sum(([(c, i), (j, c), (i / 3, j / 3, c)]
+        seen = sum(([(c, i), (j, c), (i // 3, j // 3, c)]
                     for i, row in enumerate(board)
                     for j, c in enumerate(row)
                     if c != '.'), [])
+
         return len(seen) == len(set(seen))
 
     @staticmethod
@@ -59,11 +60,11 @@ class Solution:
                        for i, row in enumerate(board)
                        for j, c in enumerate(row)
                        if c != '.'
-                       for x in ((c, i), (j, c), (i / 3, j / 3, c)))
+                       for x in ((c, i), (j, c), (i // 3, j // 3, c)))
 
     @staticmethod
     def is_valid_sudoku_sp4(board):
-        seen = sum(([(c, i), (j, c), (i / 3, j / 3, c)]
+        seen = sum(([(c, i), (j, c), (i // 3, j // 3, c)]
                     for i in range(9) for j in range(9)
                     for c in [board[i][j]] if c != '.'), [])
         return len(seen) == len(set(seen))
@@ -71,7 +72,7 @@ class Solution:
 
 def test0():
     boards = [[["5", "3", ".", ".", "7", ".", ".", ".", "."],
-               ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+               ["6", "8", ".", "1", "9", "5", ".", ".", "."],
                [".", "9", "8", ".", ".", ".", ".", "6", "."],
                ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
                ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
