@@ -1,4 +1,4 @@
-﻿# https://leetcode.com/problems/sudoku-solver/
+# https://leetcode.com/problems/sudoku-solver/
 # Write a program to solve a Sudoku puzzle by filling the empty cells.
 #
 # A sudoku solution must satisfy all the following rules:
