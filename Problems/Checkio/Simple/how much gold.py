@@ -1,4 +1,5 @@
-﻿from fractions import Fraction
+# https://py.checkio.org/ru/mission/how-much-gold/
+from fractions import Fraction
 
 METALS = ('gold', 'tin', 'iron', 'copper')
 
