@@ -38,6 +38,7 @@ class Parallelepiped:
 
 def fused_cubes(cubes):
     answer, volumes, intersections, used, component_set, n = list(), dict(), dict(), set(), set(), len(cubes)
+    # exclude_set = set()
 
     for i in range(n):
         cube_i = Parallelepiped(*cubes[i])
@@ -57,11 +58,11 @@ def fused_cubes(cubes):
             int_k = intersections[frozenset(start_tpl)] * Parallelepiped(*cubes[k])
             vl = int_k.volume()
             if vl > 0:
-                new_tpl_index = start_tpl + (k,)
-                intersections[frozenset(new_tpl_index)] = int_k
-                volumes[new_tpl_index] = vl
-                print(new_tpl_index, vl)
-                fill_volumes(new_tpl_index)
+                next_tpl_index = start_tpl + (k,)
+                intersections[frozenset(next_tpl_index)] = int_k
+                volumes[next_tpl_index] = vl
+                # print(next_tpl_index, vl)
+                fill_volumes(next_tpl_index)
 
     def neighbours(base_index):
         result = list()
@@ -73,7 +74,6 @@ def fused_cubes(cubes):
 
     def calc_component_volume():
         sum_volume, m = 0, len(component_set)
-        print(f'm = {m}')
 
         for v_index in volumes:
             for k in v_index:
@@ -103,42 +103,12 @@ def fused_cubes(cubes):
         if index not in used:
             bfs_cubes(index)
             answer.append(calc_component_volume())
-            print(component_set)
             component_set.clear()
-
-    for vol in volumes:
-        print(vol, volumes[vol])
 
     return answer
 
 
 def test0():
-    c1 = (0, 0, 0, 3)
-    c2 = (1, 2, 2, 3)
-    p1 = Parallelepiped(*c1)
-    p2 = Parallelepiped(*c2)
-    p = p1 * p2
-    print(p)
-    print(p1.volume() + p2.volume() - (p1 * p2).volume())
-    print(sorted(fused_cubes([(0, 0, 0, 3), (1, 2, 2, 3)])))
-
-    cube_tests = [[(-1, 0, 0, 1),
-                   (1, 0, 0, 1),
-                   (0, 1, 0, 1),
-                   (0, -1, 0, 1),
-                   (0, 0, 1, 1),
-                   (0, 0, -1, 1)],
-                  ]
-
-    for c_test in cube_tests:
-        print(fused_cubes(c_test))
-
-    c1 = (-1, 0, 0, 1)
-    c2 = (1, 0, 0, 1)
-    p1 = Parallelepiped(*c1)
-    p2 = Parallelepiped(*c2)
-    print(p1 * p2)
-
     print(fused_cubes(
         [(0, 0, -10, 1), (0, 0, -9, 1), (0, 0, -8, 1), (0, 0, -7, 1), (0, 0, -6, 1), (3, 0, -10, 1), (3, 0, -9, 1),
          (3, 0, -8, 1), (3, 0, -7, 1), (3, 0, -6, 1), (1, 4, -6, 2), (0, 0, -5, 2), (2, 0, -5, 2), (0, 1, -5, 2),
@@ -161,11 +131,12 @@ def test0():
              (-2, 0, -2, 4), (-1, -3, -2, 4), (-1, -2, -3, 4), (-1, -2, -2, 4), (-1, -2, -1, 4), (-1, -1, -2, 4),
              (0, -2, -2, 4)]
 
-    # print(fused_cubes(cubes))
     pr = Parallelepiped(*cubes[0])
     for i in (1, 2, 3, 4, 5, 6, 10, 15, 16, 20, 22, 23):
         pr = pr * Parallelepiped(*cubes[i])
         print(pr, pr.volume())
+
+    print(fused_cubes(cubes))
 
 
 def test1():
@@ -181,4 +152,5 @@ def test1():
 if __name__ == '__main__':
     test_funcs = [test0, test1]
     for test in test_funcs:
+        print(f'{test.__name__} ...')
         test()
