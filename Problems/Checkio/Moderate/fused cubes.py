@@ -1,4 +1,13 @@
-﻿from collections import deque
+# https://py.checkio.org/en/mission/fused-cubes/
+# This is a mission to calculate the volume of objects that combines cubes.
+#
+# You are given a list of cube details (tuple of 4 integers: X coordinate, Y coordinate, Z coordinate, edge length).
+#
+# Each coordinate is the minimum value.
+# All edges parallel to the coordinate axes.
+# If the cube share the part of another cube or touch with the face of another cube, they are considered as one object.
+# You should return a list (or iterable) of the volumes of all objects.
+from collections import deque
 
 
 class Parallelepiped:
