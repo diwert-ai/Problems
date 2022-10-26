@@ -1,4 +1,4 @@
-﻿# https://leetcode.com/problems/count-and-say/
+# https://leetcode.com/problems/count-and-say/
 # The count-and-say sequence is a sequence of digit strings defined by the recursive formula:
 #
 # countAndSay(1) = "1"
@@ -22,8 +22,7 @@ class Solution:
             for item in start_list:
                 if item != current_number:
                     res = res + [current_count, current_number] if current_number else res
-                    current_count = 1
-                    current_number = item
+                    current_count, current_number = 1, item
                 else:
                     current_count += 1
             res = res + [current_count, current_number]
@@ -48,8 +47,8 @@ class Solution:
 
 
 def test0():
-    print(Solution.count_and_say(10))
-    print(Solution.count_and_say_clear(10))
+    print(Solution.count_and_say(15))
+    print(Solution.count_and_say_clear(15))
 
 
 def test1():
