@@ -1,4 +1,5 @@
-﻿FIRST_TEN = ["one", "two", "three", "four", "five", "six", "seven",
+# https://py.checkio.org/ru/mission/speechmodule/
+FIRST_TEN = ["one", "two", "three", "four", "five", "six", "seven",
              "eight", "nine"]
 SECOND_TEN = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
               "sixteen", "seventeen", "eighteen", "nineteen"]
