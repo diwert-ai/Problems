@@ -8,6 +8,7 @@
 # If the cube share the part of another cube or touch with the face of another cube, they are considered as one object.
 # You should return a list (or iterable) of the volumes of all objects.
 from collections import deque
+from random import uniform
 
 
 class Parallelepiped:
@@ -38,7 +39,7 @@ class Parallelepiped:
 
 def fused_cubes(cubes):
     answer, volumes, intersections, used, component_set, n = list(), dict(), dict(), set(), set(), len(cubes)
-    # exclude_set = set()
+    monte_carlo = False
 
     for i in range(n):
         cube_i = Parallelepiped(*cubes[i])
@@ -50,19 +51,21 @@ def fused_cubes(cubes):
                 volumes[(i, j)] = v
             intersections[frozenset((i, j))] = int_ij
 
-    def fill_volumes(start_tpl):
-        if len(start_tpl) == n:
+    def fill_volumes(current_tuple_of_indices, current_intersection):
+        nonlocal monte_carlo
+        if len(current_tuple_of_indices) > 5:
+            monte_carlo = True
             return
-        start = start_tpl[-1] + 1
-        for k in range(start, n):
-            int_k = intersections[frozenset(start_tpl)] * Parallelepiped(*cubes[k])
-            vl = int_k.volume()
-            if vl > 0:
-                next_tpl_index = start_tpl + (k,)
-                intersections[frozenset(next_tpl_index)] = int_k
-                volumes[next_tpl_index] = vl
-                # print(next_tpl_index, vl)
-                fill_volumes(next_tpl_index)
+        next_index = current_tuple_of_indices[-1] + 1
+        for cube_index in range(next_index, n):
+            next_intersection = current_intersection * Parallelepiped(*cubes[cube_index])
+            next_volume = next_intersection.volume()
+            if next_volume > 0:
+                next_tuple_of_indices = current_tuple_of_indices + (cube_index,)
+                volumes[next_tuple_of_indices] = next_volume
+                fill_volumes(next_tuple_of_indices, next_intersection)
+            if monte_carlo:
+                return
 
     def neighbours(base_index):
         result = list()
@@ -74,7 +77,6 @@ def fused_cubes(cubes):
 
     def calc_component_volume():
         sum_volume, m = 0, len(component_set)
-
         for v_index in volumes:
             for k in v_index:
                 if k in component_set:
@@ -82,6 +84,30 @@ def fused_cubes(cubes):
                     break
 
         return sum_volume
+
+    def is_in_component(x, y, z):
+        for cube_index in component_set:
+            cx, cy, cz, cd = cubes[cube_index]
+            if cx <= x <= cx + cd and cy <= y <= cy + cd and cz <= z <= cz + cd:
+                return True
+        return False
+
+    def calc_component_volume_monte_carlo():
+        x_min = min((cubes[x][0] for x in component_set))
+        x_max = max((cubes[x][0] + cubes[x][3] for x in component_set))
+        y_min = min((cubes[x][1] for x in component_set))
+        y_max = max((cubes[x][1] + cubes[x][3] for x in component_set))
+        z_min = min((cubes[x][2] for x in component_set))
+        z_max = max((cubes[x][2] + cubes[x][3] for x in component_set))
+        minmax_volume = (x_max - x_min) * (y_max - y_min) * (z_max - z_min)
+        num_points = minmax_volume * 1000
+        inner_points = 0
+        for _ in range(num_points):
+            x, y, z = uniform(x_min, x_max), uniform(y_min, y_max), uniform(z_min, z_max)
+            if is_in_component(x, y, z):
+                inner_points += 1
+
+        return round(minmax_volume * inner_points / num_points)
 
     def bfs_cubes(start_index):
         used.add(start_index)
@@ -97,12 +123,13 @@ def fused_cubes(cubes):
 
     for vol in volumes.copy():
         if len(vol) == 2:
-            fill_volumes(vol)
+            fill_volumes(vol, intersections[frozenset(vol)])
 
     for index in range(n):
         if index not in used:
             bfs_cubes(index)
-            answer.append(calc_component_volume())
+            component_volume = calc_component_volume_monte_carlo() if monte_carlo else calc_component_volume()
+            answer.append(component_volume)
             component_set.clear()
 
     return answer
@@ -137,6 +164,18 @@ def test0():
         print(pr, pr.volume())
 
     print(fused_cubes(cubes))
+    print(fused_cubes(
+        [(-4, -4, -4, 8), (-5, -3, -3, 6), (-3, -5, -3, 6), (-3, -3, -5, 6), (-3, -3, -1, 6), (-3, -1, -3, 6),
+         (-1, -3, -3, 6), (-6, -3, -2, 4), (-6, -2, -3, 4), (-6, -2, -2, 4), (-6, -2, -1, 4), (-6, -1, -2, 4),
+         (-5, -4, -2, 4), (-5, -2, -4, 4), (-5, -2, 0, 4), (-5, 0, -2, 4), (-4, -5, -2, 4), (-4, -2, -5, 4),
+         (-4, -2, 1, 4), (-4, 1, -2, 4), (-3, -6, -2, 4), (-3, -2, -6, 4), (-3, -2, 2, 4), (-3, 2, -2, 4),
+         (-2, -6, -3, 4), (-2, -6, -2, 4), (-2, -6, -1, 4), (-2, -5, -4, 4), (-2, -5, 0, 4), (-2, -4, -5, 4),
+         (-2, -4, 1, 4), (-2, -3, -6, 4), (-2, -3, 2, 4), (-2, -2, -6, 4), (-2, -2, 2, 4), (-2, -1, -6, 4),
+         (-2, -1, 2, 4), (-2, 0, -5, 4), (-2, 0, 1, 4), (-2, 1, -4, 4), (-2, 1, 0, 4), (-2, 2, -3, 4),
+         (-2, 2, -2, 4), (-2, 2, -1, 4), (-1, -6, -2, 4), (-1, -2, -6, 4), (-1, -2, 2, 4), (-1, 2, -2, 4),
+         (0, -5, -2, 4), (0, -2, -5, 4), (0, -2, 1, 4), (0, 1, -2, 4), (1, -4, -2, 4), (1, -2, -4, 4),
+         (1, -2, 0, 4), (1, 0, -2, 4), (2, -3, -2, 4), (2, -2, -3, 4), (2, -2, -2, 4), (2, -2, -1, 4),
+         (2, -1, -2, 4)]))
 
 
 def test1():
