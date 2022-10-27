@@ -1,4 +1,4 @@
-﻿def min(*args, **kwargs):
+def _min(*args, **kwargs):
     key, nargs = kwargs.get("key", None), len(args)
     lst = list(args) if nargs > 1 else list(args[0])
     n, min_arg_value = len(lst), None
@@ -11,7 +11,7 @@
     return min_arg_value
 
 
-def max(*args, **kwargs):
+def _max(*args, **kwargs):
     key, nargs = kwargs.get("key", None), len(args)
     lst = list(args) if nargs > 1 else list(args[0])
     n, max_arg_value = len(lst), None
@@ -25,19 +25,21 @@ def max(*args, **kwargs):
 
 
 def test0():
-    print(min('hello'))
+    print(_min('hello'))
     list0 = [(1, 2), (2, 2), (0, 3), (1, 4), (3, -2), (1, 5), (-100, 1)]
-    print(min(list0, key=lambda x: x[1]))
+    print(_min(list0, key=lambda x: x[1]))
+    print(_min(list0, key=lambda x: x[0]))
+    print(_min(list0, key=lambda x: -x[1] * 100 - x[0] * 10))
 
 
 def test1():
     # These "asserts" using only for self-checking and not necessary for auto-testing
-    assert max(3, 2) == 3, "Simple case max"
-    assert min(3, 2) == 2, "Simple case min"
-    assert max([1, 2, 0, 3, 4]) == 4, "From a list"
-    assert min("hello") == "e", "From string"
-    assert max(2.2, 5.6, 5.9, key=int) == 5.6, "Two maximal items"
-    assert min([[1, 2], [3, 4], [9, 0]], key=lambda x: x[1]) == [9, 0], "lambda key"
+    assert _max(3, 2) == 3, "Simple case _max"
+    assert _min(3, 2) == 2, "Simple case _min"
+    assert _max([1, 2, 0, 3, 4]) == 4, "From a list"
+    assert _min("hello") == "e", "From string"
+    assert _max(2.2, 5.6, 5.9, key=int) == 5.6, "Two maximal items"
+    assert _min([[1, 2], [3, 4], [9, 0]], key=lambda x: x[1]) == [9, 0], "lambda key"
     print("Coding complete? Click 'Check' to review your tests and earn cool rewards!")
 
 
