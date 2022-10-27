@@ -1,3 +1,4 @@
+# https://py.checkio.org/ru/mission/min-max/
 def _min(*args, **kwargs):
     key, nargs = kwargs.get("key", None), len(args)
     lst = list(args) if nargs > 1 else list(args[0])
