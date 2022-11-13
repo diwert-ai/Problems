@@ -58,9 +58,9 @@ def test4():
     p = 1/365
     lam = n * p
     for k in range(6):
-        bino = binom.pmf(k+1, n, p)
-        po = poisson.pmf(k+1, lam)
-        print(f'binomial: {bino:.5} poisson: {po:.5} diff: {abs(bino-po):.5}')
+        bino = binom.pmf(k, n, p)
+        po = poisson.pmf(k, lam)
+        print(f'k:{k} binomial: {bino:.5f} poisson: {po:.5f} diff: {abs(bino-po):.5f}')
 
 
 if __name__ == '__main__':
