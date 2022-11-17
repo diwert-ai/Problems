@@ -1,5 +1,6 @@
 ﻿from math import log2
 from scipy.stats import binom, poisson
+import numpy as np
 
 
 def entropy(a):
@@ -11,7 +12,6 @@ def test0():
     a2 = [0.3, 0.3, 0.4]
     print(f'a1 entropy: {entropy(a1)}')
     print(f'a2 entropy: {entropy(a2)}')
-
     pass
 
 
@@ -32,16 +32,16 @@ def test1():
     for p, k in tests:
         s = summation(p, k)
         a = answer(p)
-        print(f'p: {p} sum:{s} answer: {s} diff: {s-a}')
+        print(f'p: {p} sum:{s} answer: {s} diff: {s - a}')
     pass
 
 
 def test2():
-    print(f'n > {log2(0.5)/log2(0.99)}')
+    print(f'n > {log2(0.5) / log2(0.99)}')
 
     b = 0
     for i in range(3):
-        b += binom.pmf(21+i, 23, 0.75)
+        b += binom.pmf(21 + i, 23, 0.75)
     print(binom.pmf(17, 17, 0.75) + binom.pmf(16, 17, 0.75))
     print(b)
 
@@ -50,20 +50,51 @@ def test3():
     n = 23
     p = 0.75
     m = (n + 1) * p
-    print(f'(n+1)p: {int(m)} {binom.pmf(int(m), n, p)} {binom.pmf(int(m)-1, n, p)} {binom.pmf(int(m)+1, n, p)}')
+    print(f'(n+1)p: {int(m)} {binom.pmf(int(m), n, p)} {binom.pmf(int(m) - 1, n, p)} {binom.pmf(int(m) + 1, n, p)}')
 
 
 def test4():
     n = 500
-    p = 1/365
+    p = 1 / 365
     lam = n * p
     for k in range(6):
         bino = binom.pmf(k, n, p)
         po = poisson.pmf(k, lam)
-        print(f'k:{k} binomial: {bino:.5f} poisson: {po:.5f} diff: {abs(bino-po):.5f}')
+        print(f'k:{k} binomial: {bino:.5f} poisson: {po:.5f} diff: {abs(bino - po):.5f}')
+
+
+def test5():
+    print(binom.pmf(3, 6, 0.5))
+
+
+def test6():
+    a = np.array([[2, -1, 2], [-1, 2, -1], [1, -1, 2]])
+    b = a
+    for i in range(10):
+        print(b)
+        b = b * a
+
+
+def test7():
+    b = 0
+    for i in range(3):
+        b += binom.pmf(i, 102, 0.015)
+    print(b)
+
+
+def test8():
+    a = [3, 4, 4, 3, 4, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 4, 3, 3, 3, 4, 3, 5, 5, 3, 5, 4, 4, 4, 4, 5,
+         3, 5, 5, 4, 5]
+    print(len(a), a.count(3), a.count(4), a.count(5),
+          sum(a)/len(a))
+
+
+def test9():
+    p = (36 * 37 * 38 * 39) / (49 * 50 * 51 * 52)
+    print(binom.pmf(3, 3, p))
 
 
 if __name__ == '__main__':
-    test_funcs = [test4]
+    test_funcs = [test9]
     for test in test_funcs:
         test()
