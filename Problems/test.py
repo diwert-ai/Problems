@@ -1,6 +1,7 @@
-﻿from math import log2
-from scipy.stats import binom, poisson
+﻿import scipy as sp
 import numpy as np
+from math import log2
+from scipy.stats import binom, poisson
 
 
 def entropy(a):
@@ -94,7 +95,30 @@ def test9():
     print(binom.pmf(3, 3, p))
 
 
+def test10():
+    print(log2(0.1)/log2(0.9))
+
+
+def test11():
+    p = 4*(10 * 11 * 12 * 13) / (49 * 50 * 51 * 52)
+    print(-1 / log2(1-p))
+
+
+def test12():
+    p = 1 / 5
+    n = 10
+    h = 1 - binom.pmf(0, n, p)
+    ah = h - binom.pmf(1, n, p)
+    print(ah/h)
+
+
+def test13():
+    p1 = binom.pmf(2, 13, 0.5)
+    p2 = sp.special.comb(26, 2) * sp.special.comb(26, 11) / sp.special.comb(52, 13)
+    print(p1, p2)
+
+
 if __name__ == '__main__':
-    test_funcs = [test9]
+    test_funcs = [test13]
     for test in test_funcs:
         test()
