@@ -4,8 +4,20 @@
 # Return the answer in any order.
 # A mapping of digits to letters (just like on the telephone buttons) is given below.
 # Note that 1 does not map to any letters.
+from typing import List
+from itertools import product
+
 
 class Solution:
+    mapping = {'2': "abc",
+               '3': "def",
+               '4': "ghi",
+               '5': "jkl",
+               '6': "mno",
+               '7': "pqrs",
+               '8': "tuv",
+               '9': "wxyz"}
+
     # мое решение
     @staticmethod
     def letter_combinations(digits: str) -> list[str]:
@@ -38,11 +50,18 @@ class Solution:
         
         return res
 
+    # второе мое решение
+    def letter_combinations2(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        return list(map(''.join, product(*tuple(map(lambda x: type(self).mapping[x], digits)))))
+
 
 def test0():
     tests = ['23', '523', '44', '4327']
     for test in tests:
         print(Solution.letter_combinations(test))
+        print(Solution().letter_combinations2(test))
 
 
 if __name__ == '__main__':
