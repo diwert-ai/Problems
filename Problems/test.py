@@ -1,82 +1,115 @@
-﻿from typing import List
-from collections import deque
+﻿def merge(a, b):
+    la, lb, i, j, k = len(a), len(b), 0, 0, 0
+    r = [0] * (la + lb)
+
+    while i < la and j < lb:
+        if a[i] < b[j]:
+            r[k] = a[i]
+            i += 1
+        else:
+            r[k] = b[j]
+            j += 1
+        k += 1
+
+    if i < la:
+        r[k:] = a[i:]
+    elif j < lb:
+        r[k:] = b[j:]
+
+    return r
 
 
-def checkio(land_map: List[List[int]]) -> List[int]:
-    graph, used, result, n_rows, n_columns = dict(), set(), list(), len(land_map), len(land_map[0])
+def levenstein(a, b):
+    n, m = len(a) + 1, len(b) + 1
+    f = [[i + j if i == 0 or j == 0 else 0 for j in range(m)] for i in range(n)]
+    for i in range(1, n):
+        for j in range(1, m):
+            if a[i - 1] == b[j - 1]:
+                f[i][j] = f[i - 1][j - 1]
+            else:
+                f[i][j] = 1 + min(f[i - 1][j - 1], f[i - 1][j], f[i][j - 1])
 
-    def get_neighbors(i_row, j_col):
-        neighbors = set()
-        for di in (-1, 0, 1):
-            for dj in (-1, 0, 1):
-                if di != 0 or dj != 0:
-                    ii, jj = i_row + di, j_col + dj
-                    if -1 < ii < n_rows and -1 < jj < n_columns and land_map[ii][jj] == 1:
-                        neighbors.add(f'{ii}{jj}')
-        return neighbors
+    return f[-1][-1]
 
-    def bfs(start_vertex):
-        used.add(start_vertex)
-        queue, num_vertices = deque([start_vertex]), 1
-        while queue:
-            current_vertex = queue.popleft()
-            for neighbor in graph[current_vertex]:
-                if neighbor not in used:
-                    num_vertices += 1
-                    used.add(neighbor)
-                    queue.append(neighbor)
 
-        return num_vertices
+def braces_check(string):
+    stack = []
+    for char in string:
+        if char not in '{[()]}':
+            continue
 
-    for row in range(n_rows):
-        for column in range(n_columns):
-            if land_map[row][column]:
-                graph[f'{row}{column}'] = get_neighbors(row, column)
+        if char in '({[':
+            stack.append(char)
+        else:
+            assert char in ')}]', f"right brace expected: got {char}"
 
-    for vertex in graph:
-        if vertex not in used:
-            result.append(bfs(vertex))
+            if not stack:
+                return False
 
-    return sorted(result)
+            left = stack.pop()
+            if (char == ')' and left != '(') or \
+                    (char == '}' and left != '{') or \
+                    (char == ']' and left != '['):
+                return False
+
+    return not stack
+
+
+def roman_to_int(s):
+    result = 0
+    roman = {'I': 1,
+             'V': 5,
+             'X': 10,
+             'L': 50,
+             'C': 100,
+             'D': 500,
+             'M': 1000}
+    list_s = list(s)
+    n = len(list_s)
+    for i in range(n - 1):
+        d_i = roman[list_s[i]]
+        if d_i >= roman[list_s[i + 1]]:
+            result += d_i
+        else:
+            result -= d_i
+    result += roman[list_s[n - 1]]
+    return result
 
 
 def test0():
-    print(checkio([[0, 0, 0, 0, 0],
-                   [0, 0, 1, 1, 0],
-                   [0, 0, 0, 1, 0],
-                   [0, 1, 0, 0, 0],
-                   [0, 0, 0, 0, 0]]))
+    pairs = (('horse', 'rorse'),
+             ('bug', 'bag'),
+             ('hug', 'hat'),
+             ('cat', 'bug'),
+             ('mud', 'moody'))
+
+    for word1, word2 in pairs:
+        print(f'{word1} {word2} {levenstein(word1, word2)}')
     pass
 
 
 def test1():
-    print("Example:")
-    print(checkio([[0, 0, 0, 0, 0],
-                   [0, 0, 1, 1, 0],
-                   [0, 0, 0, 1, 0],
-                   [0, 1, 0, 0, 0],
-                   [0, 0, 0, 0, 0]]))
+    arrays = [([1, 2, 2, 4], [1, 1, 1, 1]),
+              ([], []),
+              ([], [1, 2, 4, 7, 9]),
+              ([1, 1, 1], []),
+              ([1, 2, 3, 4, 4, 4, 4, 4, 5], [4, 4, 6, 6, 7, 7])]
+    for a, b in arrays:
+        print(merge(a, b))
 
-    assert checkio([[0, 0, 0, 0, 0],
-                    [0, 0, 1, 1, 0],
-                    [0, 0, 0, 1, 0],
-                    [0, 1, 0, 0, 0],
-                    [0, 0, 0, 0, 0]]) == [1, 3], "1st example"
-    assert checkio([[0, 0, 0, 0, 0],
-                    [0, 0, 1, 1, 0],
-                    [0, 0, 0, 1, 0],
-                    [0, 1, 1, 0, 0]]) == [5], "2nd example"
-    assert checkio([[0, 0, 0, 0, 0, 0],
-                    [1, 0, 0, 1, 1, 1],
-                    [1, 0, 0, 0, 0, 0],
-                    [0, 0, 1, 1, 1, 0],
-                    [0, 0, 0, 0, 0, 0],
-                    [0, 1, 1, 1, 1, 0],
-                    [0, 0, 0, 0, 0, 0]]) == [2, 3, 3, 4], "3rd example"
-    print("Coding complete? Click 'Check' to earn cool rewards!")
+
+def test2():
+    seqs = ['{}([])', '(())[{]}', '[({)]']
+    for seq in seqs:
+        print(f'seq: {seq} {braces_check(seq)}')
+
+
+def test3():
+    from scipy.stats import binom
+    print(binom.pmf(k=5100, n=10000, p=0.5))
 
 
 if __name__ == '__main__':
-    test_funcs = [test0, test1]
+    test_funcs = (test0, test1, test2, test3)
     for test in test_funcs:
         test()
