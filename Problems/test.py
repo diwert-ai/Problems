@@ -91,6 +91,16 @@ mapping = {'2': "abc",
            '9': "wxyz"}
 
 
+def product2(*args):
+    # product2('ABCD', 'xy') --> Ax Ay Bx By Cx Cy Dx Dy
+    pools = [tuple(pool) for pool in args]
+    result = [[]]
+    for pool in pools:
+        result = [x+[y] for x in result for y in pool]
+    for prod in result:
+        yield tuple(prod)
+
+
 def letter_combinations(digits):
     if not digits:
         return []
