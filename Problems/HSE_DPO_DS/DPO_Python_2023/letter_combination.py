@@ -1,4 +1,4 @@
-# вычисляет декартово произведение аргументов
+# генератор вычисляет декартово произведение аргументов
 def product(*args):
     # product('ABCD', 'xy') --> Ax Ay Bx By Cx Cy Dx Dy
     pools = [tuple(pool) for pool in args]
