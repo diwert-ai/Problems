@@ -1,3 +1,6 @@
+from gngscrap import run_query
+
+
 # генератор вычисляет декартово произведение аргументов
 def product(*args):
     # product('ABCD', 'xy') --> Ax Ay Bx By Cx Cy Dx Dy
@@ -25,10 +28,19 @@ def letter_combinations(digits):
     return list(map(''.join, product(*tuple(map(lambda x: mapping[x], digits)))))
 
 
+def top_k(combs):
+    combs_stat = []
+    for comb in combs:
+        stat = run_query(comb)[0][1]
+        combs_stat.append((comb, sum(stat)/len(stat) if stat else 0))
+
+    return sorted(combs_stat, key=lambda x: x[1], reverse=True)
+
+
 def test0():
-    tests = ('23', '523', '44', '4327')
+    tests = ('233', )
     for digits in tests:
-        print(letter_combinations(digits))
+        print(top_k(letter_combinations(digits)))
 
 
 if __name__ == '__main__':
