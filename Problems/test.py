@@ -146,7 +146,22 @@ def test4():
         print(letter_combinations(digits))
 
 
+def test5():
+    student = ('Иван Питонов', 2001, [8, 7, 7, 9, 6], True)
+    name_surname, birth_year, scores, _ = student
+    name, surname = name_surname.split()
+    age = 2020 - birth_year
+    average_scores = sum(scores) / len(scores)
+    increased_scholarship = True if average_scores >= 8 else False
+
+    print(f'Студент: {name}, {surname}')
+    print(f'Возраст студента: {age}')
+    print(f'Оценки студента: {scores}')
+    print(f'Средний балл студента: {average_scores}')
+    print(f'Повышенная стипендия: {increased_scholarship}')
+
+
 if __name__ == '__main__':
-    test_funcs = (test0, test1, test2, test3, test4)
+    test_funcs = (test0, test1, test2, test3, test4, test5)
     for test in test_funcs:
         test()
