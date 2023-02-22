@@ -46,9 +46,9 @@ def run_query(query, start_year=2000,
 
 
 def test():
-    query = "lbd"
+    query = "The"
     result = run_query(query)
-    print(sum(result[0][1])/len(result[0][1]))
+    print(f'ngramm = "{query}" -> frequency = {sum(result[0][1])/len(result[0][1])}')
 
 
 if __name__ == '__main__':

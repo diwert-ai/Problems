@@ -1,4 +1,5 @@
-from gngscrap import run_query
+from gngscrap import run_query  # модуль для получения частоты N-граммы в виде JSON ответа
+                                # от сервиса Google Ngram Viewer
 
 
 # генератор вычисляет декартово произведение аргументов
@@ -12,6 +13,7 @@ def product(*args):
         yield tuple(prod)
 
 
+# соответствие цифр и букв на кнопочном телефоне
 mapping = {'2': "abc",
            '3': "def",
            '4': "ghi",
@@ -22,25 +24,33 @@ mapping = {'2': "abc",
            '9': "wxyz"}
 
 
+# возвращает возможные комбинации по набору цифр
 def letter_combinations(digits):
     if not digits:
         return []
     return list(map(''.join, product(*tuple(map(lambda x: mapping[x], digits)))))
 
 
-def top_k(combs):
+# возвращает топ k=5 комбинаций букв (n-грамм) отсортированных по убыванию частоты
+def top_k(combs, k=5):
     combs_stat = []
     for comb in combs:
-        stat = run_query(comb)[0][1]
-        combs_stat.append((comb, sum(stat)/len(stat) if stat else 0))
+        try:
+            stat = run_query(comb)[0][1]
+        except:
+            stat = None
+        combs_stat.append((comb, sum(stat) / len(stat) if stat else 0))
 
-    return sorted(combs_stat, key=lambda x: x[1], reverse=True)
+    return sorted(combs_stat, key=lambda x: x[1], reverse=True)[:k]
 
 
 def test0():
-    tests = ('233', )
+    tests = ('4663',)
     for digits in tests:
         print(top_k(letter_combinations(digits)))
+
+    # out: [('good', 0.0004746672944747843), ('gone', 9.665996567491675e-05),
+    # ('goof', 1.5751266388974727e-07), ('imod', 5.630060376793367e-08), ('inne', 4.7688858373362566e-08)]
 
 
 if __name__ == '__main__':
