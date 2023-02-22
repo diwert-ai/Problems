@@ -48,4 +48,4 @@ def palindrom(s):
 Входные данные: 123
 Выходные данные: False
 
-Решение в файле [`palindrom.py`](./prlindrom.py)
+Решение в файле [`palindrome.py`](./prlindrome.py)
