@@ -10,3 +10,18 @@ def levenstein(a, b):
 
     return f[-1][-1]
 
+
+def test0():
+    tests = (('horse', 'rorse'),
+             ('bug', 'bag'),
+             ('hug', 'hat'),
+             ('cat', 'bug'),
+             ('mud', 'moody'))
+    for a, b in tests:
+        print(f'{a}->{b}: {levenstein(a, b)}')
+
+
+if __name__ == '__main__':
+    test_funcs = (test0,)
+    for test in test_funcs:
+        test()
