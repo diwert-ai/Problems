@@ -1,5 +1,7 @@
 from gngscrap import run_query  # модуль для получения частоты N-граммы в виде JSON ответа
-                                # от сервиса Google Ngram Viewer
+
+
+# от сервиса Google Ngram Viewer
 
 
 # генератор вычисляет декартово произведение аргументов
@@ -45,9 +47,9 @@ def top_k(combs, k=5):
 
 
 def test0():
-    tests = ('4663',)
+    tests = ('276', '466', '666', '4663')
     for digits in tests:
-        print(top_k(letter_combinations(digits)))
+        print(top_k(letter_combinations(digits), k=5))
 
     # out: [('good', 0.0004746672944747843), ('gone', 9.665996567491675e-05),
     # ('goof', 1.5751266388974727e-07), ('imod', 5.630060376793367e-08), ('inne', 4.7688858373362566e-08)]
