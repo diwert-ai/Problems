@@ -33,9 +33,9 @@ def top_k_ngrams(numeric_code, k=5):
     mapping = {'2': "abc", '3': "def", '4': "ghi", '5': "jkl", '6': "mno", '7': "pqrs", '8': "tuv", '9': "wxyz"}
     ngrams = list(map(''.join, product(*tuple(map(lambda x: mapping[x], numeric_code)))))
     ngrams_stat, ngrams_num, chunk_size = [], len(ngrams), 512
-    print(f'combinations total: {ngrams_num},  chunk size: {chunk_size}')
+    print(f'ngrams total: {ngrams_num},  chunk size: {chunk_size}')
     for chunk_start in range(0, ngrams_num, chunk_size):
-        print(f'processing combinations from {chunk_start} to {chunk_start + chunk_size}...')
+        print(f'processing ngrams from {chunk_start} to {chunk_start + chunk_size}...')
         request = ','.join(ngrams[chunk_start:chunk_start + chunk_size])
         try:
             data = run_query(request)
@@ -47,7 +47,7 @@ def top_k_ngrams(numeric_code, k=5):
             ngram, stat = rec['ngram'], rec['timeseries']
             freq = sum(stat) / len(stat) if stat else 0
             print(f'#{num} stats for "{rec["ngram"]}" is {freq}')
-            ngrams_stat.append((ngram, sum(stat) / len(stat) if stat else 0))
+            ngrams_stat.append((ngram, freq))
     print(f'ngrams with stats total: {len(ngrams_stat)}')
     return sorted(ngrams_stat, key=lambda x: x[1], reverse=True)[:k]
 
