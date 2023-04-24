@@ -22,8 +22,8 @@ def test():
              [random.randint(-1000, 1000) for _ in range(random.randint(1, 10))],
              )
     for test_array in tests:
-        print(test_array)
-        print(select_max_sort(test_array))
+        print(*test_array)
+        print(*select_max_sort(test_array))
         print()
 
 
