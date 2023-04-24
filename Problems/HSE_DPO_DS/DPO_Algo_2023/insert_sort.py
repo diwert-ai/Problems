@@ -19,9 +19,19 @@ def insert_sort(array):
 
 
 def test():
-    pass
+    tests = (([1, 2, 5, 3, 4], 2),
+             ([1, 2, 3, 4, 5], 4),
+             ([2, 2, 2, 2, 2], 4),
+             ([5, 4, 3, 2, 1], 0)
+             )
+    for test_array, right_answer in tests:
+        print(*test_array)
+        sorted_array, answer = insert_sort(test_array)
+        print(*sorted_array)
+        print(f'right answer: {right_answer}')
+        print(f'answer: {answer}')
+        print()
 
 
 if __name__ == '__main__':
     test()
-
