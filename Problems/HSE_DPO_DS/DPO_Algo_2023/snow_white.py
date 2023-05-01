@@ -18,7 +18,22 @@ def top2_dwarfs(heights):
     return max_height, second_height
 
 
-def test():
+def top2_dwarfs_streamed():
+    max_height, second_height, current_height = -1, -1, -1
+
+    while current_height:
+        if current_height > max_height:
+            second_height = max_height
+            max_height = current_height
+        elif current_height > second_height:
+            second_height = current_height
+
+        current_height = int(input())
+
+    return max_height, second_height
+
+
+def test0():
     tests = ((1, 5, 3, 10, 11, 20, 21),
              (1, 2, 3, 3, 3, 3),
              (1, 2, 3, 3, -10, 100, 99),
@@ -29,5 +44,10 @@ def test():
         print(*top2_dwarfs(test_array))
 
 
+def test1():
+    print(*top2_dwarfs_streamed())
+
+
 if __name__ == '__main__':
-    test()
+    for test in (test0, test1):
+        test()
