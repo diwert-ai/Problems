@@ -3,8 +3,7 @@
 # отрезков как можно большей длины, выражающейся целым числом сантиметров. Если нельзя получить k отрезков длиной даже
 # 1 см, вывести 0.
 #
-# Ограничения:
-# 1≤n≤10^4, 1≤k≤10^4, 100≤li≤10^7, все целые числа.
+# Ограничения: 1≤n≤10^4, 1≤k≤10^4, 100≤li≤10^7, все целые числа.
 
 def segments_count(lengths, current_length):
     cnt = 0
@@ -22,8 +21,7 @@ def max_length_bin_search(segment_lengths, k):
     else:
         while min_length < max_length - 1:
             mid_length = (max_length + min_length) // 2
-            cnt = segments_count(segment_lengths, mid_length)
-            if cnt >= k:
+            if segments_count(segment_lengths, mid_length) >= k:
                 min_length = mid_length
                 if mid_length > result_length:
                     result_length = mid_length
