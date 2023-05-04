@@ -1,3 +1,11 @@
+# https://contest.yandex.ru/contest/49329/problems/D/
+# Дано n отрезков провода длиной l1,l2,…,ln сантиметров. Требуется с помощью разрезания получить из них k равных
+# отрезков как можно большей длины, выражающейся целым числом сантиметров. Если нельзя получить k отрезков длиной даже
+# 1 см, вывести 0.
+#
+# Ограничения:
+# 1≤n≤10^4, 1≤k≤10^4, 100≤li≤10^7, все целые числа.
+
 def segments_count(lengths, current_length):
     cnt = 0
     for length in lengths:
@@ -5,6 +13,7 @@ def segments_count(lengths, current_length):
     return cnt
 
 
+# бинарный поиск по ответу
 def max_length_bin_search(segment_lengths, k):
     min_length, max_length, result_length = 1, max(segment_lengths), 0
 
@@ -24,6 +33,7 @@ def max_length_bin_search(segment_lengths, k):
         return result_length
 
 
+# линейный поиск по ответу
 def max_length_enum(segment_lengths, k):
     max_length = max(segment_lengths)
     for length in range(max_length, 0, -1):
@@ -52,3 +62,4 @@ if __name__ == '__main__':
     tests = (test0, test1)
     for test in tests:
         test()
+        print()
