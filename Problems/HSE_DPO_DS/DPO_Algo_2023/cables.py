@@ -14,21 +14,16 @@ def segments_count(lengths, current_length):
 
 # бинарный поиск по ответу
 def max_length_bin_search(segment_lengths, k):
-    min_length, max_length, result_length = 1, max(segment_lengths), 0
+    min_length, max_length = 0, max(segment_lengths)+1
 
-    if segments_count(segment_lengths, max_length) >= k:
-        return max_length
-    else:
-        while min_length < max_length - 1:
-            mid_length = (max_length + min_length) // 2
-            if segments_count(segment_lengths, mid_length) >= k:
-                min_length = mid_length
-                if mid_length > result_length:
-                    result_length = mid_length
-            else:
-                max_length = mid_length
+    while min_length < max_length - 1:
+        mid_length = (max_length + min_length) // 2
+        if segments_count(segment_lengths, mid_length) >= k:
+            min_length = mid_length
+        else:
+            max_length = mid_length
 
-        return result_length
+    return min_length
 
 
 # линейный поиск по ответу
