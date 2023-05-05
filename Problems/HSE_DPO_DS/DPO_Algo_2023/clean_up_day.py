@@ -29,14 +29,14 @@ def check_mid(diffs, r, c, mid):
 
 def minmax_diff(heights, r, c):
     heights.sort()
-    left, right = -1, heights[-1] - heights[0] + 1
+    left, right = 0, heights[-1] - heights[0]
     diffs = [heights[i + c - 1] - heights[i] for i in range(len(heights) - c + 1)]
-    while left < right - 1:
+    while left < right:
         mid = (left + right) // 2
         if check_mid(diffs, r, c, mid):
             right = mid
         else:
-            left = mid
+            left = mid + 1
     return right
 
 
