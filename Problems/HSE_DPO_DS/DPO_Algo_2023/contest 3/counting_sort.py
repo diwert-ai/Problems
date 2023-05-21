@@ -1,4 +1,5 @@
-# сортировка подсчетом
+# https://contest.yandex.ru/contest/49613/problems/C/
+# Вам необходимо реализовать устойчивую сортировку подсчетом по неубыванию.
 
 
 def counting_sort(array):
