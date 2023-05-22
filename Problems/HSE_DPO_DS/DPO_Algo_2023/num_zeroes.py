@@ -1,4 +1,4 @@
-# Задача: Эффективно вычислять число нулей на отрезке от i до j
+# Задача. Эффективно вычислять число нулей на отрезке от i до j.
 
 def num_zeroes(array, queries):
     n = len(array)
@@ -17,7 +17,7 @@ def num_zeroes(array, queries):
 
 
 def test0():
-    test_data = (([1, 2, 0, 2, 0, 2, 2, 4, 5, 6, 0, 0], ((1, 4), (1, 8), (4, 11), (1, 11))), )
+    test_data = (([0, 1, 2, 0, 2, 0, 2, 2, 4, 5, 6, 0, 0], ((0, 0), (1, 4), (1, 8), (4, 11), (1, 11))), )
 
     for array, queries in test_data:
         print(*num_zeroes(array, queries))
