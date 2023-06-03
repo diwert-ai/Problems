@@ -1,11 +1,9 @@
-﻿# Алгоритм Дейкстры поиск кртчайшего пути в графе с весами
+﻿# Алгоритм Дейкстры поиск кротчайшего пути в графе с весами
 # из лекции курса Хирьянова:
 # https://www.youtube.com/watch?v=2N6YbTc-USw&list=PLRDzFCPr95fK7tr47883DFUbm4GeOjjc0&index=25
 
 
-# алгоритм bfs с перезажиганием
-# веса - положительные числа.
-# ассимптотика - O(N^2) по времени
+# Алгоритм bfs с перезажиганием. Веса - положительные числа. Асимптотика - O(N^2) по времени.
 
 from collections import deque
 
@@ -27,7 +25,7 @@ Graphs = [{1: {2: 2, 9: 15},
            'f': {'c': 7, 'e': 5, 'd': 5}}]
 
 
-# weightes bfs with distances
+# Weights bfs with distances
 def wbfs_d(start_vertex, G, distances):
     distances[start_vertex] = 0
     queue = deque([start_vertex])
