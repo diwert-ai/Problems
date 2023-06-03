@@ -25,8 +25,8 @@ Graphs = [{1: {2: 2, 9: 15},
            'f': {'c': 7, 'e': 5, 'd': 5}}]
 
 
-# Weights bfs with distances
-def wbfs_d(start_vertex, graph, distances):
+# Weighted bfs (by distances)
+def weighted_bfs_d(start_vertex, graph, distances):
     distances[start_vertex] = 0
     queue = deque([start_vertex])
     while queue:
@@ -39,7 +39,7 @@ def wbfs_d(start_vertex, graph, distances):
 
 def find_shortest_path(start, end, graph):
     distances = dict()
-    wbfs_d(start, graph, distances)
+    weighted_bfs_d(start, graph, distances)
     if end not in distances:
         return None
     path = [end]
@@ -58,7 +58,7 @@ def test0():
     bounds = ((1, 8), ('a', 'e'))
     for (start, end), graph in zip(bounds, Graphs):
         distances = dict()
-        wbfs_d(start, graph, distances)
+        weighted_bfs_d(start, graph, distances)
         print(f'shortest dists from {start}: {distances}')
         print(f'shortest path from {start} to {end}: ' +
               f'{find_shortest_path(start, end, graph)}')
