@@ -26,28 +26,28 @@ Graphs = [{1: {2: 2, 9: 15},
 
 
 # Weights bfs with distances
-def wbfs_d(start_vertex, G, distances):
+def wbfs_d(start_vertex, graph, distances):
     distances[start_vertex] = 0
     queue = deque([start_vertex])
     while queue:
         v = queue.popleft()
-        for u in G[v]:
-            if u not in distances or distances[v] + G[v][u] < distances[u]:
-                distances[u] = distances[v] + G[v][u]
+        for u in graph[v]:
+            if u not in distances or distances[v] + graph[v][u] < distances[u]:
+                distances[u] = distances[v] + graph[v][u]
                 queue.append(u)
 
 
-def find_shortest_path(start, end, G):
+def find_shortest_path(start, end, graph):
     distances = dict()
-    wbfs_d(start, G, distances)
+    wbfs_d(start, graph, distances)
     if end not in distances:
         return None
     path = [end]
     queue = deque([end])
     while queue:
         v = queue.popleft()
-        for u in G[v]:
-            if distances[u] + G[v][u] == distances[v]:
+        for u in graph[v]:
+            if distances[u] + graph[v][u] == distances[v]:
                 path.append(u)
                 queue.append(u)
                 break
@@ -56,12 +56,12 @@ def find_shortest_path(start, end, G):
 
 def test0():
     bounds = ((1, 8), ('a', 'e'))
-    for (start, end), G in zip(bounds, Graphs):
+    for (start, end), graph in zip(bounds, Graphs):
         distances = dict()
-        wbfs_d(start, G, distances)
+        wbfs_d(start, graph, distances)
         print(f'shortest dists from {start}: {distances}')
         print(f'shortest path from {start} to {end}: ' +
-              f'{find_shortest_path(start, end, G)}')
+              f'{find_shortest_path(start, end, graph)}')
 
 
 if __name__ == '__main__':
