@@ -36,7 +36,7 @@ def wfi(graph, g_order):
     for i, v in enumerate(g_order):
         for j, u in enumerate(g_order):
             if u in graph[v]:
-                graph[i][j] = graph[v][u]
+                f[i][j] = graph[v][u]
 
     for k in range(n):
         for i in range(n):
