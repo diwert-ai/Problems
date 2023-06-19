@@ -15,18 +15,16 @@ def kmp(p, s):
     m = len(p)
     prefix = [0] * n
     cur_p = 0
+    result = []
 
     for i in range(1, n):
         while cur_p > 0 and s[cur_p] != s[i]:
             cur_p = prefix[cur_p - 1]
         if s[i] == s[cur_p]:
             cur_p += 1
-        prefix[i] = cur_p
-
-    result = []
-    for i in range(m, n):
-        if prefix[i] == m:
+        if cur_p == m:
             result.append(i - 2 * m)
+        prefix[i] = cur_p
 
     return len(result), result
 
